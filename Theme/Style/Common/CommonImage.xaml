@@ -1,0 +1,25 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    
+    <BitmapImage x:Key="ProductIcon_Black_24" UriSource="/Theme;component/Images/ic_camera_black_24dp_1x.png" />
+    <BitmapImage x:Key="ProductIcon_White_24" UriSource="/Theme;component/Images/ic_camera_white_24dp_1x.png" />
+    <BitmapImage x:Key="ShipmentIcon_Black_24" UriSource="/Theme;component/Images/ic_business_black_24dp_1x.png" />
+    <BitmapImage x:Key="ShipmentIcon_White_24" UriSource="/Theme;component/Images/ic_business_white_24dp_1x.png" />
+    <BitmapImage x:Key="SettingsIcon_Black_24" UriSource="/Theme;component/Images/ic_settings_black_24dp_1x.png" />
+    <BitmapImage x:Key="SettingsIcon_White_24" UriSource="/Theme;component/Images/ic_settings_white_24dp_1x.png" />
+    <BitmapImage x:Key="BasicUpIcon_Black_18" UriSource="/Theme;component/Images/ic_control_point_black_18dp_1x.png" />
+    <BitmapImage x:Key="BasicUpIcon_White_18" UriSource="/Theme;component/Images/ic_control_point_white_18dp_1x.png" />
+    <BitmapImage x:Key="CombinedUpIcon_Black_18" UriSource="/Theme;component/Images/ic_control_point_duplicate_black_18dp_1x.png" />
+    <BitmapImage x:Key="CombinedUpIcon_White_18" UriSource="/Theme;component/Images/ic_control_point_duplicate_white_18dp_1x.png" />
+    <BitmapImage x:Key="AddIcon_Black_18" UriSource="/Theme;component/Images/ic_add_black_18dp_1x.png"/>
+    <BitmapImage x:Key="AddIcon_White_18" UriSource="/Theme;component/Images/ic_add_white_18dp_1x.png"/>
+    <BitmapImage x:Key="EditIcon_Black_18" UriSource="/Theme;component/Images/ic_mode_edit_black_18dp_1x.png"/>
+    <BitmapImage x:Key="EditIcon_White_18" UriSource="/Theme;component/Images/ic_mode_edit_white_18dp_1x.png"/>
+    <BitmapImage x:Key="CancelIcon_Black_18" UriSource="/Theme;component/Images/ic_cancel_black_18dp_1x.png"/>
+    <BitmapImage x:Key="CancelIcon_White_18" UriSource="/Theme;component/Images/ic_cancel_white_18dp_1x.png"/>
+    <BitmapImage x:Key="ClearIcon_Black_18" UriSource="/Theme;component/Images/ic_clear_black_18dp_1x.png"/>
+    <BitmapImage x:Key="ClearIcon_White_18" UriSource="/Theme;component/Images/ic_clear_white_18dp_1x.png"/>
+    <BitmapImage x:Key="DeleteIcon_Black_18" UriSource="/Theme;component/Images/ic_delete_black_18dp_1x.png"/>
+    <BitmapImage x:Key="DeleteIcon_White_18" UriSource="/Theme;component/Images/ic_delete_white_18dp_1x.png"/>
+
+</ResourceDictionary>
