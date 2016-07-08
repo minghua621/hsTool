@@ -1,0 +1,69 @@
+﻿<UserControl x:Class="UI.Main.Views.RootFrameView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:converter="clr-namespace:Common.Converter;assembly=Common"
+             xmlns:product="clr-namespace:UI.Product.Views"             
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300">
+    <UserControl.Resources>
+        <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
+        <converter:InverseVisibilityConverter x:Key="InverseVisibilityConverter"/>
+        <SolidColorBrush x:Key="RootBackground" Color="#4CAF50"/>
+
+        <Style TargetType="{x:Type TabItem}" BasedOn="{StaticResource TabItemStyle}">
+            <Setter Property="Background" Value="{StaticResource RootBackground}"/>
+        </Style>
+    </UserControl.Resources>
+
+    <Grid Background="{StaticResource RootBackground}">
+        <TabControl TabStripPlacement="Left" Margin="10,5,5,5">
+            <TabItem>
+                <TabItem.Header>
+                    <Grid Width="50" Height="50">
+                        <Grid.RowDefinitions>
+                            <RowDefinition/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <Image x:Name="blackProduct" Source="{StaticResource ProductIcon_Black_24}" Stretch="None" Visibility="{Binding IsSelected,RelativeSource={RelativeSource AncestorType=TabItem},Converter={StaticResource BooleanToVisibilityConverter}}"/>
+                        <Image Source="{StaticResource ProductIcon_White_24}" Stretch="None" Visibility="{Binding Visibility,ElementName=blackProduct,Converter={StaticResource InverseVisibilityConverter}}"/>
+                        <TextBlock Grid.Row="1" Text="{Binding Source={StaticResource ResourceWrapper},Path=ApplicationString.rootframeview_tabheader_product}" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                    </Grid>
+                </TabItem.Header>
+                <TabItem.Content>
+                    <product:ProductContentView/>
+                </TabItem.Content>
+            </TabItem>
+            <TabItem>
+                <TabItem.Header>
+                    <Grid Width="50" Height="50">
+                        <Grid.RowDefinitions>
+                            <RowDefinition/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <Image x:Name="blackShipment" Source="{StaticResource ShipmentIcon_Black_24}" Stretch="None" Visibility="{Binding IsSelected,RelativeSource={RelativeSource AncestorType=TabItem},Converter={StaticResource BooleanToVisibilityConverter}}"/>
+                        <Image Source="{StaticResource ShipmentIcon_White_24}" Stretch="None" Visibility="{Binding Visibility,ElementName=blackShipment,Converter={StaticResource InverseVisibilityConverter}}"/>
+                        <TextBlock Grid.Row="1" Text="{Binding Source={StaticResource ResourceWrapper},Path=ApplicationString.rootframeview_tabheader_shipment}" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                    </Grid>
+                </TabItem.Header>
+                <Border Width="500" Margin="1"/>
+            </TabItem>
+            <TabItem>
+                <TabItem.Header>
+                    <Grid Width="50" Height="50">
+                        <Grid.RowDefinitions>
+                            <RowDefinition/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <Image x:Name="blackSettings" Source="{StaticResource SettingsIcon_Black_24}" Stretch="None" Visibility="{Binding IsSelected,RelativeSource={RelativeSource AncestorType=TabItem},Converter={StaticResource BooleanToVisibilityConverter}}"/>
+                        <Image Source="{StaticResource SettingsIcon_White_24}" Stretch="None" Visibility="{Binding Visibility,ElementName=blackSettings,Converter={StaticResource InverseVisibilityConverter}}"/>
+                        <TextBlock Grid.Row="1" Text="{Binding Source={StaticResource ResourceWrapper},Path=ApplicationString.rootframeview_tabheader_settings}" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                    </Grid>
+                </TabItem.Header>
+                <Border Width="500" Margin="1"/>
+            </TabItem>
+        </TabControl>
+
+    </Grid>
+</UserControl>
