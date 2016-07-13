@@ -5,7 +5,32 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
+    <UserControl.Resources>
+        <Style TargetType="{x:Type TextBlock}">
+            <Setter Property="Foreground" Value="Black"/>
+        </Style>
+    </UserControl.Resources>
     <Grid>
-
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <StackPanel Orientation="Vertical">
+            <TextBlock Text="Basic List"/>
+            <DataGrid/>
+        </StackPanel>
+        <Button Grid.Column="1" Content="Add" VerticalAlignment="Center"/>
+        <StackPanel Orientation="Vertical" Grid.Column="2">
+            <TextBlock Text="Basic List"/>
+            <DataGrid/>
+        </StackPanel>        
+        <Button Grid.Column="3" Content="Create" VerticalAlignment="Center"/>
+        <StackPanel Orientation="Vertical" Grid.Column="4">
+            <TextBlock Text="Basic List"/>
+            <DataGrid/>
+        </StackPanel>        
     </Grid>
 </UserControl>

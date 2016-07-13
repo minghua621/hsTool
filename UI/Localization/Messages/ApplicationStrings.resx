@@ -147,11 +147,17 @@
   <data name="header_material" xml:space="preserve">
     <value>原料</value>
   </data>
+  <data name="header_processing" xml:space="preserve">
+    <value>特殊加工</value>
+  </data>
   <data name="header_product_code" xml:space="preserve">
     <value>產品代碼</value>
   </data>
   <data name="header_product_name" xml:space="preserve">
     <value>品名</value>
+  </data>
+  <data name="header_size" xml:space="preserve">
+    <value>尺寸</value>
   </data>
   <data name="header_unit_price" xml:space="preserve">
     <value>單價</value>

@@ -29,19 +29,29 @@
             </Grid.RowDefinitions>
             <StackPanel Orientation="Horizontal">
                 <Label Content="{Binding Source={StaticResource ResourceWrapper},Path=ApplicationString.header_product_code}"/>
-                <TextBox IsReadOnly="True"/>
+                <TextBox IsReadOnly="True" Text="{Binding ProductCode,Mode=OneWay}"/>
                 <Label Content="{Binding Source={StaticResource ResourceWrapper},Path=ApplicationString.header_customer_name}"/>
                 <TextBox IsReadOnly="True" Text="{Binding CustomerName,Mode=OneWay}"/>
+                <Label Content="{Binding Source={StaticResource ResourceWrapper},Path=ApplicationString.header_processing}"/>
+                <TextBox Text="{Binding Processing0Text,Mode=TwoWay}"/>
             </StackPanel>
             <StackPanel Orientation="Horizontal" Grid.Row="1">
-                <Label Content="{Binding Source={StaticResource ResourceWrapper},Path=ApplicationString.header_product_name}"/>
-                <TextBox Text="{Binding UnitName,Mode=TwoWay}"/>
-                <Label Content="{Binding Source={StaticResource ResourceWrapper},Path=ApplicationString.header_unit_price}"/>
-                <TextBox Text="{Binding UnitPriceText,Mode=TwoWay}"/>
+                <StackPanel Orientation="Horizontal" Width="80">
+                    <Label Content="{Binding Source={StaticResource ResourceWrapper},Path=ApplicationString.header_product_name}" Width="Auto"/>
+                    <Label Content="*" Foreground="Red" FontWeight="Bold" Width="Auto" Margin="-8,0,0,0"/>
+                </StackPanel>
+                <TextBox Text="{Binding InputName,Mode=TwoWay}"/>
+                <StackPanel Orientation="Horizontal" Width="80">
+                    <Label Content="{Binding Source={StaticResource ResourceWrapper},Path=ApplicationString.header_unit_price}" Width="Auto"/>
+                    <Label Content="*" Foreground="Red" FontWeight="Bold" Width="Auto" Margin="-8,0,0,0"/>
+                </StackPanel>                                
+                <TextBox Text="{Binding InputPriceText,Mode=TwoWay}"/>
                 <Label Content="{Binding Source={StaticResource ResourceWrapper},Path=ApplicationString.header_material}"/>
-                <TextBox />
+                <ComboBox ItemsSource="{Binding MaterialNameList}" DisplayMemberPath="Name" SelectedValuePath="Code" SelectedItem="{Binding SelectedMaterial}" Text="{Binding MaterialText}" Width="150" IsEditable="True"/>                
+                <Label Content="{Binding Source={StaticResource ResourceWrapper},Path=ApplicationString.header_size}"/>
+                <TextBox Text="{Binding SizeText,Mode=TwoWay}"/>
             </StackPanel>
-            <Grid Grid.Row="2" Grid.ColumnSpan="6" >
+            <Grid Grid.Row="2" Grid.ColumnSpan="6">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto"/>
                     <ColumnDefinition Width="Auto"/>
@@ -52,9 +62,11 @@
                                  IconSource="{StaticResource AddIcon_Black_18}" PressedIconSource="{StaticResource AddIcon_White_18}"
                                  Command="{Binding CreateItemCommand}"/>
                 <controls:Button Grid.Column="1" Content="{Binding Source={StaticResource ResourceWrapper},Path=ApplicationString.buttonContent_Update}"
-                                 IconSource="{StaticResource EditIcon_Black_18}" PressedIconSource="{StaticResource EditIcon_White_18}"/>
+                                 IconSource="{StaticResource EditIcon_Black_18}" PressedIconSource="{StaticResource EditIcon_White_18}"
+                                 Command="{Binding UpdateCommand}"/>
                 <controls:Button Grid.Column="2" Content="{Binding Source={StaticResource ResourceWrapper},Path=ApplicationString.buttonContent_Delete}"
-                                 IconSource="{StaticResource DeleteIcon_Black_18}" PressedIconSource="{StaticResource DeleteIcon_White_18}"/>
+                                 IconSource="{StaticResource DeleteIcon_Black_18}" PressedIconSource="{StaticResource DeleteIcon_White_18}"
+                                 Command="{Binding DeleteCommand}"/>
                 <controls:Button Grid.Column="3" Content="{Binding Source={StaticResource ResourceWrapper},Path=ApplicationString.buttonContent_Clear}"
                                  IconSource="{StaticResource ClearIcon_Black_18}" PressedIconSource="{StaticResource ClearIcon_White_18}"
                                  Command="{Binding ClearCommand}"/>
@@ -64,14 +76,18 @@
         <DataGrid x:Name="dataGrid" Grid.Row="1" AutoGenerateColumns="False" IsReadOnly="True" ItemsSource="{Binding Items}" Margin="6,3"
                   SelectedItem="{Binding SelectedItem}">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="{Binding Source={StaticResource ResourceWrapper},Path=ApplicationString.header_customer_name}" Binding="{Binding Customer}"/>
+                <DataGridTextColumn Header="{Binding Source={StaticResource ResourceWrapper},Path=ApplicationString.header_customer_name}" Binding="{Binding CustomerName}"/>
                 <DataGridTextColumn Header="{Binding Source={StaticResource ResourceWrapper},Path=ApplicationString.header_product_code}" Binding="{Binding Code}"/>
                 <DataGridTextColumn Header="{Binding Source={StaticResource ResourceWrapper},Path=ApplicationString.header_product_name}" Binding="{Binding Name}"/>
-                <DataGridTextColumn Header="{Binding Source={StaticResource ResourceWrapper},Path=ApplicationString.header_unit_price}" Binding="{Binding Price}"/>                
+                <DataGridTextColumn Header="{Binding Source={StaticResource ResourceWrapper},Path=ApplicationString.header_unit_price}" Binding="{Binding Price}"/>
+                <DataGridTextColumn Header="{Binding Source={StaticResource ResourceWrapper},Path=ApplicationString.header_material}" Binding="{Binding MaterialName}"/>
+                <DataGridTextColumn Header="{Binding Source={StaticResource ResourceWrapper},Path=ApplicationString.header_size}" Binding="{Binding Size}"/>
+                <DataGridTextColumn Header="{Binding Source={StaticResource ResourceWrapper},Path=ApplicationString.header_processing}" Binding="{Binding Processing0}"/>
             </DataGrid.Columns>
             <i:Interaction.Triggers>
                 <i:EventTrigger EventName="SelectionChanged">
-                    <ei:CallMethodAction MethodName="SelectionChanged" TargetObject="{Binding}"/>
+                    <i:InvokeCommandAction Command="{Binding SelectionChangedCommand}" CommandParameter="{Binding SelectedItems,ElementName=dataGrid}"/>
+                    <i:InvokeCommandAction Command="{Binding DetailChangedCommand}"/>
                 </i:EventTrigger>
             </i:Interaction.Triggers>
         </DataGrid>

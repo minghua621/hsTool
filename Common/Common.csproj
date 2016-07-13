@@ -47,6 +47,7 @@
     <Reference Include="PresentationFramework" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Command\ActiveDelegateCommand.cs" />
     <Compile Include="Command\CommandBase.cs" />
     <Compile Include="Command\RelayCommand.cs" />
     <Compile Include="Converter\InverseVisibilityConverter.cs" />
@@ -54,6 +55,8 @@
     <Compile Include="Logger\FileLogger.cs" />
     <Compile Include="Logger\ILogger.cs" />
     <Compile Include="Logger\Log.cs" />
+    <Compile Include="Models\ItemModel.cs" />
+    <Compile Include="Models\ListModel.cs" />
     <Compile Include="NotificationBase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>

@@ -9,6 +9,7 @@
         <ResourceDictionary Source="TextBox.xaml"/>
         <ResourceDictionary Source="ToggleButton.xaml"/>        
         <ResourceDictionary Source="DataGrid.xaml"/>
+        <ResourceDictionary Source="ComboBox.xaml"/>
         
         <ResourceDictionary Source="AlternativeImage.xaml"/>
     </ResourceDictionary.MergedDictionaries>
@@ -20,4 +21,5 @@
     <Style TargetType="{x:Type TabItem}" BasedOn="{StaticResource TabItemStyle}"/>
     <Style TargetType="{x:Type TextBox}" BasedOn="{StaticResource TextBoxStyle}"/>
     <Style TargetType="{x:Type DataGrid}" BasedOn="{StaticResource DataGridStyle}"/>
+    <Style TargetType="{x:Type ComboBox}" BasedOn="{StaticResource ComboBoxStyle}"/>
 </ResourceDictionary>

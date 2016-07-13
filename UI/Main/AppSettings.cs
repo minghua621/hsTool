@@ -32,7 +32,15 @@ namespace UI.Main
                         case "Customer":
                             foreach (var item in section.Elements())
                             {
-                                customerList.Add(new CustomerSettings() { Code = item.Attribute(XName.Get("Key")).Value, Name = item.Attribute(XName.Get("Value")).Value });
+                                CustomerSettings cus = new CustomerSettings() { Code = item.Attribute(XName.Get("Key")).Value, Name = item.Attribute(XName.Get("Value")).Value };
+                                customerList.Add(cus.Code, cus);
+                            }
+                            break;
+                        case "Material":
+                            foreach (var item in section.Elements())
+                            {
+                                MaterialSettings material = new MaterialSettings() { Code = item.Attribute(XName.Get("Key")).Value, Name = item.Attribute(XName.Get("Value")).Value };
+                                materialList.Add(material.Code, material);
                             }
                             break;
                         default:
@@ -75,14 +83,26 @@ namespace UI.Main
         }
         private static string logDir = string.Empty;
 
-        public static List<CustomerSettings> CustomerList
+        public static Dictionary<string, CustomerSettings> CustomerList
         {
             get { return customerList; }
         }
-        private static List<CustomerSettings> customerList = new List<CustomerSettings>();
+        private static Dictionary<string, CustomerSettings> customerList = new Dictionary<string, CustomerSettings>();
+
+        public static Dictionary<string, MaterialSettings> MaterialList
+        {
+            get { return materialList; }
+        }
+        private static Dictionary<string, MaterialSettings> materialList = new Dictionary<string, MaterialSettings>();
     }
 
     public class CustomerSettings
+    {
+        public string Code { get; set; }
+        public string Name { get; set; }
+    }
+
+    public class MaterialSettings
     {
         public string Code { get; set; }
         public string Name { get; set; }
