@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using UI.Main;
+using UI.Product.Models;
 using UI.Product.ViewModels;
 
 namespace UI.Product.Views
@@ -32,10 +33,11 @@ namespace UI.Product.Views
         private void BasicUnitPriceHeaderView_Loaded(object sender, RoutedEventArgs e)
         {
             this.Loaded -= BasicUnitPriceHeaderView_Loaded;
-            foreach (CustomerSettings item in AppSettings.CustomerList)
+            int count = 0;
+            foreach (var item in AppSettings.CustomerList.Values)
             {
                 Border bd = new Border();
-                bd.Child = new BasicUintPriceView() { DataContext = new BasicUnitPriceVM((CustomerType)Enum.Parse(typeof(CustomerType), item.Code, true)) };
+                bd.Child = new BasicUintPriceView() { DataContext = BasicUnitPriceVM.Units[count++] };
                 tabControl.Items.Add(new TabItem() { Header = item.Name, Content = bd });
             }
         }

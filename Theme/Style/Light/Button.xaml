@@ -36,7 +36,7 @@
                                 <ColumnDefinition Width="Auto"/>
                                 <ColumnDefinition />
                             </Grid.ColumnDefinitions>
-                            <controls:AlternativeImage AlternativeState="{TemplateBinding IsPressed}" TrueStateIconSource="{TemplateBinding PressedIconSource}" FalseStateIconSource="{TemplateBinding IconSource}" Margin="0,0,3,0" IsEnabled="{TemplateBinding IsEnabled}"/>
+                            <controls:AlternativeImage AlternativeState="{TemplateBinding IsPressed}" TrueStateIconSource="{TemplateBinding PressedIconSource}" FalseStateIconSource="{TemplateBinding IconSource}" Margin="0,0,3,0"/>
                             <ContentPresenter Grid.Column="1" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" HorizontalAlignment="Left"/>                            
                         </Grid>
                     </Grid>

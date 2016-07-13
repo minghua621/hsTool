@@ -24,8 +24,12 @@ namespace UI
             Localization.ResourceWrapper.CurrentCultrue = "zh-TW";
 
             string config = @"C:\home\hsTool\AppSettings.xml";
-            AppSettings.Initialize(config);
-            this.MainWindow.Content = new Main.Views.RootFrameView();
+            AppSettings.Initialize(config);            
+            this.MainWindow.Width = 1080;
+            this.MainWindow.Height = 640;
+            this.MainWindow.Title = "hsTool";
+            this.MainWindow.WindowStartupLocation = WindowStartupLocation.CenterScreen;
+            this.MainWindow.Content = new Main.Views.RootFrameView();            
             this.MainWindow.Show();
         }
     }

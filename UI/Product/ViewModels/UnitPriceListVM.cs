@@ -9,10 +9,7 @@ using UI.Product.Models;
 
 namespace UI.Product.ViewModels
 {
-    public class UnitPriceListVM : ListViewModel<UnitPriceItemModel>
+    public class UnitPriceListVM
     {
-        public UnitPriceListVM()
-        {
-        }
     }
 }

@@ -151,6 +151,15 @@ namespace UI.Localization.Messages {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to 特殊加工.
+        /// </summary>
+        public static string header_processing {
+            get {
+                return ResourceManager.GetString("header_processing", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to 產品代碼.
         /// </summary>
         public static string header_product_code {
@@ -165,6 +174,15 @@ namespace UI.Localization.Messages {
         public static string header_product_name {
             get {
                 return ResourceManager.GetString("header_product_name", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 尺寸.
+        /// </summary>
+        public static string header_size {
+            get {
+                return ResourceManager.GetString("header_size", resourceCulture);
             }
         }
         
