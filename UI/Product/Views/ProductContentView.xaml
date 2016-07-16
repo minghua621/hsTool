@@ -15,8 +15,8 @@
     </UserControl.Resources>
     
     <Grid>
-        <product:BasicUnitPriceHeaderView Visibility="{Binding ShowBasicUP,Converter={StaticResource BooleanToVisibilityConverter}}"/>
-        <product:CombinedUnitPriceHeaderView Visibility="{Binding ShowCombinedUP,Converter={StaticResource BooleanToVisibilityConverter}}"/>
+        <product:BasicUnitPriceHeaderView x:Name="basicView" Visibility="{Binding ShowBasicUP,Converter={StaticResource BooleanToVisibilityConverter}}"/>
+        <product:CombinedUnitPriceHeaderView x:Name="combinedViews" Visibility="{Binding ShowCombinedUP,Converter={StaticResource BooleanToVisibilityConverter}}"/>
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,5,5,0">
             <ToggleButton IsChecked="{Binding ShowBasicUP,Mode=TwoWay}">
                 <ToggleButton.Content>

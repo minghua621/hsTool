@@ -21,5 +21,18 @@
     <BitmapImage x:Key="ClearIcon_White_18" UriSource="/Theme;component/Images/ic_clear_white_18dp_1x.png"/>
     <BitmapImage x:Key="DeleteIcon_Black_18" UriSource="/Theme;component/Images/ic_delete_black_18dp_1x.png"/>
     <BitmapImage x:Key="DeleteIcon_White_18" UriSource="/Theme;component/Images/ic_delete_white_18dp_1x.png"/>
+    <BitmapImage x:Key="LeftArrowIcon_Black_18" UriSource="/Theme;component/Images/ic_arrow_back_black_18dp_1x.png"/>
+    <BitmapImage x:Key="LeftArrowIcon_White_18" UriSource="/Theme;component/Images/ic_arrow_back_white_18dp_1x.png"/>
+    <BitmapImage x:Key="RightArrowIcon_Black_18" UriSource="/Theme;component/Images/ic_arrow_forward_black_18dp_1x.png"/>
+    <BitmapImage x:Key="RightArrowIcon_White_18" UriSource="/Theme;component/Images/ic_arrow_forward_white_18dp_1x.png"/>
+    <BitmapImage x:Key="DoneIcon_Black_18" UriSource="/Theme;component/Images/ic_done_black_18dp_1x.png"/>
+    <BitmapImage x:Key="DoneIcon_White_18" UriSource="/Theme;component/Images/ic_done_white_18dp_1x.png"/>
+    <BitmapImage x:Key="SwapHorizIcon_Black_18" UriSource="/Theme;component/Images/ic_swap_horiz_black_18dp_1x.png"/>
+    <BitmapImage x:Key="SwapHorizIcon_White_18" UriSource="/Theme;component/Images/ic_swap_horiz_white_18dp_1x.png"/>
+    <BitmapImage x:Key="RedoIcon_Black_18" UriSource="/Theme;component/Images/ic_redo_black_18dp_1x.png"/>
+    <BitmapImage x:Key="RedoIcon_White_18" UriSource="/Theme;component/Images/ic_redo_white_18dp_1x.png"/>
+    <BitmapImage x:Key="UndoIcon_Black_18" UriSource="/Theme;component/Images/ic_undo_black_18dp_1x.png"/>
+    <BitmapImage x:Key="UndoIcon_White_18" UriSource="/Theme;component/Images/ic_undo_white_18dp_1x.png"/>
+
 
 </ResourceDictionary>

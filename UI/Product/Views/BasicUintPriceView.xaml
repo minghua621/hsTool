@@ -4,13 +4,13 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
-             xmlns:ei="http://schemas.microsoft.com/expression/2010/interactions"
              xmlns:controls="clr-namespace:Theme.Controls;assembly=Theme"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
     <UserControl.Resources>
         <Style TargetType="{x:Type Label}">
             <Setter Property="Width" Value="80"/>
+            <Setter Property="HorizontalContentAlignment" Value="Right"/>
         </Style>
         <Style TargetType="{x:Type TextBox}" BasedOn="{StaticResource TextBoxStyle}">
             <Setter Property="Width" Value="150"/>
@@ -32,24 +32,24 @@
                 <TextBox IsReadOnly="True" Text="{Binding ProductCode,Mode=OneWay}"/>
                 <Label Content="{Binding Source={StaticResource ResourceWrapper},Path=ApplicationString.header_customer_name}"/>
                 <TextBox IsReadOnly="True" Text="{Binding CustomerName,Mode=OneWay}"/>
-                <Label Content="{Binding Source={StaticResource ResourceWrapper},Path=ApplicationString.header_processing}"/>
-                <TextBox Text="{Binding Processing0Text,Mode=TwoWay}"/>
             </StackPanel>
             <StackPanel Orientation="Horizontal" Grid.Row="1">
                 <StackPanel Orientation="Horizontal" Width="80">
-                    <Label Content="{Binding Source={StaticResource ResourceWrapper},Path=ApplicationString.header_product_name}" Width="Auto"/>
-                    <Label Content="*" Foreground="Red" FontWeight="Bold" Width="Auto" Margin="-8,0,0,0"/>
+                    <Label Content="{Binding Source={StaticResource ResourceWrapper},Path=ApplicationString.header_product_name}" Margin="-2,0,0,0"/>
+                    <Label Content="*" Foreground="Red" FontWeight="Bold" Width="Auto" Margin="-9,0,0,0"/>
                 </StackPanel>
                 <TextBox Text="{Binding InputName,Mode=TwoWay}"/>
                 <StackPanel Orientation="Horizontal" Width="80">
-                    <Label Content="{Binding Source={StaticResource ResourceWrapper},Path=ApplicationString.header_unit_price}" Width="Auto"/>
-                    <Label Content="*" Foreground="Red" FontWeight="Bold" Width="Auto" Margin="-8,0,0,0"/>
+                    <Label Content="{Binding Source={StaticResource ResourceWrapper},Path=ApplicationString.header_unit_price}" Margin="-2,0,0,0"/>
+                    <Label Content="*" Foreground="Red" FontWeight="Bold" Width="Auto" Margin="-9,0,0,0"/>
                 </StackPanel>                                
                 <TextBox Text="{Binding InputPriceText,Mode=TwoWay}"/>
                 <Label Content="{Binding Source={StaticResource ResourceWrapper},Path=ApplicationString.header_material}"/>
                 <ComboBox ItemsSource="{Binding MaterialNameList}" DisplayMemberPath="Name" SelectedValuePath="Code" SelectedItem="{Binding SelectedMaterial}" Text="{Binding MaterialText}" Width="150" IsEditable="True"/>                
                 <Label Content="{Binding Source={StaticResource ResourceWrapper},Path=ApplicationString.header_size}"/>
                 <TextBox Text="{Binding SizeText,Mode=TwoWay}"/>
+                <Label Content="{Binding Source={StaticResource ResourceWrapper},Path=ApplicationString.header_processing}"/>
+                <TextBox Text="{Binding Processing0Text,Mode=TwoWay}"/>                
             </StackPanel>
             <Grid Grid.Row="2" Grid.ColumnSpan="6">
                 <Grid.ColumnDefinitions>

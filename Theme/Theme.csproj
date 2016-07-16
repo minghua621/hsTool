@@ -157,6 +157,28 @@
     <Resource Include="Images\ic_delete_black_18dp_1x.png" />
     <Resource Include="Images\ic_delete_white_18dp_1x.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\ic_arrow_back_black_18dp_1x.png" />
+    <Resource Include="Images\ic_arrow_back_white_18dp_1x.png" />
+    <Resource Include="Images\ic_arrow_forward_black_18dp_1x.png" />
+    <Resource Include="Images\ic_arrow_forward_white_18dp_1x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\ic_done_white_18dp_1x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\ic_done_black_18dp_1x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\ic_swap_horiz_black_18dp_1x.png" />
+    <Resource Include="Images\ic_swap_horiz_white_18dp_1x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\ic_redo_black_18dp_1x.png" />
+    <Resource Include="Images\ic_redo_white_18dp_1x.png" />
+    <Resource Include="Images\ic_undo_black_18dp_1x.png" />
+    <Resource Include="Images\ic_undo_white_18dp_1x.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

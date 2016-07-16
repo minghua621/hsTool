@@ -25,10 +25,8 @@ namespace UI
 
             string config = @"C:\home\hsTool\AppSettings.xml";
             AppSettings.Initialize(config);            
-            this.MainWindow.Width = 1080;
-            this.MainWindow.Height = 640;
             this.MainWindow.Title = "hsTool";
-            this.MainWindow.WindowStartupLocation = WindowStartupLocation.CenterScreen;
+            this.MainWindow.WindowState = WindowState.Maximized;
             this.MainWindow.Content = new Main.Views.RootFrameView();            
             this.MainWindow.Show();
         }

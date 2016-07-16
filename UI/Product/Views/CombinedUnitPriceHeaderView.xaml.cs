@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using UI.Main;
+using UI.Product.ViewModels;
 
 namespace UI.Product.Views
 {
@@ -31,10 +32,11 @@ namespace UI.Product.Views
         private void CombinedUnitPriceHeaderView_Loaded(object sender, RoutedEventArgs e)
         {
             this.Loaded -= CombinedUnitPriceHeaderView_Loaded;
+            int count = 0;
             foreach (CustomerSettings item in AppSettings.CustomerList.Values)
             {
                 Border bd = new Border();
-                bd.Child = new CombinedUnitPriceView();
+                bd.Child = new CombinedUnitPriceView() { DataContext = CombinedUnitPriceVM.Units[count++] };
                 tabControl.Items.Add(new TabItem() { Header = item.Name, Content = bd });
             }
         }
