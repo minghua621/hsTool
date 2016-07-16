@@ -62,7 +62,7 @@ namespace UI.Product.Dao
         }
 
         /// <summary>
-        /// 新增一筆基本單價資訊
+        /// 新增一筆單價資訊
         /// </summary>
         /// <param name="item"></param>
         public static void Create(UnitPriceItemModel item)
@@ -91,7 +91,7 @@ namespace UI.Product.Dao
         }
 
         /// <summary>
-        /// 更新一筆基本單價資訊
+        /// 更新一筆單價資訊
         /// </summary>
         /// <param name="item"></param>
         public static void Update(UnitPriceItemModel item)
@@ -102,14 +102,15 @@ namespace UI.Product.Dao
                 using (SQLiteCommand cmd = conn.CreateCommand())
                 {
                     cmd.CommandType = CommandType.Text;
-                    cmd.CommandText = @"Update UnitPrice SET ProductName=@p0, Price=@p1, MaterialCode=@p2, SizeInfo=@p3, Processing0=@p4, UpdatedTime=@p5 WHERE ProductCode=@p6";                    
+                    cmd.CommandText = @"Update UnitPrice SET ProductName=@p0, Price=@p1, MaterialCode=@p2, SizeInfo=@p3, Processing0=@p4, UpdatedTime=@p5, CombinedUnits=@p6  WHERE ProductCode=@p7";
                     cmd.Parameters.AddWithValue("@p0", item.Name);
                     cmd.Parameters.AddWithValue("@p1", item.Price);
                     cmd.Parameters.AddWithValue("@p2", item.MaterialCode);
                     cmd.Parameters.AddWithValue("@p3", item.Size);
                     cmd.Parameters.AddWithValue("@p4", item.Processing0);
                     cmd.Parameters.AddWithValue("@p5", DateTime.Now);
-                    cmd.Parameters.AddWithValue("@p6", item.Code);
+                    cmd.Parameters.AddWithValue("@p6", item.CombinedUnits);
+                    cmd.Parameters.AddWithValue("@p7", item.Code);
                     cmd.ExecuteNonQuery();
                 }
             }

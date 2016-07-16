@@ -35,7 +35,7 @@ namespace UI.Product.ViewModels
                 }
             }
         }
-        private ProductPanelType _state = ProductPanelType.BasicUnitPrice;
+        private ProductPanelType _state = ProductPanelType.CombinedUnitPrice;
 
         /// <summary>
         /// display BasicUnitPriceView or not

@@ -61,6 +61,15 @@ namespace UI.Localization.Messages {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to 基本產品清單.
+        /// </summary>
+        public static string basic_units_header {
+            get {
+                return ResourceManager.GetString("basic_units_header", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to 基本單價表.
         /// </summary>
         public static string basicUnitPrice_header {
@@ -79,11 +88,29 @@ namespace UI.Localization.Messages {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to 變更組合.
+        /// </summary>
+        public static string buttonContent_change_units {
+            get {
+                return ResourceManager.GetString("buttonContent_change_units", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to 清除.
         /// </summary>
         public static string buttonContent_Clear {
             get {
                 return ResourceManager.GetString("buttonContent_Clear", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 複製.
+        /// </summary>
+        public static string buttonContent_copy {
+            get {
+                return ResourceManager.GetString("buttonContent_copy", resourceCulture);
             }
         }
         
@@ -106,6 +133,15 @@ namespace UI.Localization.Messages {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to 追加.
+        /// </summary>
+        public static string buttonContent_increase {
+            get {
+                return ResourceManager.GetString("buttonContent_increase", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to 更新.
         /// </summary>
         public static string buttonContent_Update {
@@ -115,11 +151,29 @@ namespace UI.Localization.Messages {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to 合成產品清單.
+        /// </summary>
+        public static string combined_units_header {
+            get {
+                return ResourceManager.GetString("combined_units_header", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to 合成單價表.
         /// </summary>
         public static string combinedUnitPrice_header {
             get {
                 return ResourceManager.GetString("combinedUnitPrice_header", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 組合.
+        /// </summary>
+        public static string header_combinedUnits {
+            get {
+                return ResourceManager.GetString("header_combinedUnits", resourceCulture);
             }
         }
         

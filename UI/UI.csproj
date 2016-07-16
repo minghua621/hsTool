@@ -90,6 +90,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>ApplicationStrings.resx</DependentUpon>
     </Compile>
+    <Compile Include="Localization\Messages\MessageStrings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>MessageStrings.resx</DependentUpon>
+    </Compile>
     <Compile Include="Localization\ResourceWrapper.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
@@ -130,7 +135,7 @@
     <Compile Include="Product\Models\UnitPriceListModel.cs" />
     <Compile Include="Product\ViewModels\BasicUnitPriceVM.cs" />
     <Compile Include="Product\ViewModels\ProductContentVM.cs" />
-    <Compile Include="Product\ViewModels\UnitPriceListVM.cs" />
+    <Compile Include="Product\ViewModels\CombinedUnitPriceVM.cs" />
     <Compile Include="Product\Views\BasicUintPriceView.xaml.cs">
       <DependentUpon>BasicUintPriceView.xaml</DependentUpon>
     </Compile>
@@ -162,6 +167,10 @@
     <EmbeddedResource Include="Localization\Messages\ApplicationStrings.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>ApplicationStrings.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Localization\Messages\MessageStrings.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>MessageStrings.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

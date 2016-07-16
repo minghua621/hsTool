@@ -24,7 +24,17 @@ namespace UI.Product.Views
         public ProductContentView()
         {
             InitializeComponent();
-            this.DataContext = new ProductContentVM();           
+            this.DataContext = new ProductContentVM();
+
+            basicView.tabControl.SelectionChanged += (s, e) =>
+            {
+                combinedViews.tabControl.SelectedIndex = (s as TabControl).SelectedIndex;                
+            };
+
+            combinedViews.tabControl.SelectionChanged += (s, e) =>
+            {
+                basicView.tabControl.SelectedIndex = (s as TabControl).SelectedIndex;
+            };
         }
     }
 }

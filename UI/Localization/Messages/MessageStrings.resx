@@ -117,76 +117,7 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="basicUnitPrice_header" xml:space="preserve">
-    <value>基本單價表</value>
-  </data>
-  <data name="basic_units_header" xml:space="preserve">
-    <value>基本產品清單</value>
-  </data>
-  <data name="buttonContent_Add" xml:space="preserve">
-    <value>新增</value>
-  </data>
-  <data name="buttonContent_Clear" xml:space="preserve">
-    <value>清除</value>
-  </data>
-  <data name="buttonContent_copy" xml:space="preserve">
-    <value>複製</value>
-  </data>
-  <data name="buttonContent_Delete" xml:space="preserve">
-    <value>刪除</value>
-  </data>
-  <data name="buttonContent_Edit" xml:space="preserve">
-    <value>編輯</value>
-  </data>
-  <data name="buttonContent_increase" xml:space="preserve">
-    <value>追加</value>
-  </data>
-  <data name="buttonContent_Update" xml:space="preserve">
-    <value>更新</value>
-  </data>
-  <data name="combinedUnitPrice_header" xml:space="preserve">
-    <value>合成單價表</value>
-  </data>
-  <data name="combined_units_header" xml:space="preserve">
-    <value>合成產品清單</value>
-  </data>
-  <data name="header_combinedUnits" xml:space="preserve">
-    <value>組合</value>
-  </data>
-  <data name="header_customer_code" xml:space="preserve">
-    <value>客戶代碼</value>
-  </data>
-  <data name="header_customer_name" xml:space="preserve">
-    <value>客戶</value>
-  </data>
-  <data name="header_material" xml:space="preserve">
-    <value>原料</value>
-  </data>
-  <data name="header_processing" xml:space="preserve">
-    <value>特殊加工</value>
-  </data>
-  <data name="header_product_code" xml:space="preserve">
-    <value>產品代碼</value>
-  </data>
-  <data name="header_product_name" xml:space="preserve">
-    <value>品名</value>
-  </data>
-  <data name="header_size" xml:space="preserve">
-    <value>尺寸</value>
-  </data>
-  <data name="header_unit_price" xml:space="preserve">
-    <value>單價</value>
-  </data>
-  <data name="rootframeview_tabheader_product" xml:space="preserve">
-    <value>產品</value>
-  </data>
-  <data name="rootframeview_tabheader_settings" xml:space="preserve">
-    <value>設定</value>
-  </data>
-  <data name="rootframeview_tabheader_shipment" xml:space="preserve">
-    <value>出貨</value>
-  </data>
-  <data name="buttonContent_change_units" xml:space="preserve">
-    <value>變更組合</value>
+  <data name="unitprice_same_units_warning" xml:space="preserve">
+    <value>已存在擁有相同組件的產品，請確認</value>
   </data>
 </root>

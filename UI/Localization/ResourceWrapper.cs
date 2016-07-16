@@ -18,6 +18,13 @@ namespace UI.Localization
         }
         private ApplicationStrings _ApplicationString;
 
+        public MessageStrings MessageStrings
+        {
+            get { return _MessageStrings; }
+            set { _MessageStrings = value; OnPropertyChanged("MessageStrings"); }
+        }
+        private MessageStrings _MessageStrings;
+
         public static string CurrentCultrue
         {
             get { return _currentCulture.Name; }
@@ -27,6 +34,7 @@ namespace UI.Localization
                 System.Threading.Thread.CurrentThread.CurrentUICulture = _currentCulture;
                 ResourceWrapper rm = System.Windows.Application.Current.Resources["ResourceWrapper"] as ResourceWrapper;
                 rm.ApplicationString = new ApplicationStrings();
+                rm.MessageStrings = new MessageStrings();
             }
         }
         private static CultureInfo _currentCulture;

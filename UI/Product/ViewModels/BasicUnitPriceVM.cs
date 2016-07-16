@@ -31,7 +31,7 @@ namespace UI.Product.ViewModels
 
         #region fields
 
-        private string _customerType { get; set; }
+        public string _customerType { get; private set; }
 
         public string ProductCode
         {
@@ -122,7 +122,7 @@ namespace UI.Product.ViewModels
             {
                 return new SelectionDelegateCommand<BasicUnitPriceVM>(this,
                     (vm) => { UpdateItem(); },
-                    (vm) => { return OnlyOneItemSelected() && !string.IsNullOrEmpty(_inputName) && IsNumericText(InputPriceText); });
+                    (vm) => { return OnlyOneItemSelected() && IsNumericText(InputPriceText); });
             }
         }
 
@@ -148,7 +148,7 @@ namespace UI.Product.ViewModels
 
         #endregion
 
-        #region Method
+        #region methods
 
         protected override bool FilterItem(UnitPriceItemModel item)
         {
@@ -170,17 +170,6 @@ namespace UI.Product.ViewModels
         {
             return new Regex("^[0-9]+[.]?[0-9]+$").IsMatch(text) || new Regex("^[0-9]+$").IsMatch(text);
         }
-
-        private string GetNewProductCode()
-        {
-            UnitPriceItemModel last = this._listModel.Where(x => x.CustomerCode == this._customerType && x.IsCombined == false).OrderByDescending(x => x.Code).FirstOrDefault();
-            int newId = 0;
-            if (last != null)
-            {
-                newId = Convert.ToInt32(last.Code.Substring(4)) + 1;
-            }
-            return string.Format("{0}0{1:D4}", this._customerType, newId);
-        }
         
         private bool CanCreateItem()
         {
@@ -195,7 +184,7 @@ namespace UI.Product.ViewModels
         {
             UnitPriceItemModel item = new UnitPriceItemModel()
             {
-                Code = GetNewProductCode(),
+                Code = UnitPriceItemModel.GetNewProductCode(_listModel, _customerType, false),
                 Name = _inputName,
                 Price = inputPrice,
                 CustomerCode = _customerType,
