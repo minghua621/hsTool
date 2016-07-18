@@ -31,9 +31,7 @@
                         <TextBlock Grid.Row="1" Text="{Binding Source={StaticResource ResourceWrapper},Path=ApplicationString.rootframeview_tabheader_product}" VerticalAlignment="Center" HorizontalAlignment="Center"/>
                     </Grid>
                 </TabItem.Header>
-                <TabItem.Content>
-                    <product:ProductContentView/>
-                </TabItem.Content>
+                <product:ProductContentView Margin="6,6,0,0"/>
             </TabItem>
             <TabItem>
                 <TabItem.Header>
@@ -47,7 +45,7 @@
                         <TextBlock Grid.Row="1" Text="{Binding Source={StaticResource ResourceWrapper},Path=ApplicationString.rootframeview_tabheader_shipment}" VerticalAlignment="Center" HorizontalAlignment="Center"/>
                     </Grid>
                 </TabItem.Header>
-                <Border Width="500" Margin="1"/>
+                <product:ShipmentContentView Margin="6,6,0,0"/>
             </TabItem>
             <TabItem>
                 <TabItem.Header>

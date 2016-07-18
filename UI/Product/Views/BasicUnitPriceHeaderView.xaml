@@ -7,25 +7,9 @@
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
     <UserControl.Resources>
-        <Style TargetType="{x:Type TabItem}" BasedOn="{StaticResource TabItemStyle}">
-            <Setter Property="Background" Value="White"/>
-            <Setter Property="BorderBrush" Value="#1976d2"/>
-            <Setter Property="Foreground" Value="Black"/>
-            <Setter Property="Padding" Value="10"/>
-            <Style.Triggers>
-                <Trigger Property="IsSelected" Value="true">
-                    <Setter Property="Foreground" Value="White"/>
-                </Trigger>
-            </Style.Triggers>
-        </Style>
-        
-        <Style TargetType="{x:Type Border}">
-            <Setter Property="BorderBrush" Value="{StaticResource ActiveBackground_Blue}"/>
-            <Setter Property="BorderThickness" Value="0,2,0,0"/>
-            <Setter Property="Margin" Value="-3"/>
-        </Style>
+        <Style TargetType="{x:Type Border}" BasedOn="{StaticResource BlueTopBrushBorder}"/>
     </UserControl.Resources>
     <Grid>
-        <TabControl x:Name="tabControl" TabStripPlacement="Top"/>
+        <TabControl x:Name="tabControl" TabStripPlacement="Top" ItemContainerStyle="{StaticResource TabItemStyle_Blue}"/>
     </Grid>
 </UserControl>

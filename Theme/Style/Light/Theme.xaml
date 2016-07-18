@@ -4,6 +4,7 @@
     <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary Source="../Common/CommonColor.xaml"/>
         <ResourceDictionary Source="../Common/CommonImage.xaml"/>
+        <ResourceDictionary Source="CommonStyle.xaml"/>
         <ResourceDictionary Source="Button.xaml"/>
         <ResourceDictionary Source="TabControl.xaml"/>
         <ResourceDictionary Source="TextBox.xaml"/>

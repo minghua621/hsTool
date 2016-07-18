@@ -28,12 +28,18 @@ namespace UI.Product.Views
 
             basicView.tabControl.SelectionChanged += (s, e) =>
             {
-                combinedViews.tabControl.SelectedIndex = (s as TabControl).SelectedIndex;                
+                if (combinedViews.tabControl.SelectedIndex != (s as TabControl).SelectedIndex)
+                {
+                    combinedViews.tabControl.SelectedIndex = (s as TabControl).SelectedIndex;
+                }
             };
 
             combinedViews.tabControl.SelectionChanged += (s, e) =>
             {
-                basicView.tabControl.SelectedIndex = (s as TabControl).SelectedIndex;
+                if (basicView.tabControl.SelectedIndex != (s as TabControl).SelectedIndex)
+                {
+                    basicView.tabControl.SelectedIndex = (s as TabControl).SelectedIndex;
+                }
             };
         }
     }

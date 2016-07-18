@@ -153,4 +153,16 @@
             </Setter.Value>
         </Setter>
     </Style>
+
+    <Style x:Key="TabItemStyle_Blue" TargetType="{x:Type TabItem}" BasedOn="{StaticResource TabItemStyle}">
+        <Setter Property="Background" Value="White"/>
+        <Setter Property="BorderBrush" Value="#1976D2"/>
+        <Setter Property="Foreground" Value="Black"/>
+        <Setter Property="Padding" Value="10"/>
+        <Style.Triggers>
+            <Trigger Property="IsSelected" Value="true">
+                <Setter Property="Foreground" Value="White"/>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
 </ResourceDictionary>

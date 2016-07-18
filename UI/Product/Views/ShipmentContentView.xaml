@@ -1,4 +1,4 @@
-﻿<UserControl x:Class="UI.Product.Views.CombinedUnitPriceHeaderView"
+﻿<UserControl x:Class="UI.Product.Views.ShipmentContentView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -9,6 +9,6 @@
         <Style TargetType="{x:Type Border}" BasedOn="{StaticResource BlueTopBrushBorder}"/>
     </UserControl.Resources>
     <Grid>
-        <TabControl x:Name="tabControl" TabStripPlacement="Top" ItemContainerStyle="{StaticResource TabItemStyle_Blue}"/>
+        <TabControl x:Name="tabControl" TabStripPlacement="Top" ItemContainerStyle="{StaticResource TabItemStyle_Blue}"/>    
     </Grid>
 </UserControl>

@@ -1,6 +1,7 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
-    
+
+    <BitmapImage x:Key="application_icon" UriSource="/Theme;component/Images/applicationIcon.ico"/>
     <BitmapImage x:Key="ProductIcon_Black_24" UriSource="/Theme;component/Images/ic_camera_black_24dp_1x.png" />
     <BitmapImage x:Key="ProductIcon_White_24" UriSource="/Theme;component/Images/ic_camera_white_24dp_1x.png" />
     <BitmapImage x:Key="ShipmentIcon_Black_24" UriSource="/Theme;component/Images/ic_business_black_24dp_1x.png" />
@@ -33,6 +34,5 @@
     <BitmapImage x:Key="RedoIcon_White_18" UriSource="/Theme;component/Images/ic_redo_white_18dp_1x.png"/>
     <BitmapImage x:Key="UndoIcon_Black_18" UriSource="/Theme;component/Images/ic_undo_black_18dp_1x.png"/>
     <BitmapImage x:Key="UndoIcon_White_18" UriSource="/Theme;component/Images/ic_undo_white_18dp_1x.png"/>
-
-
+    
 </ResourceDictionary>
