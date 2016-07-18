@@ -29,8 +29,8 @@
             <ColumnDefinition Width="100"/>
             <ColumnDefinition Width="3*"/>
         </Grid.ColumnDefinitions>
-        <StackPanel Orientation="Vertical" Margin="6,3">            
-            <Label Margin="0,37,0,6" Content="{Binding Source={StaticResource ResourceWrapper},Path=ApplicationString.basic_units_header}"/>
+        <StackPanel Orientation="Vertical" Margin="0,3,6,3">            
+            <Label Margin="0,6,0,37" Content="{Binding Source={StaticResource ResourceWrapper},Path=ApplicationString.basic_units_header}"/>
             <DataGrid x:Name="dataGrid1" ItemsSource="{Binding BasicUnits}" SelectedItem="{Binding SelectedBasicItem}">
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="{Binding Source={StaticResource ResourceWrapper},Path=ApplicationString.header_product_code}" Binding="{Binding Code}"/>

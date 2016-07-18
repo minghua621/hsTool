@@ -26,6 +26,7 @@ namespace UI
             string config = @"C:\home\hsTool\AppSettings.xml";
             AppSettings.Initialize(config);            
             this.MainWindow.Title = "hsTool";
+            this.MainWindow.Icon = this.Resources["application_icon"] as System.Windows.Media.Imaging.BitmapImage;
             this.MainWindow.WindowState = WindowState.Maximized;
             this.MainWindow.Content = new Main.Views.RootFrameView();            
             this.MainWindow.Show();
