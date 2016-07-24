@@ -53,6 +53,10 @@
     <ApplicationIcon>
     </ApplicationIcon>
   </PropertyGroup>
+  <PropertyGroup>
+    <Win32Resource>
+    </Win32Resource>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.0.0\lib\net45\EntityFramework.dll</HintPath>
@@ -78,6 +82,14 @@
       <HintPath>..\packages\System.Data.SQLite.Linq.1.0.102.0\lib\net45\System.Data.SQLite.Linq.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="System.Windows.Controls.Input.Toolkit, Version=3.5.40128.1, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\WPFToolkit.3.5.50211.1\lib\System.Windows.Controls.Input.Toolkit.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Windows.Controls.Layout.Toolkit, Version=3.5.40128.1, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\WPFToolkit.3.5.50211.1\lib\System.Windows.Controls.Layout.Toolkit.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System.Windows.Interactivity, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
@@ -90,12 +102,33 @@
     <Reference Include="WindowsBase" />
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
+    <Reference Include="WPFToolkit, Version=3.5.40128.1, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\WPFToolkit.3.5.50211.1\lib\WPFToolkit.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="App.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Product\Models\CombinedUnitsConverter.cs" />
+    <Compile Include="Settings\Dao\SettingsDao.cs" />
+    <Compile Include="Settings\Models\ColorItemModel.cs" />
+    <Compile Include="Settings\Models\ColorListModel.cs" />
+    <Compile Include="Settings\ViewModels\ColorSettingsVM.cs" />
+    <Compile Include="Settings\Views\ColorSettingsView.xaml.cs">
+      <DependentUpon>ColorSettingsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Settings\Views\CustomerSettingsView.xaml.cs">
+      <DependentUpon>CustomerSettingsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Settings\Views\MaterialSettingsView.xaml.cs">
+      <DependentUpon>MaterialSettingsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Settings\Views\SettingsView.xaml.cs">
+      <DependentUpon>SettingsView.xaml</DependentUpon>
+    </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -147,18 +180,42 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Product\Views\ShipmentRecordView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Settings\Views\ColorSettingsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Settings\Views\CustomerSettingsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Settings\Views\MaterialSettingsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Settings\Views\SettingsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Main\AppSettings.cs" />
     <Compile Include="Main\Views\RootFrameView.xaml.cs">
       <DependentUpon>RootFrameView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Product\Dao\ShipmentDao.cs" />
     <Compile Include="Product\Dao\UnitPriceDao.cs" />
+    <Compile Include="Product\Models\ShipmentItemModel.cs" />
+    <Compile Include="Product\Models\ShipmentListModel.cs" />
     <Compile Include="Product\Models\UnitPriceItemModel.cs" />
     <Compile Include="Product\Models\UnitPriceListModel.cs" />
     <Compile Include="Product\ViewModels\BasicUnitPriceVM.cs" />
     <Compile Include="Product\ViewModels\ProductContentVM.cs" />
     <Compile Include="Product\ViewModels\CombinedUnitPriceVM.cs" />
+    <Compile Include="Product\ViewModels\ShipmentRecordVM.cs" />
     <Compile Include="Product\Views\BasicUintPriceView.xaml.cs">
       <DependentUpon>BasicUintPriceView.xaml</DependentUpon>
     </Compile>
@@ -176,6 +233,9 @@
     </Compile>
     <Compile Include="Product\Views\ShipmentContentView.xaml.cs">
       <DependentUpon>ShipmentContentView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Product\Views\ShipmentRecordView.xaml.cs">
+      <DependentUpon>ShipmentRecordView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
@@ -239,6 +299,7 @@
       <Install>false</Install>
     </BootstrapperPackage>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\System.Data.SQLite.Core.1.0.102.0\build\net45\System.Data.SQLite.Core.targets" Condition="Exists('..\packages\System.Data.SQLite.Core.1.0.102.0\build\net45\System.Data.SQLite.Core.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

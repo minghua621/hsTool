@@ -4,6 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+             xmlns:toolkit="clr-namespace:System.Windows.Controls;assembly=System.Windows.Controls.Input.Toolkit"
              xmlns:controls="clr-namespace:Theme.Controls;assembly=Theme"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
@@ -15,6 +16,12 @@
         <Style TargetType="{x:Type TextBox}" BasedOn="{StaticResource TextBoxStyle}">
             <Setter Property="Width" Value="150"/>
         </Style>
+        <DataTemplate x:Key="ColorItemTemplate">
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="{Binding Code}" Width="80"/>
+                <TextBlock Text="{Binding Name}" Foreground="DarkGray" Width="60"/>
+            </StackPanel>
+        </DataTemplate>        
     </UserControl.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
@@ -31,6 +38,7 @@
                 <DataGridTextColumn Header="{Binding Source={StaticResource ResourceWrapper},Path=ApplicationString.header_material}" Binding="{Binding MaterialName}"/>
                 <DataGridTextColumn Header="{Binding Source={StaticResource ResourceWrapper},Path=ApplicationString.header_size}" Binding="{Binding Size}"/>
                 <DataGridTextColumn Header="{Binding Source={StaticResource ResourceWrapper},Path=ApplicationString.header_processing}" Binding="{Binding Processing0}"/>
+                <DataGridTextColumn Header="{Binding Source={StaticResource ResourceWrapper},Path=ApplicationString.colorSettings_code}" Binding="{Binding ColorTypes}"/>
             </DataGrid.Columns>
             <i:Interaction.Triggers>
                 <i:EventTrigger EventName="SelectionChanged">
@@ -41,6 +49,7 @@
         </DataGrid>
         <Grid Grid.Column="1" Margin="5">
             <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
@@ -75,7 +84,19 @@
                 <Label Content="{Binding Source={StaticResource ResourceWrapper},Path=ApplicationString.header_processing}"/>
                 <TextBox Text="{Binding Processing0Text,Mode=TwoWay}"/>                
             </StackPanel>
-            <Grid Grid.Row="4" Margin="15,5,0,0">
+            <StackPanel Orientation="Horizontal" Grid.Row="4">
+                <Label Content="{Binding Source={StaticResource ResourceWrapper},Path=ApplicationString.colorSettings_code}"/>
+                <toolkit:AutoCompleteBox Width="150" Height="25" Margin="3" VerticalAlignment="Top" ItemsSource="{Binding Colors}" SelectedItem="{Binding SelectedColor,Mode=TwoWay}" Text="{Binding SelectedColorText,Mode=TwoWay}" ValueMemberPath="Code" ItemTemplate="{StaticResource ColorItemTemplate}" FilterMode="StartsWith"/>
+                <StackPanel Orientation="Vertical" VerticalAlignment="Top" Margin="5,0,0,0">
+                    <controls:Button IconSource="{StaticResource RightArrowIcon_Black_18}" PressedIconSource="{StaticResource RightArrowIcon_White_18}"
+                                     Padding="6,3,4,3" Command="{Binding IncreaseColorCommand}"/>
+                    <controls:Button IconSource="{StaticResource LeftArrowIcon_Black_18}" PressedIconSource="{StaticResource LeftArrowIcon_White_18}"
+                                     Padding="6,3,4,3"  Command="{Binding DecreaseColorCommand}"/>
+                </StackPanel>
+                <Label Content="{Binding Source={StaticResource ResourceWrapper},Path=ApplicationString.colorSettings_name}" Width="Auto"/>
+                <ListBox ItemsSource="{Binding ColorList,Mode=TwoWay}" ItemTemplate="{StaticResource ColorItemTemplate}" SelectionMode="Single" SelectedItem="{Binding SelectedColorItem}" Width="150" Height="200" Margin="3"/>
+            </StackPanel>            
+            <Grid Grid.Row="5" Margin="15,10,0,0">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto"/>
                     <ColumnDefinition Width="Auto"/>
@@ -86,7 +107,7 @@
                                  IconSource="{StaticResource AddIcon_Black_18}" PressedIconSource="{StaticResource AddIcon_White_18}"
                                  Command="{Binding CreateItemCommand}"/>
                 <controls:Button Grid.Column="1" Content="{Binding Source={StaticResource ResourceWrapper},Path=ApplicationString.buttonContent_Update}"
-                                 IconSource="{StaticResource EditIcon_Black_18}" PressedIconSource="{StaticResource EditIcon_White_18}"
+                                 IconSource="{StaticResource DoneIcon_Black_18}" PressedIconSource="{StaticResource DoneIcon_White_18}"
                                  Command="{Binding UpdateCommand}"/>
                 <controls:Button Grid.Column="2" Content="{Binding Source={StaticResource ResourceWrapper},Path=ApplicationString.buttonContent_Delete}"
                                  IconSource="{StaticResource DeleteIcon_Black_18}" PressedIconSource="{StaticResource DeleteIcon_White_18}"

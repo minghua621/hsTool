@@ -118,6 +118,6 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="unitprice_same_units_warning" xml:space="preserve">
-    <value>已存在擁有相同組件的產品，請確認</value>
+    <value>已存在擁有相同組件的產品{0}，請確認</value>
   </data>
 </root>

@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.IO;
 using System.Xml.Linq;
+using UI.Settings.Models;
 
 namespace UI.Main
 {
@@ -100,6 +101,7 @@ namespace UI.Main
     {
         public string Code { get; set; }
         public string Name { get; set; }
+        public string FullName { get; set; }
     }
 
     public class MaterialSettings

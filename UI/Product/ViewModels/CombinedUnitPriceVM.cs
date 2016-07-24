@@ -226,7 +226,7 @@ namespace UI.Product.ViewModels
                         {
                             if (prev != item)
                             {
-                                MessageBox.Show(MessageStrings.unitprice_same_units_warning);
+                                MessageBox.Show(string.Format(MessageStrings.unitprice_same_units_warning, prev.Name));
                                 return;
                             }
                         }
@@ -305,7 +305,7 @@ namespace UI.Product.ViewModels
                 Price = CombinedPrice,
                 CustomerCode = _customerType,
                 IsCombined = true,
-                CombinedUnits=GetCombinedString(),
+                CombinedUnits = GetCombinedString(),
                 IsDeleted = false,
             };
             this._listModel.Add(item);

@@ -151,6 +151,33 @@ namespace UI.Localization.Messages {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to 國際色號.
+        /// </summary>
+        public static string colorSettings_code {
+            get {
+                return ResourceManager.GetString("colorSettings_code", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 源三興色號.
+        /// </summary>
+        public static string colorSettings_codeAid {
+            get {
+                return ResourceManager.GetString("colorSettings_codeAid", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 顏色.
+        /// </summary>
+        public static string colorSettings_name {
+            get {
+                return ResourceManager.GetString("colorSettings_name", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to 合成產品清單.
         /// </summary>
         public static string combined_units_header {
@@ -232,6 +259,33 @@ namespace UI.Localization.Messages {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to 數量.
+        /// </summary>
+        public static string header_quantity {
+            get {
+                return ResourceManager.GetString("header_quantity", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 小計金額.
+        /// </summary>
+        public static string header_ship_subtotal {
+            get {
+                return ResourceManager.GetString("header_ship_subtotal", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 出貨日.
+        /// </summary>
+        public static string header_shipdate {
+            get {
+                return ResourceManager.GetString("header_shipdate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to 尺寸.
         /// </summary>
         public static string header_size {
@@ -273,6 +327,33 @@ namespace UI.Localization.Messages {
         public static string rootframeview_tabheader_shipment {
             get {
                 return ResourceManager.GetString("rootframeview_tabheader_shipment", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 顏色設定.
+        /// </summary>
+        public static string settings_color {
+            get {
+                return ResourceManager.GetString("settings_color", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 客戶設定.
+        /// </summary>
+        public static string settings_customer {
+            get {
+                return ResourceManager.GetString("settings_customer", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 原料設定.
+        /// </summary>
+        public static string settings_material {
+            get {
+                return ResourceManager.GetString("settings_material", resourceCulture);
             }
         }
     }

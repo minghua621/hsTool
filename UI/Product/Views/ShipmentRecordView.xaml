@@ -1,0 +1,103 @@
+﻿<UserControl x:Class="UI.Product.Views.ShipmentRecordView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+             xmlns:toolkit="clr-namespace:System.Windows.Controls;assembly=System.Windows.Controls.Input.Toolkit"
+             xmlns:controls="clr-namespace:Theme.Controls;assembly=Theme"
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300">
+    <UserControl.Resources>
+        <DataTemplate x:Key="AutoCompleteBoxItemTemplate">
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="{Binding Name}" Width="100"/>
+                <TextBlock Text="{Binding MaterialName}" Foreground="DarkGray" Width="50"/>
+            </StackPanel>
+        </DataTemplate>
+        <DataTemplate x:Key="ColorItemTemplate">
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="{Binding Code}" Width="80"/>
+                <TextBlock Text="{Binding Name}" Foreground="DarkGray" Width="60"/>
+            </StackPanel>
+        </DataTemplate>
+        <Style TargetType="{x:Type Label}">
+            <Setter Property="Width" Value="70"/>
+        </Style>
+        <Style TargetType="{x:Type TextBox}" BasedOn="{StaticResource TextBoxStyle}">
+            <Setter Property="Width" Value="200"/>
+        </Style>
+        <Style TargetType="{x:Type StackPanel}">
+            <Setter Property="Orientation" Value="Horizontal"/>
+            <Setter Property="Margin" Value="8"/>         
+        </Style>
+    </UserControl.Resources>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition Width="Auto"/>
+        </Grid.ColumnDefinitions>
+        <DataGrid x:Name="dataGrid" AutoGenerateColumns="False" IsReadOnly="True" ItemsSource="{Binding Items}" Margin="0,8"
+                  SelectedItem="{Binding SelectedItem}">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="{Binding Source={StaticResource ResourceWrapper},Path=ApplicationString.header_shipdate}" Binding="{Binding ShipDate,StringFormat=\{0:yyyy/MM/dd\}}"/>
+                <DataGridTextColumn Header="{Binding Source={StaticResource ResourceWrapper},Path=ApplicationString.header_product_name}" Binding="{Binding ProductName}"/>
+                <DataGridTextColumn Header="{Binding Source={StaticResource ResourceWrapper},Path=ApplicationString.colorSettings_code}" Binding="{Binding ColorCode}"/>
+                <DataGridTextColumn Header="{Binding Source={StaticResource ResourceWrapper},Path=ApplicationString.colorSettings_name}" Binding="{Binding ColorName}"/>
+                <DataGridTextColumn Header="{Binding Source={StaticResource ResourceWrapper},Path=ApplicationString.header_unit_price}" Binding="{Binding UnitPrice}"/>
+                <DataGridTextColumn Header="{Binding Source={StaticResource ResourceWrapper},Path=ApplicationString.header_quantity}" Binding="{Binding ShipQty}"/>
+                <DataGridTextColumn Header="{Binding Source={StaticResource ResourceWrapper},Path=ApplicationString.header_ship_subtotal}" Binding="{Binding SubTotal}"/>
+            </DataGrid.Columns>
+            <i:Interaction.Triggers>
+                <i:EventTrigger EventName="SelectionChanged">
+                    <i:InvokeCommandAction Command="{Binding SelectionChangedCommand}" CommandParameter="{Binding SelectedItems,ElementName=dataGrid}"/>
+                    <i:InvokeCommandAction Command="{Binding DetailChangedCommand}"/>
+                </i:EventTrigger>
+            </i:Interaction.Triggers>            
+        </DataGrid>
+        <StackPanel Grid.Column="1" Orientation="Vertical">
+            <StackPanel>
+                <Label Content="{Binding Source={StaticResource ResourceWrapper},Path=ApplicationString.header_customer_name}"/>
+                <TextBox IsReadOnly="True" Text="{Binding CustomerName,Mode=OneWay}"/>
+            </StackPanel>
+            <StackPanel>
+                <Label Content="{Binding Source={StaticResource ResourceWrapper},Path=ApplicationString.header_product_code}"/>
+                <TextBox IsReadOnly="True" Text="{Binding ProductCode,Mode=OneWay}"/>
+            </StackPanel>
+            <StackPanel>
+                <Label Content="{Binding Source={StaticResource ResourceWrapper},Path=ApplicationString.header_unit_price}"/>
+                <TextBox IsReadOnly="True" Text="{Binding UnitPrice,Mode=OneWay}"/>
+            </StackPanel>
+            <StackPanel>
+                <Label Content="{Binding Source={StaticResource ResourceWrapper},Path=ApplicationString.header_shipdate}"/>
+                <DatePicker Margin="3" Width="200" SelectedDate="{Binding InputDate}"/>
+            </StackPanel>            
+            <StackPanel>
+                <Label Content="{Binding Source={StaticResource ResourceWrapper},Path=ApplicationString.header_product_name}"/>
+                <toolkit:AutoCompleteBox Margin="3" Width="200" ItemsSource="{Binding ProductItems}" SelectedItem="{Binding SelectedInput,Mode=TwoWay}" Text="{Binding SelectedInputText,Mode=TwoWay}" ValueMemberPath="Name" ItemTemplate="{StaticResource AutoCompleteBoxItemTemplate}" FilterMode="Contains"/>
+            </StackPanel>
+            <StackPanel>
+                <Label Content="{Binding Source={StaticResource ResourceWrapper},Path=ApplicationString.colorSettings_code}"/>
+                <toolkit:AutoCompleteBox Margin="3" Width="200" ItemsSource="{Binding ColorItems}" SelectedItem="{Binding SelectedColor,Mode=TwoWay}" Text="{Binding SelectedColorText,Mode=TwoWay}" ValueMemberPath="Code" ItemTemplate="{StaticResource ColorItemTemplate}" FilterMode="StartsWith"/>
+            </StackPanel>            
+            <StackPanel>
+                <Label Content="{Binding Source={StaticResource ResourceWrapper},Path=ApplicationString.header_quantity}"/>
+                <TextBox Text="{Binding ShipQtyText,UpdateSourceTrigger=PropertyChanged}"/>
+            </StackPanel>
+            <StackPanel>
+                <controls:Button Content="{Binding Source={StaticResource ResourceWrapper},Path=ApplicationString.buttonContent_Add}"
+                                 IconSource="{StaticResource AddIcon_Black_18}" PressedIconSource="{StaticResource AddIcon_White_18}"
+                                 Command="{Binding CreateItemCommand}"/>
+                <controls:Button Content="{Binding Source={StaticResource ResourceWrapper},Path=ApplicationString.buttonContent_Update}"
+                                 IconSource="{StaticResource DoneIcon_Black_18}" PressedIconSource="{StaticResource DoneIcon_White_18}"
+                                 Command="{Binding UpdateCommand}"/>
+                <controls:Button Content="{Binding Source={StaticResource ResourceWrapper},Path=ApplicationString.buttonContent_Delete}"
+                                 IconSource="{StaticResource DeleteIcon_Black_18}" PressedIconSource="{StaticResource DeleteIcon_White_18}"
+                                 Command="{Binding DeleteCommand}"/>
+                <controls:Button Content="{Binding Source={StaticResource ResourceWrapper},Path=ApplicationString.buttonContent_Clear}"
+                                 IconSource="{StaticResource ClearIcon_Black_18}" PressedIconSource="{StaticResource ClearIcon_White_18}"
+                                 Command="{Binding ClearCommand}"/>
+            </StackPanel>
+        </StackPanel>        
+    </Grid>
+</UserControl>

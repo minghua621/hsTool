@@ -189,4 +189,31 @@
   <data name="buttonContent_change_units" xml:space="preserve">
     <value>變更組合</value>
   </data>
+  <data name="header_quantity" xml:space="preserve">
+    <value>數量</value>
+  </data>
+  <data name="header_shipdate" xml:space="preserve">
+    <value>出貨日</value>
+  </data>
+  <data name="header_ship_subtotal" xml:space="preserve">
+    <value>小計金額</value>
+  </data>
+  <data name="colorSettings_code" xml:space="preserve">
+    <value>國際色號</value>
+  </data>
+  <data name="colorSettings_codeAid" xml:space="preserve">
+    <value>源三興色號</value>
+  </data>
+  <data name="colorSettings_name" xml:space="preserve">
+    <value>顏色</value>
+  </data>
+  <data name="settings_color" xml:space="preserve">
+    <value>顏色設定</value>
+  </data>
+  <data name="settings_customer" xml:space="preserve">
+    <value>客戶設定</value>
+  </data>
+  <data name="settings_material" xml:space="preserve">
+    <value>原料設定</value>
+  </data>
 </root>

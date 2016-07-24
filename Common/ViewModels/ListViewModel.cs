@@ -42,6 +42,13 @@ namespace Common.ViewModels
                     this.Items.Add(item);
                 }
             }
+            else if (e.Action == NotifyCollectionChangedAction.Remove)
+            {
+                foreach(var item in e.OldItems.OfType<TItemModel>().ToList())
+                {
+                    this.Items.Remove(item);
+                }
+            }
         }
 
         protected void ApplyFilter()

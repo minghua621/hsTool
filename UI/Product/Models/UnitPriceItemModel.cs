@@ -60,8 +60,22 @@ namespace UI.Product.Models
             set { _CombinedUnits = value; OnPropertyChanged("CombinedUnits"); }
         }
         private string _CombinedUnits;
+
+        //public string CombinedUnitsName
+        //{
+        //    get { return _CombinedUnitsName; }
+        //    set { _CombinedUnitsName = value; OnPropertyChanged("CombinedUnitsName"); }
+        //}
+        private string _CombinedUnitsName = string.Empty;
+
         public bool IsDeleted { get; set; }
 
+        public string ColorTypes
+        {
+            get { return _ColorTypes; }
+            set { _ColorTypes = value; OnPropertyChanged("ColorTypes"); }
+        }
+        private string _ColorTypes;
         #endregion
 
         #region methods

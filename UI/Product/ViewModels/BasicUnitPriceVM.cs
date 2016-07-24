@@ -13,6 +13,8 @@ using Common.ViewModels;
 using UI.Main;
 using UI.Product.Models;
 using UI.Product.Dao;
+using UI.Settings.Models;
+using UI.Settings.ViewModels;
 
 namespace UI.Product.ViewModels
 {
@@ -102,6 +104,34 @@ namespace UI.Product.ViewModels
             set { _processing0Text = value; OnPropertyChanged("Processing0Text"); }
         }
         private string _processing0Text = string.Empty;
+
+        public ObservableCollection<ColorItemModel> Colors
+        {
+            get { return ColorSettingsVM.ColorSettings.Items; }
+        }
+
+        public ColorItemModel SelectedColor { get; set; }
+
+        public string SelectedColorText 
+        {
+            get { return _SelectedColorText; }
+            set { _SelectedColorText = value; OnPropertyChanged("SelectedColorText"); }
+        }
+        private string _SelectedColorText = string.Empty;
+
+        public ObservableCollection<ColorItemModel> ColorList
+        {
+            get { return _ColorList; }
+            set { _ColorList = value; OnPropertyChanged("ColorList"); }
+        }
+        private ObservableCollection<ColorItemModel> _ColorList = new ObservableCollection<ColorItemModel>();
+
+        public ColorItemModel SelectedColorItem
+        {
+            get { return _SelectedColorItem; }
+            set { _SelectedColorItem = value; OnPropertyChanged("SelectedColorItem"); }
+        }
+        private ColorItemModel _SelectedColorItem;
         #endregion
 
         #region commands
@@ -145,6 +175,27 @@ namespace UI.Product.ViewModels
         {
             get { return new RelayCommand(DetailChanged); }
         }
+
+        public ICommand IncreaseColorCommand
+        {
+            get
+            {
+                return new ActiveDelegateCommand<BasicUnitPriceVM>(this,
+                    (p) => { ColorList.Add(SelectedColor); SelectedColorText = string.Empty; },
+                    (p) => { return SelectedColor != null && !ColorList.Contains(SelectedColor); });
+            }
+        }
+
+        public ICommand DecreaseColorCommand
+        {
+            get
+            {
+                return new ActiveDelegateCommand<BasicUnitPriceVM>(this,
+                    (p) => { ColorList.Remove(SelectedColorItem); },
+                    (p) => { return SelectedColorItem != null; });
+            }
+        }
+
 
         #endregion
 
@@ -193,6 +244,7 @@ namespace UI.Product.ViewModels
                 Processing0 = Processing0Text,
                 IsCombined = false,
                 IsDeleted = false,
+                ColorTypes = ColorSettingsVM.ColorItemToCode(ColorList.ToList()),
             };
             this._listModel.Add(item);
             UnitPriceDao.Create(item);
@@ -206,6 +258,7 @@ namespace UI.Product.ViewModels
             SelectedItem.MaterialCode = (SelectedMaterial == null ? string.Empty : SelectedMaterial.Code);
             SelectedItem.Size = SizeText;
             SelectedItem.Processing0 = Processing0Text;
+            SelectedItem.ColorTypes = ColorSettingsVM.ColorItemToCode(ColorList.ToList());
             UnitPriceDao.Update(SelectedItem);
             ClearInput();
         }
@@ -238,6 +291,8 @@ namespace UI.Product.ViewModels
             MaterialText = string.Empty;
             SizeText = string.Empty;
             Processing0Text = string.Empty;
+            SelectedColorText = string.Empty;
+            ColorList.Clear();
             if (flag)
             {
                 SelectedItem = null;
@@ -254,6 +309,7 @@ namespace UI.Product.ViewModels
                 MaterialText = this.SelectedItem.MaterialName;
                 SizeText = this.SelectedItem.Size;
                 Processing0Text = this.SelectedItem.Processing0;
+                ColorList = new ObservableCollection<ColorItemModel>(ColorSettingsVM.CodeToColorItemModel(this.SelectedItem.ColorTypes));
             }
             else
             {
