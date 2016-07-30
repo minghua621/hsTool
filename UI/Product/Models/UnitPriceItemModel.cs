@@ -61,13 +61,6 @@ namespace UI.Product.Models
         }
         private string _CombinedUnits;
 
-        //public string CombinedUnitsName
-        //{
-        //    get { return _CombinedUnitsName; }
-        //    set { _CombinedUnitsName = value; OnPropertyChanged("CombinedUnitsName"); }
-        //}
-        private string _CombinedUnitsName = string.Empty;
-
         public bool IsDeleted { get; set; }
 
         public string ColorTypes

@@ -37,7 +37,8 @@ namespace UI.Product.Views
                 Border bd = new Border();
                 bd.Child = new ShipmentRecordView() { DataContext = ShipmentRecordVM.Units[count++] };
                 tabControl.Items.Add(new TabItem() { Header = item.Name, Content = bd });
-            }        
+            }
+            tabControl.Items.Add(new TabItem() { Header = Localization.Messages.ApplicationStrings.header_invoice, Content = new Border() { Child = new InvoiceView() } });
         }
     }
 }

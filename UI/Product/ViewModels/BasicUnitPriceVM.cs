@@ -212,7 +212,7 @@ namespace UI.Product.ViewModels
 
             foreach (CustomerSettings item in AppSettings.CustomerList.Values)
             {
-                _units.Add(new BasicUnitPriceVM(new UnitPriceListModel(), item.Code));
+                _units.Add(new BasicUnitPriceVM(UnitPriceListModel.Units.FirstOrDefault(x => x._customerCode == item.Code), item.Code));
             }
             return _units;
         }

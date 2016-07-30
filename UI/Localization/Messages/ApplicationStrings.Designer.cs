@@ -223,6 +223,15 @@ namespace UI.Localization.Messages {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to 請款單.
+        /// </summary>
+        public static string header_invoice {
+            get {
+                return ResourceManager.GetString("header_invoice", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to 原料.
         /// </summary>
         public static string header_material {
@@ -246,6 +255,15 @@ namespace UI.Localization.Messages {
         public static string header_product_code {
             get {
                 return ResourceManager.GetString("header_product_code", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 產品資訊.
+        /// </summary>
+        public static string header_product_info {
+            get {
+                return ResourceManager.GetString("header_product_info", resourceCulture);
             }
         }
         

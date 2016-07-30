@@ -57,16 +57,8 @@
         </DataGrid>
         <StackPanel Grid.Column="1" Orientation="Vertical">
             <StackPanel>
-                <Label Content="{Binding Source={StaticResource ResourceWrapper},Path=ApplicationString.header_customer_name}"/>
-                <TextBox IsReadOnly="True" Text="{Binding CustomerName,Mode=OneWay}"/>
-            </StackPanel>
-            <StackPanel>
-                <Label Content="{Binding Source={StaticResource ResourceWrapper},Path=ApplicationString.header_product_code}"/>
-                <TextBox IsReadOnly="True" Text="{Binding ProductCode,Mode=OneWay}"/>
-            </StackPanel>
-            <StackPanel>
-                <Label Content="{Binding Source={StaticResource ResourceWrapper},Path=ApplicationString.header_unit_price}"/>
-                <TextBox IsReadOnly="True" Text="{Binding UnitPrice,Mode=OneWay}"/>
+                <Label Content="{Binding Source={StaticResource ResourceWrapper},Path=ApplicationString.header_product_info}"/>
+                <TextBox IsReadOnly="True" Text="{Binding ProductInfo,Mode=OneWay}" Height="120"/>
             </StackPanel>
             <StackPanel>
                 <Label Content="{Binding Source={StaticResource ResourceWrapper},Path=ApplicationString.header_shipdate}"/>

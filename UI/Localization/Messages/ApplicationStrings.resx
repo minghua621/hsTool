@@ -216,4 +216,10 @@
   <data name="settings_material" xml:space="preserve">
     <value>原料設定</value>
   </data>
+  <data name="header_product_info" xml:space="preserve">
+    <value>產品資訊</value>
+  </data>
+  <data name="header_invoice" xml:space="preserve">
+    <value>請款單</value>
+  </data>
 </root>

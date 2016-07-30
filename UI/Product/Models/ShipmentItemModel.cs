@@ -12,16 +12,27 @@ namespace UI.Product.Models
 {
     public class ShipmentItemModel : ItemModel
     {
-        public long SerialNumber { get; set; }
+        public long SerialNumber { get; set; }        
 
         public string ProductCode { get; set; }
 
         public string ProductName
         {
-            get { return _ProductName; }
-            set { _ProductName = value; OnPropertyChanged("ProductName"); }
+            get
+            {
+                string rlt = string.Empty;
+                UnitPriceListModel list = UnitPriceListModel.Units.FirstOrDefault(x => x._customerCode == CustomerCode);
+                if (list != null)
+                {
+                    UnitPriceItemModel unit = list.FirstOrDefault(x => x.Code == ProductCode);
+                    if (unit != null)
+                    {
+                        rlt = unit.Name;
+                    }
+                }
+                return rlt;
+            }
         }
-        private string _ProductName = string.Empty;
 
         public double UnitPrice
         {

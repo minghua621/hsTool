@@ -144,6 +144,7 @@ namespace UI.Settings.ViewModels
             this.InputCode = string.Empty;
             this.InputName = string.Empty;
             this.InputCodeAid = string.Empty;
+            SelectedItem = null;
         }
 
         private void DetailChanged()

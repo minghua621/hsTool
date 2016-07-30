@@ -13,6 +13,7 @@ using UI.Product.Dao;
 using UI.Main;
 using UI.Settings.Models;
 using UI.Settings.ViewModels;
+using UI.Localization.Messages;
 
 namespace UI.Product.ViewModels
 {
@@ -31,32 +32,29 @@ namespace UI.Product.ViewModels
 
         private string _customerType { get; set; }
 
-        public string CustomerName
-        {
-            get { return AppSettings.CustomerList[_customerType].Name; }
-        }
-
         public static List<ShipmentRecordVM> Units
         {
             get { return _units = _units ?? Initialize(); }
         }
         private static List<ShipmentRecordVM> _units;
 
-        public List<UnitPriceItemModel> ProductItems
+        public ObservableCollection<UnitPriceItemModel> ProductItems
         {
-            get { return _ProductItems = _ProductItems ?? UnitPriceDao.GetUnitPriceList().Where(x => x.IsDeleted == false && x.CustomerCode == _customerType).ToList(); }
+            get { return UnitPriceListModel.Units.FirstOrDefault(x => x._customerCode == this._customerType); }
         }
-        private List<UnitPriceItemModel> _ProductItems;
 
         public UnitPriceItemModel SelectedInput
         {
             get { return _SelectedInput; }
             set
             {
-                _SelectedInput = value; 
+                _SelectedInput = value;
+                if (_SelectedInput != null)
+                {
+                    unitPrice = _SelectedInput.Price;
+                }
                 OnPropertyChanged("SelectedInput");
-                OnPropertyChanged("ProductCode");
-                OnPropertyChanged("UnitPrice");
+                OnPropertyChanged("ProductInfo");
                 OnPropertyChanged("ColorItems");
             }
         }
@@ -69,19 +67,67 @@ namespace UI.Product.ViewModels
         }
         private string _SelectedInputText = string.Empty;
 
-        public string ProductCode
+        public string ProductInfo
         {
-            get { return SelectedInput == null ? string.Empty : SelectedInput.Code; }
+            get
+            {
+                string rlt = string.Empty;
+                if (SelectedInput != null)
+                {
+                    rlt += string.Format("{0}: {1}\n", ApplicationStrings.header_customer_name, SelectedInput.CustomerName);
+                    rlt += string.Format("{0}: {1}\n", ApplicationStrings.header_product_code, SelectedInput.Code);
+                    rlt += string.Format("{0}: {1}\n", ApplicationStrings.header_unit_price, unitPrice);
+                    rlt += string.IsNullOrEmpty(SelectedInput.MaterialName) ? "" : string.Format("{0}: {1}\n", ApplicationStrings.header_material, SelectedInput.MaterialName);
+                    rlt += string.IsNullOrEmpty(SelectedInput.Size) ? "" : string.Format("{0}: {1}\n", ApplicationStrings.header_size, SelectedInput.Size);
+                    rlt += string.IsNullOrEmpty(SelectedInput.Processing0) ? "" : string.Format("{0}: {1}\n", ApplicationStrings.header_processing, SelectedInput.Processing0);
+                }
+                return rlt;
+            }
         }
 
-        public double UnitPrice
-        {
-            get { return SelectedInput == null ? 0 : SelectedInput.Price; }
-        }
+        private double unitPrice { get; set; }
 
         public List<ColorItemModel> ColorItems
         {
-            get { return SelectedInput == null ? null : ColorSettingsVM.CodeToColorItemModel(SelectedInput.ColorTypes); }
+            get
+            {
+                if (SelectedInput == null)
+                {
+                    return null;
+                }
+                else
+                {
+                    List<ColorItemModel> colors = new List<ColorItemModel>();
+                    if (SelectedInput.IsCombined == true)
+                    {
+                        string[] combines = SelectedInput.CombinedUnits.Split(",".ToCharArray());
+                        UnitPriceListModel list = UnitPriceListModel.Units.FirstOrDefault(x => x._customerCode == this._customerType);
+                        if (list != null)
+                        {
+                            foreach (string str in combines)
+                            {
+                                UnitPriceItemModel unit = list.FirstOrDefault(x => x.Code == str);
+                                if (unit != null)
+                                {
+                                    List<ColorItemModel> rlt = ColorSettingsVM.CodeToColorItemModel(unit.ColorTypes);
+                                    foreach(ColorItemModel color in rlt)
+                                    {
+                                        if(!colors.Contains(color))
+                                        {
+                                            colors.Add(color);
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    else
+                    {
+                        colors = ColorSettingsVM.CodeToColorItemModel(SelectedInput.ColorTypes);
+                    }
+                    return colors;
+                }
+            }
         }
 
         public ColorItemModel SelectedColor
@@ -197,7 +243,6 @@ namespace UI.Product.ViewModels
             {
                 CustomerCode = this._customerType,
                 ProductCode = SelectedInput.Code,
-                ProductName = SelectedInput.Name,
                 UnitPrice = SelectedInput.Price,
                 ShipQty = this.InputQty,
                 ShipDate = this.InputDate,
@@ -211,7 +256,6 @@ namespace UI.Product.ViewModels
 
         private void UpdateItem()
         {
-            SelectedItem.ProductName = SelectedInput.Name;
             SelectedItem.UnitPrice = SelectedInput.Price;
             SelectedItem.ShipQty = this.InputQty;
             SelectedItem.ShipDate = this.InputDate;
@@ -263,11 +307,14 @@ namespace UI.Product.ViewModels
                 SelectedInputText = SelectedItem.ProductName;
                 ShipQtyText = SelectedItem.ShipQty.ToString();                
                 InputDate = SelectedItem.ShipDate;
+                SelectedColorText = SelectedItem.ColorCode;
+                unitPrice = SelectedItem.UnitPrice;
             }
             else
             {
                 ClearInput(false);
             }
+            OnPropertyChanged("ProductInfo");
         }
         #endregion
     }

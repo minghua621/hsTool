@@ -233,6 +233,7 @@ namespace UI.Product.ViewModels
                         else
                         {
                             item.CombinedUnits = newUnits;
+                            item.Price = CombinedPrice;
                             UnitPriceDao.Update(item);
                         }
                     }
@@ -253,7 +254,7 @@ namespace UI.Product.ViewModels
 
             foreach (CustomerSettings item in AppSettings.CustomerList.Values)
             {
-                _units.Add(new CombinedUnitPriceVM(new UnitPriceListModel(), item.Code) { BasicUnits = BasicUnitPriceVM.Units.FirstOrDefault(x => x._customerType == item.Code).Items });                
+                _units.Add(new CombinedUnitPriceVM(UnitPriceListModel.Units.FirstOrDefault(x => x._customerCode == item.Code), item.Code) { BasicUnits = BasicUnitPriceVM.Units.FirstOrDefault(x => x._customerType == item.Code).Items });
             }            
             return _units;
         }
