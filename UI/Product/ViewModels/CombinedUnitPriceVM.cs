@@ -13,6 +13,8 @@ using UI.Localization.Messages;
 using UI.Main;
 using UI.Product.Models;
 using UI.Product.Dao;
+using UI.Settings.Models;
+using UI.Settings.ViewModels;
 
 namespace UI.Product.ViewModels
 {
@@ -252,7 +254,7 @@ namespace UI.Product.ViewModels
         {
             _units = new List<CombinedUnitPriceVM>();
 
-            foreach (CustomerSettings item in AppSettings.CustomerList.Values)
+            foreach (CustomerItemModel item in CustomerSettinigsVM.CustomerSettinigs.Items)
             {
                 _units.Add(new CombinedUnitPriceVM(UnitPriceListModel.Units.FirstOrDefault(x => x._customerCode == item.Code), item.Code) { BasicUnits = BasicUnitPriceVM.Units.FirstOrDefault(x => x._customerType == item.Code).Items });
             }            

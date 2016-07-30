@@ -133,6 +133,15 @@ namespace UI.Localization.Messages {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to 匯出.
+        /// </summary>
+        public static string buttonContent_Export {
+            get {
+                return ResourceManager.GetString("buttonContent_Export", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to 追加.
         /// </summary>
         public static string buttonContent_increase {
@@ -196,6 +205,24 @@ namespace UI.Localization.Messages {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to 全名.
+        /// </summary>
+        public static string customerSettings_fullName {
+            get {
+                return ResourceManager.GetString("customerSettings_fullName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 電話號碼.
+        /// </summary>
+        public static string customerSettings_phone {
+            get {
+                return ResourceManager.GetString("customerSettings_phone", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to 組合.
         /// </summary>
         public static string header_combinedUnits {
@@ -223,11 +250,47 @@ namespace UI.Localization.Messages {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to 手動輸入.
+        /// </summary>
+        public static string header_invoce_tax_manual {
+            get {
+                return ResourceManager.GetString("header_invoce_tax_manual", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to 請款單.
         /// </summary>
         public static string header_invoice {
             get {
                 return ResourceManager.GetString("header_invoice", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 請款月.
+        /// </summary>
+        public static string header_invoice_month {
+            get {
+                return ResourceManager.GetString("header_invoice_month", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 樣品.
+        /// </summary>
+        public static string header_invoice_sample {
+            get {
+                return ResourceManager.GetString("header_invoice_sample", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 5%.
+        /// </summary>
+        public static string header_invoice_tax_persent {
+            get {
+                return ResourceManager.GetString("header_invoice_tax_persent", resourceCulture);
             }
         }
         
@@ -313,11 +376,38 @@ namespace UI.Localization.Messages {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to 稅額.
+        /// </summary>
+        public static string header_tax {
+            get {
+                return ResourceManager.GetString("header_tax", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to 單價.
         /// </summary>
         public static string header_unit_price {
             get {
                 return ResourceManager.GetString("header_unit_price", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 原料代碼.
+        /// </summary>
+        public static string materialSettings_code {
+            get {
+                return ResourceManager.GetString("materialSettings_code", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 原料名稱.
+        /// </summary>
+        public static string materialSettings_name {
+            get {
+                return ResourceManager.GetString("materialSettings_name", resourceCulture);
             }
         }
         

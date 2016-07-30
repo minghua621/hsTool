@@ -6,6 +6,8 @@ using System.Text;
 using System.Threading.Tasks;
 using Common.Models;
 using UI.Main;
+using UI.Settings.Models;
+using UI.Settings.ViewModels;
 
 namespace UI.Product.Models
 {
@@ -29,7 +31,11 @@ namespace UI.Product.Models
         public string CustomerCode { get; set; }
         public string CustomerName
         {
-            get { return AppSettings.CustomerList[CustomerCode].Name; }
+            get
+            {
+                CustomerItemModel item = CustomerSettinigsVM.CustomerSettinigs.Items.FirstOrDefault(x => x.Code == CustomerCode);
+                return item == null ? string.Empty : item.Name;
+            }
         }
         public string MaterialCode
         {
@@ -39,7 +45,11 @@ namespace UI.Product.Models
         private string _MaterialCode = string.Empty;
         public string MaterialName
         {
-            get { return AppSettings.MaterialList.Keys.Contains(MaterialCode) ? AppSettings.MaterialList[MaterialCode].Name : string.Empty; }
+            get 
+            {
+                MaterialItemModel material = MaterialSettingsVM.MaterialSettings.Items.FirstOrDefault(x => x.Code == MaterialCode);
+                return material == null ? string.Empty : material.Name;
+            }
         }
         public string Size
         {

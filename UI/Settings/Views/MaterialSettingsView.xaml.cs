@@ -12,6 +12,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using UI.Settings.Models;
+using UI.Settings.ViewModels;
 
 namespace UI.Settings.Views
 {
@@ -23,6 +25,7 @@ namespace UI.Settings.Views
         public MaterialSettingsView()
         {
             InitializeComponent();
+            this.DataContext = new MaterialSettingsVM(new MaterialListModel());
         }
     }
 }

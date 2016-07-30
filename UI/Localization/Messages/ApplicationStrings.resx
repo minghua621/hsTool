@@ -222,4 +222,34 @@
   <data name="header_invoice" xml:space="preserve">
     <value>請款單</value>
   </data>
+  <data name="header_invoice_month" xml:space="preserve">
+    <value>請款月</value>
+  </data>
+  <data name="header_invoice_sample" xml:space="preserve">
+    <value>樣品</value>
+  </data>
+  <data name="header_tax" xml:space="preserve">
+    <value>稅額</value>
+  </data>
+  <data name="customerSettings_fullName" xml:space="preserve">
+    <value>全名</value>
+  </data>
+  <data name="customerSettings_phone" xml:space="preserve">
+    <value>電話號碼</value>
+  </data>
+  <data name="header_invoce_tax_manual" xml:space="preserve">
+    <value>手動輸入</value>
+  </data>
+  <data name="header_invoice_tax_persent" xml:space="preserve">
+    <value>5%</value>
+  </data>
+  <data name="materialSettings_code" xml:space="preserve">
+    <value>原料代碼</value>
+  </data>
+  <data name="materialSettings_name" xml:space="preserve">
+    <value>原料名稱</value>
+  </data>
+  <data name="buttonContent_Export" xml:space="preserve">
+    <value>匯出</value>
+  </data>
 </root>

@@ -3,9 +3,86 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:xceed="http://schemas.xceed.com/wpf/xaml/toolkit"
+             xmlns:controls="clr-namespace:Theme.Controls;assembly=Theme"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
+    <UserControl.Resources>
+        <Style TargetType="{x:Type Label}">
+            <Setter Property="Width" Value="80"/>
+        </Style>
+        <Style TargetType="{x:Type TextBox}" BasedOn="{StaticResource TextBoxStyle}">
+            <Setter Property="Width" Value="150"/>
+        </Style>
+    </UserControl.Resources>
     <Grid>
-        <Button Content="123" Click="Button_Click"/>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition />
+            <ColumnDefinition Width="Auto"/>
+        </Grid.ColumnDefinitions>
+        <DataGrid AutoGenerateColumns="False" IsReadOnly="True" ItemsSource="{Binding Items}" Margin="0,8" SelectedItem="{Binding SelectedItem}">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="{Binding Source={StaticResource ResourceWrapper},Path=ApplicationString.header_product_name}" Binding="{Binding ProductName}"/>
+                <DataGridTextColumn Header="{Binding Source={StaticResource ResourceWrapper},Path=ApplicationString.header_unit_price}" Binding="{Binding UnitPrice}"/>
+                <DataGridTextColumn Header="{Binding Source={StaticResource ResourceWrapper},Path=ApplicationString.header_quantity}" Binding="{Binding ShipQty}"/>
+                <DataGridTextColumn Header="{Binding Source={StaticResource ResourceWrapper},Path=ApplicationString.header_ship_subtotal}" Binding="{Binding SubTotal}"/>
+            </DataGrid.Columns>
+        </DataGrid>
+        <StackPanel Orientation="Vertical" Grid.Column="1" Margin="10,8">
+            <StackPanel Orientation="Horizontal" Margin="5,0">
+                <Label Content="{Binding Source={StaticResource ResourceWrapper},Path=ApplicationString.header_customer_name}"/>
+                <ComboBox ItemsSource="{Binding Customers}" Width="120"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Margin="5,0">
+                <Label Content="{Binding Source={StaticResource ResourceWrapper},Path=ApplicationString.header_invoice_month}"/>
+                <xceed:DateTimeUpDown Format="YearMonth" CurrentDateTimePart="Month" Value="{Binding SelectedMonth}" Margin="3,0,0,0" Width="120" VerticalAlignment="Bottom"/>
+            </StackPanel>
+            <GroupBox Header="{Binding Source={StaticResource ResourceWrapper},Path=ApplicationString.header_invoice_sample}" Foreground="Black">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <StackPanel Orientation="Vertical">
+                        <StackPanel Orientation="Horizontal">
+                            <Label Content="{Binding Source={StaticResource ResourceWrapper},Path=ApplicationString.header_product_name}"/>
+                            <TextBox Text="{Binding SampleName}"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <Label Content="{Binding Source={StaticResource ResourceWrapper},Path=ApplicationString.header_unit_price}"/>
+                            <TextBox Text="{Binding SamplePrice}"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <Label Content="{Binding Source={StaticResource ResourceWrapper},Path=ApplicationString.header_quantity}"/>
+                            <TextBox Text="{Binding SampleQty}"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Margin="80,0,0,0">
+                            <controls:Button Content="{Binding Source={StaticResource ResourceWrapper},Path=ApplicationString.buttonContent_Add}"
+                                    IconSource="{StaticResource AddIcon_Black_18}" PressedIconSource="{StaticResource AddIcon_White_18}"
+                                    Command="{Binding CreateItemCommand}"/>
+                            <controls:Button Content="{Binding Source={StaticResource ResourceWrapper},Path=ApplicationString.buttonContent_Delete}"
+                                    IconSource="{StaticResource DeleteIcon_Black_18}" PressedIconSource="{StaticResource DeleteIcon_White_18}"
+                                    Command="{Binding DeleteCommand}"/>
+                        </StackPanel>
+                    </StackPanel>
+                    <ListBox Grid.Column="1" Width="200" Margin="3"/>
+                </Grid>
+            </GroupBox>
+            <StackPanel Orientation="Vertical" Margin="5,0">
+                <Label Content="{Binding Source={StaticResource ResourceWrapper},Path=ApplicationString.header_tax}" HorizontalAlignment="Left"/>
+                <StackPanel Orientation="Horizontal" Margin="5,0">
+                    <RadioButton x:Name="rb1" GroupName="rb" Content="{Binding Source={StaticResource ResourceWrapper},Path=ApplicationString.header_invoice_tax_persent}" Width="85" IsChecked="True"/>
+                    <TextBox IsReadOnly="True" IsEnabled="{Binding IsChecked,ElementName=rb1}" Text="{Binding PersentTax}"/>
+                </StackPanel>                
+                <StackPanel Orientation="Horizontal" Margin="5,0">
+                    <RadioButton x:Name="rb2" GroupName="rb" Content="{Binding Source={StaticResource ResourceWrapper},Path=ApplicationString.header_invoce_tax_manual}" Width="85"/>
+                    <TextBox IsEnabled="{Binding IsChecked,ElementName=rb2}" Text="{Binding ManualTax}"/>
+                </StackPanel>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <controls:Button IconSource="{StaticResource DownLoadIcon_Black_18}" PressedIconSource="{StaticResource DownLoadIcon_White_18}"
+                                 Content="{Binding Source={StaticResource ResourceWrapper},Path=ApplicationString.buttonContent_Export}" Command="{Binding ExportCommand}"/>
+            </StackPanel>
+        </StackPanel>
     </Grid>
 </UserControl>

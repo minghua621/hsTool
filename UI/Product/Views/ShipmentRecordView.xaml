@@ -10,10 +10,7 @@
              d:DesignHeight="300" d:DesignWidth="300">
     <UserControl.Resources>
         <DataTemplate x:Key="AutoCompleteBoxItemTemplate">
-            <StackPanel Orientation="Horizontal">
-                <TextBlock Text="{Binding Name}" Width="100"/>
-                <TextBlock Text="{Binding MaterialName}" Foreground="DarkGray" Width="50"/>
-            </StackPanel>
+            <TextBlock Text="{Binding Name}"/>
         </DataTemplate>
         <DataTemplate x:Key="ColorItemTemplate">
             <StackPanel Orientation="Horizontal">

@@ -93,5 +93,68 @@ namespace UI.Settings.Dao
                 }
             }
         }
+
+        public static List<CustomerItemModel> GetCustomerList()
+        {
+            List<CustomerItemModel> rlt = new List<CustomerItemModel>();
+
+            using (SQLiteConnection conn = new SQLiteConnection(AppSettings.ConnectString))
+            {
+                conn.Open();
+                using (SQLiteCommand cmd = conn.CreateCommand())
+                {
+                    cmd.CommandType = CommandType.Text;
+                    cmd.CommandText = "SELECT * FROM CustomerSettings";
+                    SQLiteDataReader sqlite_datareader = cmd.ExecuteReader();
+
+                    while (sqlite_datareader.Read())
+                    {
+                        string code = sqlite_datareader["Code"].ToString();
+                        string name = sqlite_datareader["Name"].ToString();
+                        string fullname = sqlite_datareader["FullName"].ToString();
+                        string phone = sqlite_datareader["PhoneNumber"].ToString();
+
+                        rlt.Add(new CustomerItemModel()
+                        {
+                            Code = code,
+                            Name = name,
+                            FullName = fullname,
+                            Phone = phone,
+                        });
+                    }
+                }
+            }
+            return rlt;
+        }
+
+        public static List<MaterialItemModel> GetMaterialList()
+        {
+            List<MaterialItemModel> rlt = new List<MaterialItemModel>();
+
+            using (SQLiteConnection conn = new SQLiteConnection(AppSettings.ConnectString))
+            {
+                conn.Open();
+                using (SQLiteCommand cmd = conn.CreateCommand())
+                {
+                    cmd.CommandType = CommandType.Text;
+                    cmd.CommandText = "SELECT * FROM MaterialSettings";
+                    SQLiteDataReader sqlite_datareader = cmd.ExecuteReader();
+
+                    while (sqlite_datareader.Read())
+                    {
+                        string code = sqlite_datareader["Code"].ToString();
+                        string name = sqlite_datareader["Name"].ToString();
+
+                        rlt.Add(new MaterialItemModel()
+                        {
+                            Code = code,
+                            Name = name,
+                        });
+                    }
+                }
+            }
+            return rlt;
+        }
+
     }
 }

@@ -225,7 +225,7 @@ namespace UI.Product.ViewModels
         {
             _units = new List<ShipmentRecordVM>();
 
-            foreach (CustomerSettings item in AppSettings.CustomerList.Values)
+            foreach (CustomerItemModel item in CustomerSettinigsVM.CustomerSettinigs.Items)
             {
                 _units.Add(new ShipmentRecordVM(new ShipmentListModel(), item.Code));
             }

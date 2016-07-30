@@ -44,7 +44,11 @@ namespace UI.Product.ViewModels
 
         public string CustomerName
         {
-            get { return AppSettings.CustomerList[_customerType].Name; }
+            get 
+            {
+                CustomerItemModel item = CustomerSettinigsVM.CustomerSettinigs.Items.FirstOrDefault(x => x.Code == _customerType);
+                return item == null ? string.Empty : item.Name;
+            }
         }
 
         public static List<BasicUnitPriceVM> Units
@@ -72,17 +76,17 @@ namespace UI.Product.ViewModels
             get { return Convert.ToDouble(InputPriceText); }
         }
 
-        public List<MaterialSettings> MaterialNameList
+        public ObservableCollection<MaterialItemModel> MaterialNameList
         {
-            get { return AppSettings.MaterialList.Values.ToList(); }
+            get { return MaterialSettingsVM.MaterialSettings.Items; }
         }
 
-        public MaterialSettings SelectedMaterial
+        public MaterialItemModel SelectedMaterial
         {
             get { return _selectedMaterial; }
             set { _selectedMaterial = value; OnPropertyChanged("SelectedMaterial"); }
         }
-        private MaterialSettings _selectedMaterial;
+        private MaterialItemModel _selectedMaterial;
 
         public string MaterialText
         {
@@ -210,7 +214,7 @@ namespace UI.Product.ViewModels
         {
             _units = new List<BasicUnitPriceVM>();
 
-            foreach (CustomerSettings item in AppSettings.CustomerList.Values)
+            foreach (CustomerItemModel item in CustomerSettinigsVM.CustomerSettinigs.Items)
             {
                 _units.Add(new BasicUnitPriceVM(UnitPriceListModel.Units.FirstOrDefault(x => x._customerCode == item.Code), item.Code));
             }

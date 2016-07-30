@@ -15,6 +15,8 @@ using System.Windows.Shapes;
 using UI.Main;
 using UI.Product.Models;
 using UI.Product.ViewModels;
+using UI.Settings.Models;
+using UI.Settings.ViewModels;
 
 namespace UI.Product.Views
 {
@@ -34,7 +36,7 @@ namespace UI.Product.Views
         {
             this.Loaded -= BasicUnitPriceHeaderView_Loaded;
             int count = 0;
-            foreach (var item in AppSettings.CustomerList.Values)
+            foreach (CustomerItemModel item in CustomerSettinigsVM.CustomerSettinigs.Items)
             {
                 Border bd = new Border();
                 bd.Child = new BasicUintPriceView() { DataContext = BasicUnitPriceVM.Units[count++] };

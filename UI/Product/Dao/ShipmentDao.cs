@@ -26,7 +26,7 @@ namespace UI.Product.Dao
                 using (SQLiteCommand cmd = conn.CreateCommand())
                 {
                     cmd.CommandType = CommandType.Text;
-                    cmd.CommandText = "SELECT * FROM ShipmentRecord WHERE 1 = 1";
+                    cmd.CommandText = "SELECT * FROM ShipmentRecord order by ShipDate asc";
                     SQLiteDataReader sqlite_datareader = cmd.ExecuteReader();
 
                     while (sqlite_datareader.Read())

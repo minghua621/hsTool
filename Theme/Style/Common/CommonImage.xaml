@@ -34,5 +34,7 @@
     <BitmapImage x:Key="RedoIcon_White_18" UriSource="/Theme;component/Images/ic_redo_white_18dp_1x.png"/>
     <BitmapImage x:Key="UndoIcon_Black_18" UriSource="/Theme;component/Images/ic_undo_black_18dp_1x.png"/>
     <BitmapImage x:Key="UndoIcon_White_18" UriSource="/Theme;component/Images/ic_undo_white_18dp_1x.png"/>
-    
+    <BitmapImage x:Key="DownLoadIcon_Black_18" UriSource="/Theme;component/Images/ic_file_download_black_18dp_1x.png"/>
+    <BitmapImage x:Key="DownLoadIcon_White_18" UriSource="/Theme;component/Images/ic_file_download_white_18dp_1x.png"/>    
+
 </ResourceDictionary>

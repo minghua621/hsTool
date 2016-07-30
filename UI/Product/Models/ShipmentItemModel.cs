@@ -44,7 +44,11 @@ namespace UI.Product.Models
         public string CustomerCode { get; set; }
         public string CustomerName
         {
-            get { return AppSettings.CustomerList[CustomerCode].Name; }
+            get 
+            {
+                CustomerItemModel item = CustomerSettinigsVM.CustomerSettinigs.Items.FirstOrDefault(x => x.Code == CustomerCode);
+                return item == null ? string.Empty : item.Name;
+            }
         }
 
         public string ColorCode

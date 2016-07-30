@@ -5,6 +5,8 @@ using System.Text;
 using System.Threading.Tasks;
 using Common.Models;
 using UI.Main;
+using UI.Settings.Models;
+using UI.Settings.ViewModels;
 
 namespace UI.Product.Models
 {
@@ -39,7 +41,7 @@ namespace UI.Product.Models
         {
             _units = new List<UnitPriceListModel>();
 
-            foreach (CustomerSettings item in AppSettings.CustomerList.Values)
+            foreach (CustomerItemModel item in CustomerSettinigsVM.CustomerSettinigs.Items)
             {
                 _units.Add(new UnitPriceListModel(item.Code));
             }

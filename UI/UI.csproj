@@ -219,7 +219,13 @@
     <Compile Include="Settings\Dao\SettingsDao.cs" />
     <Compile Include="Settings\Models\ColorItemModel.cs" />
     <Compile Include="Settings\Models\ColorListModel.cs" />
+    <Compile Include="Settings\Models\CustomerItemModel.cs" />
+    <Compile Include="Settings\Models\CustomerListModel.cs" />
+    <Compile Include="Settings\Models\MaterialItemModel.cs" />
+    <Compile Include="Settings\Models\MaterialListModel.cs" />
     <Compile Include="Settings\ViewModels\ColorSettingsVM.cs" />
+    <Compile Include="Settings\ViewModels\CustomerSettinigsVM.cs" />
+    <Compile Include="Settings\ViewModels\MaterialSettingsVM.cs" />
     <Compile Include="Settings\Views\ColorSettingsView.xaml.cs">
       <DependentUpon>ColorSettingsView.xaml</DependentUpon>
     </Compile>
