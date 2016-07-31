@@ -139,12 +139,15 @@ namespace UI.Settings.ViewModels
             ClearInput();
         }
 
-        private void ClearInput()
+        private void ClearInput(bool flag = true)
         {
             this.InputCode = string.Empty;
             this.InputName = string.Empty;
             this.InputCodeAid = string.Empty;
-            SelectedItem = null;
+            if (flag)
+            {
+                SelectedItem = null;
+            }
         }
 
         private void DetailChanged()
@@ -159,7 +162,7 @@ namespace UI.Settings.ViewModels
                     return;
                 }
             }
-            ClearInput();
+            ClearInput(false);
         }
 
         public static string ColorItemToCode(List<ColorItemModel> items)

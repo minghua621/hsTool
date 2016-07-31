@@ -156,5 +156,53 @@ namespace UI.Settings.Dao
             return rlt;
         }
 
+        public static void CreateMaterial(MaterialItemModel item)
+        {
+            using (SQLiteConnection conn = new SQLiteConnection(AppSettings.ConnectString))
+            {
+                conn.Open();
+                using (SQLiteCommand cmd = conn.CreateCommand())
+                {
+                    cmd.CommandType = CommandType.Text;
+                    cmd.CommandText = @"INSERT INTO MaterialSettings (Code, Name, UpdatedTime) VALUES (@p1,@p2,@p3)";
+                    cmd.Parameters.Add(new SQLiteParameter("@p1", item.Code));
+                    cmd.Parameters.Add(new SQLiteParameter("@p2", item.Name));
+                    cmd.Parameters.Add(new SQLiteParameter("@p3", DateTime.Now));
+                    cmd.ExecuteNonQuery();
+                }
+            }
+        }
+
+        public static void UpdateMaterial(MaterialItemModel item)
+        {
+            using (SQLiteConnection conn = new SQLiteConnection(AppSettings.ConnectString))
+            {
+                conn.Open();
+                using (SQLiteCommand cmd = conn.CreateCommand())
+                {
+                    cmd.CommandType = CommandType.Text;
+                    cmd.CommandText = @"Update MaterialSettings SET Name=@p0, UpdatedTime=@p1 WHERE Code=@p2";
+                    cmd.Parameters.Add(new SQLiteParameter("@p0", item.Name));
+                    cmd.Parameters.Add(new SQLiteParameter("@p1", DateTime.Now));
+                    cmd.Parameters.Add(new SQLiteParameter("@p2", item.Code));
+                    cmd.ExecuteNonQuery();
+                }
+            }
+        }
+
+        public static void DeleteMaterial(string code)
+        {
+            using (SQLiteConnection conn = new SQLiteConnection(AppSettings.ConnectString))
+            {
+                conn.Open();
+                using (SQLiteCommand cmd = conn.CreateCommand())
+                {
+                    cmd.CommandType = CommandType.Text;
+                    cmd.CommandText = @"Delete FROM MaterialSettings WHERE Code=@p0";
+                    cmd.Parameters.AddWithValue("@p0", code);
+                    cmd.ExecuteNonQuery();
+                }
+            }
+        }
     }
 }

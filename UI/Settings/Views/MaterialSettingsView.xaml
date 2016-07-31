@@ -3,14 +3,44 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+             xmlns:controls="clr-namespace:Theme.Controls;assembly=Theme"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
     <Grid Margin="0,8">
-        <DataGrid AutoGenerateColumns="False" IsReadOnly="True" ItemsSource="{Binding Items}" SelectedItem="{Binding SelectedItem}">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="500"/>
+            <ColumnDefinition Width="330"/>
+        </Grid.ColumnDefinitions>
+        <DataGrid x:Name="dataGrid" AutoGenerateColumns="False" IsReadOnly="True" ItemsSource="{Binding Items}" SelectedItem="{Binding SelectedItem}">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="{Binding Source={StaticResource ResourceWrapper},Path=ApplicationString.materialSettings_code}" Binding="{Binding Code}"/>
                 <DataGridTextColumn Header="{Binding Source={StaticResource ResourceWrapper},Path=ApplicationString.materialSettings_name}" Binding="{Binding Name}"/>
             </DataGrid.Columns>
+            <i:Interaction.Triggers>
+                <i:EventTrigger EventName="SelectionChanged">
+                    <i:InvokeCommandAction Command="{Binding SelectionChangedCommand}" CommandParameter="{Binding SelectedItems,ElementName=dataGrid}"/>
+                    <i:InvokeCommandAction Command="{Binding DetailChangedCommand}"/>
+                </i:EventTrigger>
+            </i:Interaction.Triggers>            
         </DataGrid>
+        <StackPanel Grid.Column="1" Orientation="Vertical" Margin="10,0,0,0">
+            <Label Content="{Binding Source={StaticResource ResourceWrapper},Path=ApplicationString.materialSettings_name}"/>
+            <TextBox Text="{Binding InputName,UpdateSourceTrigger=PropertyChanged}"/>
+            <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
+                <controls:Button Content="{Binding Source={StaticResource ResourceWrapper},Path=ApplicationString.buttonContent_Add}"
+                                    IconSource="{StaticResource AddIcon_Black_18}" PressedIconSource="{StaticResource AddIcon_White_18}"
+                                    Command="{Binding CreateItemCommand}"/>
+                <controls:Button Content="{Binding Source={StaticResource ResourceWrapper},Path=ApplicationString.buttonContent_Update}"
+                                    IconSource="{StaticResource DoneIcon_Black_18}" PressedIconSource="{StaticResource DoneIcon_White_18}"
+                                    Command="{Binding UpdateCommand}"/>
+                <controls:Button Content="{Binding Source={StaticResource ResourceWrapper},Path=ApplicationString.buttonContent_Delete}"
+                                    IconSource="{StaticResource DeleteIcon_Black_18}" PressedIconSource="{StaticResource DeleteIcon_White_18}"
+                                    Command="{Binding DeleteCommand}"/>
+                <controls:Button Content="{Binding Source={StaticResource ResourceWrapper},Path=ApplicationString.buttonContent_Clear}"
+                                    IconSource="{StaticResource ClearIcon_Black_18}" PressedIconSource="{StaticResource ClearIcon_White_18}"
+                                    Command="{Binding ClearCommand}"/>
+            </StackPanel>
+        </StackPanel>        
     </Grid>
 </UserControl>
