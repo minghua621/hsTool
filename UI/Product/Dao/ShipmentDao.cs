@@ -71,12 +71,12 @@ namespace UI.Product.Dao
                 using (SQLiteCommand cmd = conn.CreateCommand())
                 {
                     cmd.CommandType = CommandType.Text;
-                    cmd.CommandText = @"INSERT INTO ShipmentRecord (CustomerCode, ProductCode, Price, ShipQty, ShipDate, Color, UpdatedTime) VALUES (@p1,@p2,@p3,@p4,@p5,@p6,@p7,@p8)";
+                    cmd.CommandText = @"INSERT INTO ShipmentRecord (CustomerCode, ProductCode, Price, ShipQty, ShipDate, Color, UpdatedTime) VALUES (@p1,@p2,@p3,@p4,@p5,@p6,@p7)";
                     cmd.Parameters.Add(new SQLiteParameter("@p1", item.CustomerCode));
                     cmd.Parameters.Add(new SQLiteParameter("@p2", item.ProductCode));
                     cmd.Parameters.Add(new SQLiteParameter("@p3", item.UnitPrice));
                     cmd.Parameters.Add(new SQLiteParameter("@p4", item.ShipQty));
-                    cmd.Parameters.AddWithValue("@5", item.ShipDate);
+                    cmd.Parameters.AddWithValue("@p5", item.ShipDate);
                     cmd.Parameters.Add(new SQLiteParameter("@p6", item.ColorCode));
                     cmd.Parameters.Add(new SQLiteParameter("@p7", DateTime.Now));
                     cmd.ExecuteNonQuery();

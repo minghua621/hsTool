@@ -232,7 +232,7 @@ namespace UI.Product.ViewModels
             return _units;
         }
 
-        private static bool IsIntText(string text)
+        public static bool IsIntText(string text)
         {
             return new Regex("^[0-9]+$").IsMatch(text);
         }

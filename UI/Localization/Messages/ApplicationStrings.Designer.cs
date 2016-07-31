@@ -286,11 +286,29 @@ namespace UI.Localization.Messages {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to 出貨金額.
+        /// </summary>
+        public static string header_invoice_shipment_total {
+            get {
+                return ResourceManager.GetString("header_invoice_shipment_total", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to 5%.
         /// </summary>
         public static string header_invoice_tax_persent {
             get {
                 return ResourceManager.GetString("header_invoice_tax_persent", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 總計金額.
+        /// </summary>
+        public static string header_invoice_total {
+            get {
+                return ResourceManager.GetString("header_invoice_total", resourceCulture);
             }
         }
         
@@ -390,6 +408,33 @@ namespace UI.Localization.Messages {
         public static string header_unit_price {
             get {
                 return ResourceManager.GetString("header_unit_price", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {0}年{1}月{2}日 製表.
+        /// </summary>
+        public static string invoice_date {
+            get {
+                return ResourceManager.GetString("invoice_date", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {0}年{1}月.
+        /// </summary>
+        public static string invoice_month {
+            get {
+                return ResourceManager.GetString("invoice_month", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to TEL: {0}.
+        /// </summary>
+        public static string invoice_phone_number {
+            get {
+                return ResourceManager.GetString("invoice_phone_number", resourceCulture);
             }
         }
         

@@ -252,4 +252,19 @@
   <data name="buttonContent_Export" xml:space="preserve">
     <value>匯出</value>
   </data>
+  <data name="header_invoice_total" xml:space="preserve">
+    <value>總計金額</value>
+  </data>
+  <data name="header_invoice_shipment_total" xml:space="preserve">
+    <value>出貨金額</value>
+  </data>
+  <data name="invoice_date" xml:space="preserve">
+    <value>{0}年{1}月{2}日 製表</value>
+  </data>
+  <data name="invoice_month" xml:space="preserve">
+    <value>{0}年{1}月</value>
+  </data>
+  <data name="invoice_phone_number" xml:space="preserve">
+    <value>TEL: {0}</value>
+  </data>
 </root>

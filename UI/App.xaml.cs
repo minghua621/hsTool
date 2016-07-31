@@ -23,7 +23,7 @@ namespace UI
         {
             Localization.ResourceWrapper.CurrentCultrue = "zh-TW";
 
-            string config = @"C:\home\hsTool\AppSettings.xml";
+            string config = @"D:\home\hsTool\AppSettings.xml";
             AppSettings.Initialize(config);            
             this.MainWindow.Title = "hsTool";
             this.MainWindow.Icon = this.Resources["application_icon"] as System.Windows.Media.Imaging.BitmapImage;

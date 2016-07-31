@@ -30,6 +30,12 @@ namespace UI.Main
                         case "Log":
                             logDir = baseDirectory + GetValue(section, "Path");
                             break;
+                        case "InvoiceTemplate":
+                            invoiceTemplate = baseDirectory + GetValue(section, "Path");
+                            break;
+                        case "Company":
+                            company = GetCompanySetting(section);
+                            break;
                         default:
                             break;
                     }
@@ -52,6 +58,19 @@ namespace UI.Main
             }
             return rlt;
         }
+
+        private static CompanySetting GetCompanySetting(XElement section)
+        {
+            CompanySetting rlt = new CompanySetting();
+            foreach (var item in section.Elements())
+            {
+                rlt.Name = item.Attribute(XName.Get("Name")).Value;
+                rlt.FullName = item.Attribute(XName.Get("FullName")).Value;
+                rlt.Phone = item.Attribute(XName.Get("Phone")).Value;
+            }
+            return rlt;
+        }
+
         public static string DBPath
         {
             get { return dbPath; }
@@ -69,5 +88,24 @@ namespace UI.Main
             get { return logDir; }
         }
         private static string logDir = string.Empty;
+
+        public static string InvoiceTemplate
+        {
+            get { return invoiceTemplate; }
+        }
+        private static string invoiceTemplate = string.Empty;
+
+        public static CompanySetting Company
+        {
+            get { return company; }
+        }
+        private static CompanySetting company;
+    }
+
+    public class CompanySetting
+    {
+        public string Name { get; set; }
+        public string FullName { get; set; }
+        public string Phone { get; set; }
     }
 }

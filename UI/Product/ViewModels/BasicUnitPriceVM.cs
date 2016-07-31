@@ -221,7 +221,7 @@ namespace UI.Product.ViewModels
             return _units;
         }
 
-        private static bool IsNumericText(string text)
+        public static bool IsNumericText(string text)
         {
             return new Regex("^[0-9]+[.]?[0-9]+$").IsMatch(text) || new Regex("^[0-9]+$").IsMatch(text);
         }
