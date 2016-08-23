@@ -10,13 +10,15 @@
         <ResourceDictionary Source="TextBox.xaml"/>
         <ResourceDictionary Source="ToggleButton.xaml"/>        
         <ResourceDictionary Source="DataGrid.xaml"/>
-        <ResourceDictionary Source="ComboBox.xaml"/>
+        <ResourceDictionary Source="ComboBox.xaml"/>        
         
         <ResourceDictionary Source="AlternativeImage.xaml"/>
+        <ResourceDictionary Source="MonthUpDown.xaml"/>
     </ResourceDictionary.MergedDictionaries>
 
     <Style TargetType="{x:Type controls:Button}" BasedOn="{StaticResource ButtonStyle}"/>
     <Style TargetType="{x:Type controls:AlternativeImage}" BasedOn="{StaticResource AlternativeImageStyle}"/>
+    <Style TargetType="{x:Type controls:MonthUpDown}" BasedOn="{StaticResource MonthUpDownStyle}"/>
         
     <Style TargetType="{x:Type TabControl}" BasedOn="{StaticResource TabControlStyle}"/>
     <Style TargetType="{x:Type TabItem}" BasedOn="{StaticResource TabItemStyle}"/>

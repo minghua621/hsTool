@@ -11,7 +11,7 @@ namespace UI.Main
 {
     public static class AppSettings
     {
-        public static bool Initialize(string configXml)
+        public static bool Initialize(string configXml, bool isTest)
         {
             bool result = false;
 
@@ -24,7 +24,14 @@ namespace UI.Main
                     switch (section.Attribute(XName.Get("Key")).Value)
                     {
                         case "DB":
-                            dbPath = baseDirectory + GetValue(section, "Path");
+                            if (isTest)
+                            {
+                                dbPath = baseDirectory + GetValue(section, "TestPath");
+                            }
+                            else
+                            {
+                                dbPath = baseDirectory + GetValue(section, "Path");
+                            }
                             connectString = string.Format("Data source={0}", dbPath);
                             break;
                         case "Log":

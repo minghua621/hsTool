@@ -24,7 +24,8 @@ namespace UI
             Localization.ResourceWrapper.CurrentCultrue = "zh-TW";
 
             string config = @"D:\home\hsTool\AppSettings.xml";
-            AppSettings.Initialize(config);            
+            bool isTest = e.Args.Count() > 0 && e.Args[0] == "-test" ? true : false;
+            AppSettings.Initialize(config, isTest);
             this.MainWindow.Title = "hsTool";
             this.MainWindow.Icon = this.Resources["application_icon"] as System.Windows.Media.Imaging.BitmapImage;
             this.MainWindow.WindowState = WindowState.Maximized;

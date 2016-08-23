@@ -50,6 +50,7 @@
   <ItemGroup>
     <Compile Include="Controls\AlternativeImage.cs" />
     <Compile Include="Controls\Button.cs" />
+    <Compile Include="Controls\MonthUpDown.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -109,6 +110,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Style\Light\DataGrid.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Style\Light\MonthUpDown.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

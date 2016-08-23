@@ -3,7 +3,6 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:xceed="http://schemas.xceed.com/wpf/xaml/toolkit"
              xmlns:controls="clr-namespace:Theme.Controls;assembly=Theme"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
@@ -44,9 +43,9 @@
             </StackPanel>
             <StackPanel Orientation="Horizontal" Margin="5,0">
                 <Label Content="{Binding Source={StaticResource ResourceWrapper},Path=ApplicationString.header_invoice_month}"/>
-                <xceed:DateTimeUpDown Format="Custom" FormatString="yyyy/MM" CurrentDateTimePart="Month"  Width="120" VerticalAlignment="Bottom" Value="{Binding SelectedMonth,UpdateSourceTrigger=PropertyChanged}" Margin="3,0"/>
+                <controls:MonthUpDown Value="{Binding SelectedMonth,Mode=TwoWay}" Margin="3,3,0,-3" VerticalAlignment="Bottom"/>
             </StackPanel>
-            <GroupBox Header="{Binding Source={StaticResource ResourceWrapper},Path=ApplicationString.header_invoice_sample}" Foreground="Black">
+            <GroupBox Header="{Binding Source={StaticResource ResourceWrapper},Path=ApplicationString.header_invoice_sample}" Foreground="Black" Margin="0,5">
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition/>
@@ -98,7 +97,7 @@
             </StackPanel>
             <StackPanel Orientation="Horizontal" Margin="5,15,0,0">
                 <controls:Button IconSource="{StaticResource DownLoadIcon_Black_18}" PressedIconSource="{StaticResource DownLoadIcon_White_18}"
-                                 Content="{Binding Source={StaticResource ResourceWrapper},Path=ApplicationString.buttonContent_Export}" Command="{Binding ExportCommand}"/>
+                                 Content="{Binding Source={StaticResource ResourceWrapper},Path=ApplicationString.buttonContent_Export}" Command="{Binding ExportCommand}"/>                
             </StackPanel>
         </StackPanel>
     </Grid>
