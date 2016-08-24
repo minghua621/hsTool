@@ -10,13 +10,14 @@
     <Grid Margin="0,8">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="500"/>
-            <ColumnDefinition Width="330"/>
+            <ColumnDefinition Width="350"/>
         </Grid.ColumnDefinitions>
         <DataGrid x:Name="dataGrid" AutoGenerateColumns="False" IsReadOnly="True" ItemsSource="{Binding Items}" SelectedItem="{Binding SelectedItem}">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="{Binding Source={StaticResource ResourceWrapper},Path=ApplicationString.colorSettings_code}" Binding="{Binding Code}"/>
                 <DataGridTextColumn Header="{Binding Source={StaticResource ResourceWrapper},Path=ApplicationString.colorSettings_name}" Binding="{Binding Name}"/>
                 <DataGridTextColumn Header="{Binding Source={StaticResource ResourceWrapper},Path=ApplicationString.colorSettings_codeAid}" Binding="{Binding CodeAid}"/>
+                <DataGridTextColumn Header="{Binding Source={StaticResource ResourceWrapper},Path=ApplicationString.colorSettings_amount}" Binding="{Binding Amount}"/>
             </DataGrid.Columns>
             <i:Interaction.Triggers>
                 <i:EventTrigger EventName="SelectionChanged">
@@ -32,6 +33,8 @@
             <TextBox Text="{Binding InputName}"/>
             <Label Content="{Binding Source={StaticResource ResourceWrapper},Path=ApplicationString.colorSettings_codeAid}"/>
             <TextBox Text="{Binding InputCodeAid}" CharacterCasing="Upper"/>
+            <Label Content="{Binding Source={StaticResource ResourceWrapper},Path=ApplicationString.colorSettings_amount}"/>
+            <TextBox Text="{Binding InputAmount}"/>            
             <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
                 <controls:Button Content="{Binding Source={StaticResource ResourceWrapper},Path=ApplicationString.buttonContent_Add}"
                                     IconSource="{StaticResource AddIcon_Black_18}" PressedIconSource="{StaticResource AddIcon_White_18}"

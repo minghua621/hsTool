@@ -19,7 +19,7 @@
             </StackPanel>
         </DataTemplate>
         <Style TargetType="{x:Type Label}">
-            <Setter Property="Width" Value="70"/>
+            <Setter Property="Width" Value="85"/>
         </Style>
         <Style TargetType="{x:Type TextBox}" BasedOn="{StaticResource TextBoxStyle}">
             <Setter Property="Width" Value="200"/>
@@ -55,7 +55,7 @@
         <StackPanel Grid.Column="1" Orientation="Vertical">
             <StackPanel>
                 <Label Content="{Binding Source={StaticResource ResourceWrapper},Path=ApplicationString.header_product_info}"/>
-                <TextBox IsReadOnly="True" Text="{Binding ProductInfo,Mode=OneWay}" Height="120"/>
+                <TextBox IsReadOnly="True" Text="{Binding ProductInfo,Mode=OneWay}" Height="150"/>
             </StackPanel>
             <StackPanel>
                 <Label Content="{Binding Source={StaticResource ResourceWrapper},Path=ApplicationString.header_shipdate}"/>

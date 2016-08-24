@@ -27,7 +27,8 @@ namespace Theme.Controls
                 this.Loaded -= MonthUpDown_Loaded;
                 Value = DateTime.Now;
                 Value = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1);
-                FocusMonth();
+                valueTextBox.SelectionStart = valueTextBox.Text.IndexOf(monthSeperator) + 1;
+                valueTextBox.SelectionLength = 2;
             }
         }
 

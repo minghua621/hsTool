@@ -12,6 +12,7 @@
                 <DataGridTextColumn Header="{Binding Source={StaticResource ResourceWrapper},Path=ApplicationString.header_customer_name}" Binding="{Binding Name}"/>
                 <DataGridTextColumn Header="{Binding Source={StaticResource ResourceWrapper},Path=ApplicationString.customerSettings_fullName}" Binding="{Binding FullName}"/>
                 <DataGridTextColumn Header="{Binding Source={StaticResource ResourceWrapper},Path=ApplicationString.customerSettings_phone}" Binding="{Binding Phone}"/>
+                <DataGridTextColumn Header="{Binding Source={StaticResource ResourceWrapper},Path=ApplicationString.customerSettings_invoice}" Binding="{Binding InvoiceFormat}"/>
             </DataGrid.Columns>
         </DataGrid>            
     </Grid>

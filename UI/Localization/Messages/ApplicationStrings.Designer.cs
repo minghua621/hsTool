@@ -88,7 +88,7 @@ namespace UI.Localization.Messages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 變更組合.
+        ///   Looks up a localized string similar to 改組.
         /// </summary>
         public static string buttonContent_change_units {
             get {
@@ -160,6 +160,15 @@ namespace UI.Localization.Messages {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to 用量(色粉/原料).
+        /// </summary>
+        public static string colorSettings_amount {
+            get {
+                return ResourceManager.GetString("colorSettings_amount", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to 國際色號.
         /// </summary>
         public static string colorSettings_code {
@@ -210,6 +219,15 @@ namespace UI.Localization.Messages {
         public static string customerSettings_fullName {
             get {
                 return ResourceManager.GetString("customerSettings_fullName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 請款單格式.
+        /// </summary>
+        public static string customerSettings_invoice {
+            get {
+                return ResourceManager.GetString("customerSettings_invoice", resourceCulture);
             }
         }
         

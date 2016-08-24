@@ -30,12 +30,14 @@ namespace UI.Settings.Dao
                         string code = sqlite_datareader["Code"].ToString();
                         string name = sqlite_datareader["Name"].ToString();
                         string codeAid = sqlite_datareader["CodeAid"].ToString();
+                        string amount = sqlite_datareader["Amount"].ToString();
 
                         rlt.Add(new ColorItemModel()
                         {
                             Code = code,
                             Name = name,
                             CodeAid = codeAid,
+                            Amount = amount,
                         });
                     }
                 }
@@ -51,11 +53,12 @@ namespace UI.Settings.Dao
                 using (SQLiteCommand cmd = conn.CreateCommand())
                 {
                     cmd.CommandType = CommandType.Text;
-                    cmd.CommandText = @"INSERT INTO ColorSettings (Code, Name, CodeAid, UpdatedTime) VALUES (@p1,@p2,@p3,@p4)";
+                    cmd.CommandText = @"INSERT INTO ColorSettings (Code, Name, CodeAid, Amount, UpdatedTime) VALUES (@p1,@p2,@p3,@p4,@p5)";
                     cmd.Parameters.Add(new SQLiteParameter("@p1", item.Code));
                     cmd.Parameters.Add(new SQLiteParameter("@p2", item.Name));
                     cmd.Parameters.Add(new SQLiteParameter("@p3", item.CodeAid));
-                    cmd.Parameters.Add(new SQLiteParameter("@p4", DateTime.Now));
+                    cmd.Parameters.Add(new SQLiteParameter("@p4", item.Amount));
+                    cmd.Parameters.Add(new SQLiteParameter("@p5", DateTime.Now));
                     cmd.ExecuteNonQuery();
                 }
             }
@@ -69,11 +72,12 @@ namespace UI.Settings.Dao
                 using (SQLiteCommand cmd = conn.CreateCommand())
                 {
                     cmd.CommandType = CommandType.Text;
-                    cmd.CommandText = @"Update ColorSettings SET Name=@p0, CodeAid=@p1, UpdatedTime=@p2 WHERE Code=@p3";
+                    cmd.CommandText = @"Update ColorSettings SET Name=@p0, CodeAid=@p1, Amount=@p2, UpdatedTime=@p3 WHERE Code=@p4";
                     cmd.Parameters.Add(new SQLiteParameter("@p0", item.Name));
                     cmd.Parameters.Add(new SQLiteParameter("@p1", item.CodeAid));
-                    cmd.Parameters.Add(new SQLiteParameter("@p2", DateTime.Now));
-                    cmd.Parameters.Add(new SQLiteParameter("@p3", item.Code));
+                    cmd.Parameters.Add(new SQLiteParameter("@p2", item.Amount));
+                    cmd.Parameters.Add(new SQLiteParameter("@p3", DateTime.Now));
+                    cmd.Parameters.Add(new SQLiteParameter("@p4", item.Code));
                     cmd.ExecuteNonQuery();
                 }
             }
@@ -113,6 +117,7 @@ namespace UI.Settings.Dao
                         string name = sqlite_datareader["Name"].ToString();
                         string fullname = sqlite_datareader["FullName"].ToString();
                         string phone = sqlite_datareader["PhoneNumber"].ToString();
+                        int format = Convert.ToInt32(sqlite_datareader["InvoiceFormat"]);
 
                         rlt.Add(new CustomerItemModel()
                         {
@@ -120,6 +125,7 @@ namespace UI.Settings.Dao
                             Name = name,
                             FullName = fullname,
                             Phone = phone,
+                            InvoiceFormat = format,
                         });
                     }
                 }

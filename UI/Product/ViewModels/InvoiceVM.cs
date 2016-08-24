@@ -197,14 +197,16 @@ namespace UI.Product.ViewModels
 
         #region methods
 
-        private void Export()
+        private void Output(IXLWorksheet ws, int startCell)
         {
-            string fileName = AppSettings.InvoiceTemplate;
-            var workbook = new XLWorkbook(fileName);
-            var ws = workbook.Worksheet(1);
+            int cell = startCell;
+            //title
+            ws.Cell(string.Format("A{0}", cell - 4)).Value = SelectedCustomer.FullName;
+            ws.Cell(string.Format("A{0}", cell - 3)).Value = string.Format(ApplicationStrings.invoice_phone_number, SelectedCustomer.Phone);
+            ws.Cell(string.Format("D{0}", cell - 3)).Value = string.Format(ApplicationStrings.invoice_month, SelectedMonth.Year - 1911, SelectedMonth.Month);
 
-            int cell = 5;
-            foreach(InvoiceItemModel item in Items)
+            //shipment
+            foreach (InvoiceItemModel item in Items)
             {
                 ws.Cell(string.Format("A{0}", cell)).Value = item.ProductName;
                 ws.Cell(string.Format("B{0}", cell)).Value = item.Price;
@@ -213,7 +215,8 @@ namespace UI.Product.ViewModels
                 cell++;
             }
 
-            foreach(SampleItem item in SampleList)
+            //sample
+            foreach (SampleItem item in SampleList)
             {
                 ws.Cell(string.Format("A{0}", cell)).Value = item.Name;
                 ws.Cell(string.Format("B{0}", cell)).Value = item.Price;
@@ -222,26 +225,54 @@ namespace UI.Product.ViewModels
                 cell++;
             }
 
-            ws.Cell("D39").Value = ShipmentTotal;
-            if(PersentTaxChecked)
+            //total
+            ws.Cell(string.Format("A{0}", ++cell)).Value = ApplicationStrings.header_invoice_shipment_total;
+            ws.Cell(string.Format("D{0}", cell)).Value = ShipmentTotal;
+            ws.Cell(string.Format("A{0}", ++cell)).Value = ApplicationStrings.header_tax;
+            if (PersentTaxChecked)
             {
-                ws.Cell("D40").Value = PersentTax;
+                ws.Cell(string.Format("D{0}", cell)).Value = PersentTax;
             }
             else
             {
-                ws.Cell("D40").Value = ManualTax;
+                ws.Cell(string.Format("D{0}", cell)).Value = ManualTax;
             }
-            ws.Cell("D41").Value = Total;
+            ws.Cell(string.Format("A{0}", ++cell)).Value = ApplicationStrings.header_invoice_total;
+            ws.Cell(string.Format("D{0}", cell)).Value = Total;
 
-            //title
-            ws.Cell("A1").Value = SelectedCustomer.FullName;
-            ws.Cell("A2").Value = string.Format(ApplicationStrings.invoice_phone_number, SelectedCustomer.Phone);
-            ws.Cell("D2").Value = string.Format(ApplicationStrings.invoice_month, SelectedMonth.Year - 1911, SelectedMonth.Month);
-            
+            //set border
+            var rngTable = ws.Range(string.Format("A{0}:D{1}", startCell, cell++));
+            rngTable.Style.Border.OutsideBorder = XLBorderStyleValues.Thin;
+            rngTable.Style.Border.OutsideBorderColor = XLColor.Black;
+            rngTable.Style.Border.InsideBorder = XLBorderStyleValues.Thin;
+            rngTable.Style.Border.InsideBorderColor = XLColor.Black;
+
             //footer            
-            ws.Cell("A43").Value = AppSettings.Company.FullName;
-            ws.Cell("A44").Value = string.Format(ApplicationStrings.invoice_phone_number, AppSettings.Company.Phone);
-            ws.Cell("C43").Value = string.Format(ApplicationStrings.invoice_date, DateTime.Now.Year - 1911, DateTime.Now.Month, DateTime.Now.Day);
+            ws.Cell(string.Format("A{0}", ++cell)).Value = AppSettings.Company.FullName;
+            ws.Cell(string.Format("D{0}", cell)).Style.Alignment.Horizontal = XLAlignmentHorizontalValues.Right;
+            ws.Cell(string.Format("D{0}", cell)).Value = string.Format(ApplicationStrings.invoice_date, DateTime.Now.Year - 1911, DateTime.Now.Month, DateTime.Now.Day);
+            ws.Cell(string.Format("A{0}", ++cell)).Value = string.Format(ApplicationStrings.invoice_phone_number, AppSettings.Company.Phone);
+        }
+        private void Export()
+        {
+            string fileName = AppSettings.InvoiceTemplate;
+            XLWorkbook workbook = new XLWorkbook(fileName);
+            IXLWorksheet ws = workbook.Worksheet(SelectedCustomer.InvoiceFormat);
+
+            Output(ws, 5);
+            if (SelectedCustomer.InvoiceFormat == 2)
+            {
+                Output(ws, 29);
+            }
+            
+            //delete other sheets            
+            for (int i = workbook.Worksheets.Count; i >= 1; i--)
+            {
+                if (i != SelectedCustomer.InvoiceFormat)
+                {
+                    workbook.Worksheet(i).Delete();
+                }
+            }
 
             Microsoft.Win32.SaveFileDialog dlg = new Microsoft.Win32.SaveFileDialog();
             dlg.FileName = string.Format("{0}-{1}", SelectedCustomer.Name, SelectedMonth.ToString("yyyyMM")); // Default file name

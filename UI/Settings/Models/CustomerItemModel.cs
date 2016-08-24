@@ -13,5 +13,6 @@ namespace UI.Settings.Models
         public string Name { get; set; }
         public string FullName { get; set; }
         public string Phone { get; set; }
+        public int InvoiceFormat { get; set; }
     }
 }

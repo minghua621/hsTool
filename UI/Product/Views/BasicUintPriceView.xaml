@@ -86,7 +86,7 @@
             </StackPanel>
             <StackPanel Orientation="Horizontal" Grid.Row="4">
                 <Label Content="{Binding Source={StaticResource ResourceWrapper},Path=ApplicationString.colorSettings_code}"/>
-                <toolkit:AutoCompleteBox Width="150" Height="25" Margin="3" VerticalAlignment="Top" ItemsSource="{Binding Colors}" SelectedItem="{Binding SelectedColor,Mode=TwoWay}" Text="{Binding SelectedColorText,Mode=TwoWay}" ValueMemberPath="Code" ItemTemplate="{StaticResource ColorItemTemplate}" FilterMode="StartsWith"/>
+                <toolkit:AutoCompleteBox Width="150" Margin="3" VerticalAlignment="Top" ItemsSource="{Binding Colors}" SelectedItem="{Binding SelectedColor,Mode=TwoWay}" Text="{Binding SelectedColorText,Mode=TwoWay}" ValueMemberPath="Code" ItemTemplate="{StaticResource ColorItemTemplate}" FilterMode="StartsWith"/>
                 <StackPanel Orientation="Vertical" VerticalAlignment="Top" Margin="5,0,0,0">
                     <controls:Button IconSource="{StaticResource RightArrowIcon_Black_18}" PressedIconSource="{StaticResource RightArrowIcon_White_18}"
                                      Padding="6,3,4,3" Command="{Binding IncreaseColorCommand}"/>

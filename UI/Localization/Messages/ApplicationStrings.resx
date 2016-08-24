@@ -187,7 +187,7 @@
     <value>出貨</value>
   </data>
   <data name="buttonContent_change_units" xml:space="preserve">
-    <value>變更組合</value>
+    <value>改組</value>
   </data>
   <data name="header_quantity" xml:space="preserve">
     <value>數量</value>
@@ -266,5 +266,11 @@
   </data>
   <data name="invoice_phone_number" xml:space="preserve">
     <value>TEL: {0}</value>
+  </data>
+  <data name="colorSettings_amount" xml:space="preserve">
+    <value>用量(色粉/原料)</value>
+  </data>
+  <data name="customerSettings_invoice" xml:space="preserve">
+    <value>請款單格式</value>
   </data>
 </root>

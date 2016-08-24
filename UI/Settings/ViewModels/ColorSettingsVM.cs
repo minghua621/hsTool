@@ -52,6 +52,12 @@ namespace UI.Settings.ViewModels
         }
         private string _InputCodeAid = string.Empty;
 
+        public string InputAmount
+        {
+            get { return _InputAmount; }
+            set { _InputAmount = value; OnPropertyChanged("InputAmount"); }
+        }
+        private string _InputAmount = string.Empty;
         #endregion
 
         #region commands
@@ -108,9 +114,10 @@ namespace UI.Settings.ViewModels
         {
             ColorItemModel item = new ColorItemModel()
             {
-                Code = this.InputCode,                
+                Code = this.InputCode,
                 Name = this.InputName,
                 CodeAid = this.InputCodeAid,
+                Amount = this.InputAmount,
             };
             SettingsDao.CreateColor(item);
             this._listModel.Add(item);
@@ -122,6 +129,7 @@ namespace UI.Settings.ViewModels
             SelectedItem.Code = this.InputCode;
             SelectedItem.Name = this.InputName;
             SelectedItem.CodeAid = this.InputCodeAid;
+            SelectedItem.Amount = this.InputAmount;
             SettingsDao.UpdateColor(SelectedItem);
             ClearInput();
         }
@@ -144,6 +152,7 @@ namespace UI.Settings.ViewModels
             this.InputCode = string.Empty;
             this.InputName = string.Empty;
             this.InputCodeAid = string.Empty;
+            this.InputAmount = string.Empty;
             if (flag)
             {
                 SelectedItem = null;
@@ -159,6 +168,7 @@ namespace UI.Settings.ViewModels
                     InputCode = SelectedItem.Code;
                     InputName = SelectedItem.Name;
                     InputCodeAid = SelectedItem.CodeAid;
+                    InputAmount = SelectedItem.Amount;
                     return;
                 }
             }
