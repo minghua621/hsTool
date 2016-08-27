@@ -259,10 +259,10 @@ namespace UI.Product.ViewModels
             XLWorkbook workbook = new XLWorkbook(fileName);
             IXLWorksheet ws = workbook.Worksheet(SelectedCustomer.InvoiceFormat);
 
-            Output(ws, 5);
+            Output(ws, 7);
             if (SelectedCustomer.InvoiceFormat == 2)
             {
-                Output(ws, 29);
+                Output(ws, 32);
             }
             
             //delete other sheets            

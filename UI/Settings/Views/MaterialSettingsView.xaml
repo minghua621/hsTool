@@ -10,7 +10,7 @@
     <Grid Margin="0,8">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="500"/>
-            <ColumnDefinition Width="350"/>
+            <ColumnDefinition Width="380"/>
         </Grid.ColumnDefinitions>
         <DataGrid x:Name="dataGrid" AutoGenerateColumns="False" IsReadOnly="True" ItemsSource="{Binding Items}" SelectedItem="{Binding SelectedItem}">
             <DataGrid.Columns>

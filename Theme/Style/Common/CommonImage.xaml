@@ -26,6 +26,10 @@
     <BitmapImage x:Key="LeftArrowIcon_White_18" UriSource="/Theme;component/Images/ic_arrow_back_white_18dp_1x.png"/>
     <BitmapImage x:Key="RightArrowIcon_Black_18" UriSource="/Theme;component/Images/ic_arrow_forward_black_18dp_1x.png"/>
     <BitmapImage x:Key="RightArrowIcon_White_18" UriSource="/Theme;component/Images/ic_arrow_forward_white_18dp_1x.png"/>
+    <BitmapImage x:Key="DownArrowIcon_Black_18" UriSource="/Theme;component/Images/ic_arrow_downward_black_18dp_1x.png"/>
+    <BitmapImage x:Key="DownArrowIcon_White_18" UriSource="/Theme;component/Images/ic_arrow_downward_white_18dp_1x.png"/>
+    <BitmapImage x:Key="UpArrowIcon_Black_18" UriSource="/Theme;component/Images/ic_arrow_upward_black_18dp_1x.png"/>
+    <BitmapImage x:Key="UpArrowIcon_White_18" UriSource="/Theme;component/Images/ic_arrow_upward_white_18dp_1x.png"/>    
     <BitmapImage x:Key="DoneIcon_Black_18" UriSource="/Theme;component/Images/ic_done_black_18dp_1x.png"/>
     <BitmapImage x:Key="DoneIcon_White_18" UriSource="/Theme;component/Images/ic_done_white_18dp_1x.png"/>
     <BitmapImage x:Key="SwapHorizIcon_Black_18" UriSource="/Theme;component/Images/ic_swap_horiz_black_18dp_1x.png"/>

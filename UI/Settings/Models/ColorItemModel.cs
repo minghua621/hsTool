@@ -22,19 +22,5 @@ namespace UI.Settings.Models
             set { _Name = value; OnPropertyChanged("Name"); }
         }
         private string _Name = string.Empty;
-
-        public string CodeAid
-        {
-            get { return _CodeAid; }
-            set { _CodeAid = value; OnPropertyChanged("CodeAid"); }
-        }
-        private string _CodeAid = string.Empty;
-
-        public string Amount
-        {
-            get { return _Amount; }
-            set { _Amount = value; OnPropertyChanged("Amount"); }
-        }
-        private string _Amount = string.Empty;
     }
 }

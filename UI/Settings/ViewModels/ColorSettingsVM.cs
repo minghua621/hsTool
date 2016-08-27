@@ -44,20 +44,6 @@ namespace UI.Settings.ViewModels
             set { _InputName = value; OnPropertyChanged("InputName"); }
         }
         private string _InputName = string.Empty;
-
-        public string InputCodeAid
-        {
-            get { return _InputCodeAid; }
-            set { _InputCodeAid = value; OnPropertyChanged("InputCodeAid"); }
-        }
-        private string _InputCodeAid = string.Empty;
-
-        public string InputAmount
-        {
-            get { return _InputAmount; }
-            set { _InputAmount = value; OnPropertyChanged("InputAmount"); }
-        }
-        private string _InputAmount = string.Empty;
         #endregion
 
         #region commands
@@ -116,8 +102,6 @@ namespace UI.Settings.ViewModels
             {
                 Code = this.InputCode,
                 Name = this.InputName,
-                CodeAid = this.InputCodeAid,
-                Amount = this.InputAmount,
             };
             SettingsDao.CreateColor(item);
             this._listModel.Add(item);
@@ -128,8 +112,6 @@ namespace UI.Settings.ViewModels
         {
             SelectedItem.Code = this.InputCode;
             SelectedItem.Name = this.InputName;
-            SelectedItem.CodeAid = this.InputCodeAid;
-            SelectedItem.Amount = this.InputAmount;
             SettingsDao.UpdateColor(SelectedItem);
             ClearInput();
         }
@@ -151,8 +133,6 @@ namespace UI.Settings.ViewModels
         {
             this.InputCode = string.Empty;
             this.InputName = string.Empty;
-            this.InputCodeAid = string.Empty;
-            this.InputAmount = string.Empty;
             if (flag)
             {
                 SelectedItem = null;
@@ -167,40 +147,10 @@ namespace UI.Settings.ViewModels
                 {
                     InputCode = SelectedItem.Code;
                     InputName = SelectedItem.Name;
-                    InputCodeAid = SelectedItem.CodeAid;
-                    InputAmount = SelectedItem.Amount;
                     return;
                 }
             }
             ClearInput(false);
-        }
-
-        public static string ColorItemToCode(List<ColorItemModel> items)
-        {
-            string rlt = string.Empty;
-            foreach (var item in items.OrderBy(x => x.Code))
-            {
-                rlt += item.Code + ",";
-            }
-            return rlt;
-        }
-
-        public static List<ColorItemModel> CodeToColorItemModel(string colorList)
-        {
-            List<ColorItemModel> rlt = new List<ColorItemModel>();
-            if (!string.IsNullOrEmpty(colorList))
-            {
-                string[] colors = colorList.Split(",".ToCharArray());
-                foreach (string code in colors)
-                {
-                    ColorItemModel item = ColorSettings.Items.FirstOrDefault(x => x.Code == code);
-                    if (item != null)
-                    {
-                        rlt.Add(item);
-                    }
-                }
-            }
-            return rlt;
         }
         #endregion
     }

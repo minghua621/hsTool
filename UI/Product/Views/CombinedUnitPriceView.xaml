@@ -13,9 +13,6 @@
         <converter:InverseVisibilityConverter x:Key="InverseVisibilityConverter"/>
         <model:CombinedUnitsConverter x:Key="CombinedUnitsConverter"/>
 
-        <Style TargetType="{x:Type TextBox}" BasedOn="{StaticResource TextBoxStyle}">
-            <Setter Property="Width" Value="180"/>
-        </Style>
         <Style TargetType="{x:Type TextBlock}">
             <Setter Property="Foreground" Value="Black"/>
         </Style>
@@ -71,16 +68,16 @@
                 <RowDefinition/>                
             </Grid.RowDefinitions>
             <StackPanel x:Name="namePanel" Orientation="Horizontal" Margin="0,4,0,0" Visibility="{Binding Visibility,ElementName=CodePanel,Converter={StaticResource InverseVisibilityConverter}}">
-                <Label Content="{Binding Source={StaticResource ResourceWrapper},Path=ApplicationString.header_product_name}" Width="75"/>
-                <TextBox Text="{Binding InputName,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"/>
+                <Label Content="{Binding Source={StaticResource ResourceWrapper},Path=ApplicationString.header_product_name}" Width="85"/>
+                <TextBox Text="{Binding InputName,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Width="170"/>
             </StackPanel>
             <StackPanel x:Name="CodePanel" Orientation="Horizontal" Margin="0,4,0,0" Visibility="{Binding CodePanelVisibility}" Grid.Row="1">
-                <Label Content="{Binding Source={StaticResource ResourceWrapper},Path=ApplicationString.header_product_code}" Width="75"/>
-                <TextBox IsReadOnly="True" Text="{Binding ProductCode,Mode=OneWay}"/>
+                <Label Content="{Binding Source={StaticResource ResourceWrapper},Path=ApplicationString.header_product_code}" Width="85"/>
+                <TextBox IsReadOnly="True" Text="{Binding ProductCode,Mode=OneWay}" Width="170"/>
             </StackPanel>
             <StackPanel Orientation="Horizontal" Margin="0,0,0,6" Grid.Row="2">
-                <Label Content="{Binding Source={StaticResource ResourceWrapper},Path=ApplicationString.header_unit_price}" VerticalAlignment="Center" Width="75"/>
-                <TextBox IsReadOnly="True" Text="{Binding CombinedPrice,Mode=OneWay}" VerticalAlignment="Center"/>
+                <Label Content="{Binding Source={StaticResource ResourceWrapper},Path=ApplicationString.header_unit_price}" VerticalAlignment="Center" Width="85"/>
+                <TextBox IsReadOnly="True" Text="{Binding CombinedPrice,Mode=OneWay}" VerticalAlignment="Center" Width="170"/>
             </StackPanel>
             <DataGrid x:Name="dataGrid2" Grid.Row="3" ItemsSource="{Binding CombiningUnits}" SelectedItem="{Binding SelectedCombining}">
                 <DataGrid.Columns>
@@ -118,9 +115,8 @@
                 <RowDefinition/>
             </Grid.RowDefinitions>
             <Label Margin="0,3" Content="{Binding Source={StaticResource ResourceWrapper},Path=ApplicationString.combined_units_header}"/>
-            <StackPanel Orientation="Horizontal" Grid.Row="1">                
-                <Label Content="{Binding Source={StaticResource ResourceWrapper},Path=ApplicationString.header_product_name}" VerticalAlignment="Center"/>
-                <TextBox Text="{Binding EditName,Mode=TwoWay}" VerticalAlignment="Center"/>
+            <StackPanel Orientation="Horizontal" Grid.Row="1">
+                <TextBox Text="{Binding EditName,Mode=TwoWay}" VerticalAlignment="Center" Width="190"/>
                 <controls:Button Content="{Binding Source={StaticResource ResourceWrapper},Path=ApplicationString.buttonContent_Update}" Command="{Binding EditCommand}"                                 
                                  IconSource="{StaticResource DoneIcon_Black_18}" PressedIconSource="{StaticResource DoneIcon_White_18}"/>
                 <controls:Button Content="{Binding Source={StaticResource ResourceWrapper},Path=ApplicationString.buttonContent_Delete}" Command="{Binding DeleteCommand}"

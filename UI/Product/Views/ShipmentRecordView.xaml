@@ -13,10 +13,14 @@
             <TextBlock Text="{Binding Name}"/>
         </DataTemplate>
         <DataTemplate x:Key="ColorItemTemplate">
-            <StackPanel Orientation="Horizontal">
-                <TextBlock Text="{Binding Code}" Width="80"/>
-                <TextBlock Text="{Binding Name}" Foreground="DarkGray" Width="60"/>
-            </StackPanel>
+            <Grid Width="190">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock Text="{Binding item.Code}"/>
+                <TextBlock Text="{Binding item.Name}" Foreground="DarkGray" Grid.Column="1"/>
+            </Grid>            
         </DataTemplate>
         <Style TargetType="{x:Type Label}">
             <Setter Property="Width" Value="85"/>
@@ -55,7 +59,7 @@
         <StackPanel Grid.Column="1" Orientation="Vertical">
             <StackPanel>
                 <Label Content="{Binding Source={StaticResource ResourceWrapper},Path=ApplicationString.header_product_info}"/>
-                <TextBox IsReadOnly="True" Text="{Binding ProductInfo,Mode=OneWay}" Height="150"/>
+                <TextBox IsReadOnly="True" Text="{Binding ProductInfo,Mode=OneWay}" Height="180"/>
             </StackPanel>
             <StackPanel>
                 <Label Content="{Binding Source={StaticResource ResourceWrapper},Path=ApplicationString.header_shipdate}"/>
@@ -67,7 +71,7 @@
             </StackPanel>
             <StackPanel>
                 <Label Content="{Binding Source={StaticResource ResourceWrapper},Path=ApplicationString.colorSettings_code}"/>
-                <toolkit:AutoCompleteBox Margin="3" Width="200" ItemsSource="{Binding ColorItems}" SelectedItem="{Binding SelectedColor,Mode=TwoWay}" Text="{Binding SelectedColorText,Mode=TwoWay}" ValueMemberPath="Code" ItemTemplate="{StaticResource ColorItemTemplate}" FilterMode="StartsWith"/>
+                <toolkit:AutoCompleteBox Margin="3" Width="200" ItemsSource="{Binding ColorItems}" SelectedItem="{Binding SelectedColor,Mode=TwoWay}" Text="{Binding SelectedColorText,Mode=TwoWay}" ValueMemberPath="item.Code" ItemTemplate="{StaticResource ColorItemTemplate}" FilterMode="StartsWith"/>
             </StackPanel>            
             <StackPanel>
                 <Label Content="{Binding Source={StaticResource ResourceWrapper},Path=ApplicationString.header_quantity}"/>

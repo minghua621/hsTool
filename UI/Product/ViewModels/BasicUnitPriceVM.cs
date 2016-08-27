@@ -18,6 +18,13 @@ using UI.Settings.ViewModels;
 
 namespace UI.Product.ViewModels
 {
+    public class ColorItem
+    {
+        public ColorItemModel item { get; set; }
+        public string codeAid { get; set; }
+        public string amount { get; set; }
+    }
+
     public class BasicUnitPriceVM : ListViewModel<UnitPriceListModel, UnitPriceItemModel>
     {
         #region constructor
@@ -41,15 +48,6 @@ namespace UI.Product.ViewModels
             set { productCode = value; OnPropertyChanged("ProductCode"); }
         }
         private string productCode = string.Empty;
-
-        public string CustomerName
-        {
-            get 
-            {
-                CustomerItemModel item = CustomerSettinigsVM.CustomerSettinigs.Items.FirstOrDefault(x => x.Code == _customerType);
-                return item == null ? string.Empty : item.Name;
-            }
-        }
 
         public static List<BasicUnitPriceVM> Units
         {
@@ -123,19 +121,33 @@ namespace UI.Product.ViewModels
         }
         private string _SelectedColorText = string.Empty;
 
-        public ObservableCollection<ColorItemModel> ColorList
+        public ObservableCollection<ColorItem> ColorList
         {
             get { return _ColorList; }
             set { _ColorList = value; OnPropertyChanged("ColorList"); }
         }
-        private ObservableCollection<ColorItemModel> _ColorList = new ObservableCollection<ColorItemModel>();
+        private ObservableCollection<ColorItem> _ColorList = new ObservableCollection<ColorItem>();
 
-        public ColorItemModel SelectedColorItem
+        public ColorItem SelectedColorItem
         {
             get { return _SelectedColorItem; }
             set { _SelectedColorItem = value; OnPropertyChanged("SelectedColorItem"); }
         }
-        private ColorItemModel _SelectedColorItem;
+        private ColorItem _SelectedColorItem;
+
+        public string ColorCodeAid
+        {
+            get { return _ColorCodeAid; }
+            set { _ColorCodeAid = value; OnPropertyChanged("ColorCodeAid"); }
+        }
+        private string _ColorCodeAid = string.Empty;
+
+        public string ColorAmount
+        {
+            get { return _ColorAmount; }
+            set { _ColorAmount = value; OnPropertyChanged("ColorAmount"); }
+        }
+        private string _ColorAmount = string.Empty;
         #endregion
 
         #region commands
@@ -180,13 +192,27 @@ namespace UI.Product.ViewModels
             get { return new RelayCommand(DetailChanged); }
         }
 
+        private bool IsExistedColor()
+        {
+            bool rlt = false;
+            foreach (ColorItem color in ColorList)
+            {
+                if (color.item == SelectedColor)
+                {
+                    rlt = true;
+                    break;
+                }
+            }
+            return rlt;
+        }
+
         public ICommand IncreaseColorCommand
         {
             get
             {
                 return new ActiveDelegateCommand<BasicUnitPriceVM>(this,
-                    (p) => { ColorList.Add(SelectedColor); SelectedColorText = string.Empty; },
-                    (p) => { return SelectedColor != null && !ColorList.Contains(SelectedColor); });
+                    (p) => { ColorList.Add(new ColorItem() { item = SelectedColor, codeAid = ColorCodeAid, amount = ColorAmount }); SelectedColorText = string.Empty; ColorCodeAid = string.Empty; ColorAmount = string.Empty; },
+                    (p) => { return SelectedColor != null && !IsExistedColor(); });
             }
         }
 
@@ -235,6 +261,39 @@ namespace UI.Product.ViewModels
             return false;
         }
 
+        private static string ColorItemToString(List<ColorItem> items)
+        {
+            string rlt = string.Empty;
+            string delimiter = "^";
+
+            foreach (var color in items.OrderBy(x => x.item.Code))
+            {
+                rlt += string.Format("{0}{1}{2}{3}{4},", color.item.Code, delimiter, color.codeAid, delimiter, color.amount);
+            }
+            return rlt;
+        }
+
+        public static List<ColorItem> StringToColorItem(string colorList)
+        {
+            string delimiter = "^";
+            List<ColorItem> rlt = new List<ColorItem>();
+
+            if (!string.IsNullOrEmpty(colorList))
+            {
+                string[] colors = colorList.Split(",".ToCharArray());
+                foreach (string color in colors)
+                {
+                    string[] colorString = color.Split(delimiter.ToCharArray());
+                    ColorItemModel itemModel = Settings.ViewModels.ColorSettingsVM.ColorSettings.Items.FirstOrDefault(x => x.Code == colorString[0]);
+                    if (itemModel != null)
+                    {
+                        rlt.Add(new ColorItem() { item = itemModel, codeAid = colorString[1], amount = colorString[2] });
+                    }
+                }
+            }
+            return rlt;
+        }
+
         private void CreateItem()
         {
             UnitPriceItemModel item = new UnitPriceItemModel()
@@ -248,7 +307,7 @@ namespace UI.Product.ViewModels
                 Processing0 = Processing0Text,
                 IsCombined = false,
                 IsDeleted = false,
-                ColorTypes = ColorSettingsVM.ColorItemToCode(ColorList.ToList()),
+                ColorTypes = ColorItemToString(ColorList.ToList()),
             };
             this._listModel.Add(item);
             UnitPriceDao.Create(item);
@@ -262,7 +321,7 @@ namespace UI.Product.ViewModels
             SelectedItem.MaterialCode = (SelectedMaterial == null ? string.Empty : SelectedMaterial.Code);
             SelectedItem.Size = SizeText;
             SelectedItem.Processing0 = Processing0Text;
-            SelectedItem.ColorTypes = ColorSettingsVM.ColorItemToCode(ColorList.ToList());
+            SelectedItem.ColorTypes = ColorItemToString(ColorList.ToList());
             UnitPriceDao.Update(SelectedItem);
             ClearInput();
         }
@@ -313,7 +372,7 @@ namespace UI.Product.ViewModels
                 MaterialText = this.SelectedItem.MaterialName;
                 SizeText = this.SelectedItem.Size;
                 Processing0Text = this.SelectedItem.Processing0;
-                ColorList = new ObservableCollection<ColorItemModel>(ColorSettingsVM.CodeToColorItemModel(this.SelectedItem.ColorTypes));
+                ColorList = new ObservableCollection<ColorItem>(StringToColorItem(this.SelectedItem.ColorTypes));
             }
             else
             {

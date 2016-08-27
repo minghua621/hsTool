@@ -2,11 +2,13 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:controls="clr-namespace:Theme.Controls">
 
-    <SolidColorBrush x:Key="NormalBorder" Color="#FFB0BEC5"/>
-    <SolidColorBrush x:Key="HoverBorder" Color="#FF29b6f6"/>
+    <SolidColorBrush x:Key="NormalBorder" Color="#FF9E9E9E"/>
+    <SolidColorBrush x:Key="HoverBorder" Color="#FF29B6F6"/>
+    
     <Style x:Key="DownButtonStyle" TargetType="RepeatButton">
         <Setter Property="Focusable" Value="false"/>
         <Setter Property="Background" Value="{StaticResource NormalBorder}"/>
+        <Setter Property="Foreground" Value="White"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="RepeatButton">
@@ -32,6 +34,7 @@
     <Style x:Key="UpButtonStyle" TargetType="RepeatButton">
         <Setter Property="Focusable" Value="false"/>
         <Setter Property="Background" Value="{StaticResource NormalBorder}"/>
+        <Setter Property="Foreground" Value="White"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="RepeatButton">

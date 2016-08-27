@@ -87,7 +87,7 @@ namespace UI.Product.ViewModels
 
         private double unitPrice { get; set; }
 
-        public List<ColorItemModel> ColorItems
+        public List<ColorItem> ColorItems
         {
             get
             {
@@ -97,7 +97,7 @@ namespace UI.Product.ViewModels
                 }
                 else
                 {
-                    List<ColorItemModel> colors = new List<ColorItemModel>();
+                    List<ColorItem> colors = new List<ColorItem>();
                     if (SelectedInput.IsCombined == true)
                     {
                         string[] combines = SelectedInput.CombinedUnits.Split(",".ToCharArray());
@@ -109,8 +109,8 @@ namespace UI.Product.ViewModels
                                 UnitPriceItemModel unit = list.FirstOrDefault(x => x.Code == str);
                                 if (unit != null)
                                 {
-                                    List<ColorItemModel> rlt = ColorSettingsVM.CodeToColorItemModel(unit.ColorTypes);
-                                    foreach(ColorItemModel color in rlt)
+                                    List<ColorItem> rlt = BasicUnitPriceVM.StringToColorItem(unit.ColorTypes);
+                                    foreach(ColorItem color in rlt)
                                     {
                                         if(!colors.Contains(color))
                                         {
@@ -123,19 +123,19 @@ namespace UI.Product.ViewModels
                     }
                     else
                     {
-                        colors = ColorSettingsVM.CodeToColorItemModel(SelectedInput.ColorTypes);
+                        colors = BasicUnitPriceVM.StringToColorItem(SelectedInput.ColorTypes);
                     }
                     return colors;
                 }
             }
         }
 
-        public ColorItemModel SelectedColor
+        public ColorItem SelectedColor
         {
             get { return _SelectedColor; }
             set { _SelectedColor = value; OnPropertyChanged("SelectedColor"); }
         }
-        private ColorItemModel _SelectedColor = null;
+        private ColorItem _SelectedColor = null;
 
         public string SelectedColorText
         {
@@ -246,7 +246,7 @@ namespace UI.Product.ViewModels
                 UnitPrice = SelectedInput.Price,
                 ShipQty = this.InputQty,
                 ShipDate = this.InputDate,
-                ColorCode = SelectedColor == null ? string.Empty : SelectedColor.Code,
+                ColorCode = SelectedColor == null ? string.Empty : SelectedColor.item.Code,
             };
             long id = ShipmentDao.Create(item);
             item.SerialNumber = id;
@@ -259,7 +259,7 @@ namespace UI.Product.ViewModels
             SelectedItem.UnitPrice = SelectedInput.Price;
             SelectedItem.ShipQty = this.InputQty;
             SelectedItem.ShipDate = this.InputDate;
-            SelectedItem.ColorCode = SelectedColor == null ? string.Empty : SelectedColor.Code;
+            SelectedItem.ColorCode = SelectedColor == null ? string.Empty : SelectedColor.item.Code;
             ShipmentDao.Update(SelectedItem);
             ClearInput();
         }

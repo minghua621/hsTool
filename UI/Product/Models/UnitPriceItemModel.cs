@@ -76,12 +76,31 @@ namespace UI.Product.Models
         public string ColorTypes
         {
             get { return _ColorTypes; }
-            set { _ColorTypes = value; OnPropertyChanged("ColorTypes"); }
+            set { _ColorTypes = value; OnPropertyChanged("ColorTypes"); OnPropertyChanged("Colors"); }
         }
         private string _ColorTypes;
+
+        public string Colors
+        {
+            get { return ColorTypesToColors(ColorTypes); }
+        }
         #endregion
 
         #region methods
+
+        private static string ColorTypesToColors(string types)
+        {
+            string rlt = string.Empty;
+            string[] colors = types.Split(",".ToCharArray());
+            foreach (string color in colors)
+            {
+                if (!string.IsNullOrEmpty(color))
+                {
+                    rlt += color.Split("^".ToArray())[0] + ",";
+                }
+            }
+            return rlt;
+        }
 
         public static string GetNewProductCode(ObservableCollection<UnitPriceItemModel> items, string customer, bool isCombined)
         {

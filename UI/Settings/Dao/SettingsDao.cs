@@ -22,22 +22,18 @@ namespace UI.Settings.Dao
                 using (SQLiteCommand cmd = conn.CreateCommand())
                 {
                     cmd.CommandType = CommandType.Text;
-                    cmd.CommandText = "SELECT * FROM ColorSettings";
+                    cmd.CommandText = "SELECT * FROM ColorSettings order by Code asc";
                     SQLiteDataReader sqlite_datareader = cmd.ExecuteReader();
 
                     while (sqlite_datareader.Read())
                     {
                         string code = sqlite_datareader["Code"].ToString();
                         string name = sqlite_datareader["Name"].ToString();
-                        string codeAid = sqlite_datareader["CodeAid"].ToString();
-                        string amount = sqlite_datareader["Amount"].ToString();
 
                         rlt.Add(new ColorItemModel()
                         {
                             Code = code,
                             Name = name,
-                            CodeAid = codeAid,
-                            Amount = amount,
                         });
                     }
                 }
@@ -53,12 +49,10 @@ namespace UI.Settings.Dao
                 using (SQLiteCommand cmd = conn.CreateCommand())
                 {
                     cmd.CommandType = CommandType.Text;
-                    cmd.CommandText = @"INSERT INTO ColorSettings (Code, Name, CodeAid, Amount, UpdatedTime) VALUES (@p1,@p2,@p3,@p4,@p5)";
+                    cmd.CommandText = @"INSERT INTO ColorSettings (Code, Name, UpdatedTime) VALUES (@p1,@p2,@p3)";
                     cmd.Parameters.Add(new SQLiteParameter("@p1", item.Code));
                     cmd.Parameters.Add(new SQLiteParameter("@p2", item.Name));
-                    cmd.Parameters.Add(new SQLiteParameter("@p3", item.CodeAid));
-                    cmd.Parameters.Add(new SQLiteParameter("@p4", item.Amount));
-                    cmd.Parameters.Add(new SQLiteParameter("@p5", DateTime.Now));
+                    cmd.Parameters.Add(new SQLiteParameter("@p3", DateTime.Now));
                     cmd.ExecuteNonQuery();
                 }
             }
@@ -72,12 +66,10 @@ namespace UI.Settings.Dao
                 using (SQLiteCommand cmd = conn.CreateCommand())
                 {
                     cmd.CommandType = CommandType.Text;
-                    cmd.CommandText = @"Update ColorSettings SET Name=@p0, CodeAid=@p1, Amount=@p2, UpdatedTime=@p3 WHERE Code=@p4";
+                    cmd.CommandText = @"Update ColorSettings SET Name=@p0, UpdatedTime=@p1 WHERE Code=@p2";
                     cmd.Parameters.Add(new SQLiteParameter("@p0", item.Name));
-                    cmd.Parameters.Add(new SQLiteParameter("@p1", item.CodeAid));
-                    cmd.Parameters.Add(new SQLiteParameter("@p2", item.Amount));
-                    cmd.Parameters.Add(new SQLiteParameter("@p3", DateTime.Now));
-                    cmd.Parameters.Add(new SQLiteParameter("@p4", item.Code));
+                    cmd.Parameters.Add(new SQLiteParameter("@p1", DateTime.Now));
+                    cmd.Parameters.Add(new SQLiteParameter("@p2", item.Code));
                     cmd.ExecuteNonQuery();
                 }
             }
