@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.IO;
 using System.Xml.Linq;
 using UI.Settings.Models;
+using Common.Logger;
 
 namespace UI.Main
 {
@@ -36,9 +37,13 @@ namespace UI.Main
                             break;
                         case "Log":
                             logDir = baseDirectory + GetValue(section, "Path");
+                            Log.LogPath = string.Format("{0}{1}.txt", logDir, DateTime.Now.ToString("yyyyMMdd"));
                             break;
                         case "InvoiceTemplate":
                             invoiceTemplate = baseDirectory + GetValue(section, "Path");
+                            break;
+                        case "GoogleDriveKey":
+                            googleDriveKey = baseDirectory + GetValue(section, "Path");
                             break;
                         case "Company":
                             company = GetCompanySetting(section);
@@ -101,6 +106,12 @@ namespace UI.Main
             get { return invoiceTemplate; }
         }
         private static string invoiceTemplate = string.Empty;
+
+        public static string GoogleDriveKey
+        {
+            get { return googleDriveKey; }
+        }
+        private static string googleDriveKey = string.Empty;
 
         public static CompanySetting Company
         {

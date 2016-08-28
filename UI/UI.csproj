@@ -300,6 +300,10 @@
       <Project>{b5e727b9-2a28-40da-a7f1-3a3d624ed30b}</Project>
       <Name>Common</Name>
     </ProjectReference>
+    <ProjectReference Include="..\GoogleDrive\GoogleDrive.csproj">
+      <Project>{81c7a61d-11c0-43b5-8d27-7cb5db30029a}</Project>
+      <Name>GoogleDrive</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Theme\Theme.csproj">
       <Project>{678f705e-a7cb-4131-a1b9-f4ede287ba88}</Project>
       <Name>Theme</Name>
