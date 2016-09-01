@@ -26,12 +26,14 @@ namespace UI
 
             string config = @"D:\home\hsTool\AppSettings.xml";
             bool isTest = e.Args.Count() > 0 && e.Args[0] == "-test" ? true : false;
+
             AppSettings.Initialize(config, isTest);
-            
-            Log.Logger.Info("Application Start");
+            Log.Initialize(string.Format("{0}{1}.txt", AppSettings.LogDir, DateTime.Now.ToString("yyyyMMdd")));            
+            Log.Info("Application Start");
+
             if (!GoogleDrive.Settings.Initialize(AppSettings.GoogleDriveKey))
             {
-                Log.Logger.Error("Fail to update and backup");
+                Log.Error("Fail to update and backup");
             }
             else
             {

@@ -32,50 +32,50 @@ namespace GoogleDrive
                     _Files = GoogleDriveHelper.RetrieveAllFiles(Settings.DriveService, query);
                     if (_Files.Count > 0)
                     {
-                        Log.Logger.Info("Local DB is newer than DB in google drive.");
+                        Log.Info("Local DB is newer than DB in google drive.");
                         string newPath = string.Format("{0}_{1}", localPath, localFileDate.ToString("yyyyMMddHHmmss"));
                         System.IO.File.Copy(localPath, newPath);
                         File upload = GoogleDriveHelper.UploadFile(Settings.DriveService, newPath, _Files[0].Id);
                         if (upload != null)
                         {
                             System.IO.File.Delete(newPath);
-                            Log.Logger.Info("The lastest DB file completed uploading to google drive.");
+                            Log.Info("The lastest DB file completed uploading to google drive.");
                             isSuccess = true;
                         }
                         else
                         {
-                            Log.Logger.Error("Uploading DB file failed");
+                            Log.Error("Uploading DB file failed");
                         }
                     }
                     else
                     {
-                        Log.Logger.Error("DB folder doesn't exist.");
+                        Log.Error("DB folder doesn't exist.");
                     }
                 }
                 else if (localFileDate < googleFileDate) //download and replace
                 {
                     if (GoogleDriveHelper.DownloadFile(Settings.DriveService, _Files[0], downloadPath))
                     {
-                        Log.Logger.Info("Local DB is older than DB in google drive.");                        
+                        Log.Info("Local DB is older than DB in google drive.");                        
                         System.IO.File.Delete(localPath);
                         System.IO.File.Move(downloadPath, localPath);
-                        Log.Logger.Info("The lastest DB file completed downloading to local.");
+                        Log.Info("The lastest DB file completed downloading to local.");
                         isSuccess = true;
                     }
                     else
                     {
-                        Log.Logger.Error("Downloading DB file failed");
+                        Log.Error("Downloading DB file failed");
                     }
                 }
                 else
                 {
-                    Log.Logger.Info("The lastest DB file exists.");
+                    Log.Info("The lastest DB file exists.");
                     isSuccess = true;
                 }
             }
             else 
             {
-                Log.Logger.Error("Cannot find a DB file in google drive.");
+                Log.Error("Cannot find a DB file in google drive.");
             }
             return isSuccess;
         }

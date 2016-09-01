@@ -78,7 +78,7 @@ namespace GoogleDrive
             driveService = AuthenticateOauth(filePath);
             if (driveService == null)
             {
-                Log.Logger.Info("AuthenticateOauth failed");
+                Log.Info("AuthenticateOauth failed");
                 return false; 
             }
             return true;
@@ -118,7 +118,7 @@ namespace GoogleDrive
             }
             catch (Exception ex)
             {
-                Log.Logger.Error(ex.ToString());
+                Log.Error(ex.ToString());
                 return null;
             }
         }

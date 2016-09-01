@@ -12,10 +12,8 @@ namespace UI.Main
 {
     public static class AppSettings
     {
-        public static bool Initialize(string configXml, bool isTest)
+        public static void Initialize(string configXml, bool isTest)
         {
-            bool result = false;
-
             if (File.Exists(configXml))
             {
                 string baseDirectory = Path.GetDirectoryName(configXml) + @"\";
@@ -37,7 +35,6 @@ namespace UI.Main
                             break;
                         case "Log":
                             logDir = baseDirectory + GetValue(section, "Path");
-                            Log.LogPath = string.Format("{0}{1}.txt", logDir, DateTime.Now.ToString("yyyyMMdd"));
                             break;
                         case "InvoiceTemplate":
                             invoiceTemplate = baseDirectory + GetValue(section, "Path");
@@ -52,9 +49,7 @@ namespace UI.Main
                             break;
                     }
                 }
-                result = true;
             }
-            return result;
         }
 
         private static string GetValue(XElement section, string KeyValue)

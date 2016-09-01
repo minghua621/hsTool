@@ -38,7 +38,7 @@ namespace GoogleDrive
                 }
                 catch (Exception e)
                 {
-                    Log.Logger.Error("An error occurred: " + e.Message);
+                    Log.Error("An error occurred: " + e.Message);
                     request.PageToken = null;
                 }
             } while (!String.IsNullOrEmpty(request.PageToken));
@@ -58,7 +58,7 @@ namespace GoogleDrive
                 }
                 catch (Exception e)
                 {
-                    Log.Logger.Error("An error occurred: " + e.Message);
+                    Log.Error("An error occurred: " + e.Message);
                     return false;
                 }
             }
@@ -102,13 +102,13 @@ namespace GoogleDrive
                 }
                 catch (Exception e)
                 {
-                    Log.Logger.Error("An error occurred: " + e.Message);
+                    Log.Error("An error occurred: " + e.Message);
                     return null;
                 }
             }
             else
             {
-                Log.Logger.Error("File does not exist: " + _uploadFile);
+                Log.Error("File does not exist: " + _uploadFile);
                 return null;
             }
         }
