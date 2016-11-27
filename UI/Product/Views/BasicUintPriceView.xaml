@@ -105,7 +105,7 @@
                         <RowDefinition Height="Auto"/>
                     </Grid.RowDefinitions>
                     <Label Content="{Binding Source={StaticResource ResourceWrapper},Path=ApplicationString.colorSettings_code}"/>
-                    <toolkit:AutoCompleteBox Margin="3" ItemsSource="{Binding Colors}" SelectedItem="{Binding SelectedColor,Mode=TwoWay}" Text="{Binding SelectedColorText,Mode=TwoWay}" ValueMemberPath="Code" ItemTemplate="{StaticResource ColorTemplate}" FilterMode="StartsWith" Grid.Row="1"/>
+                    <toolkit:AutoCompleteBox Margin="3" ItemsSource="{Binding Colors}" SelectedItem="{Binding SelectedColor,Mode=TwoWay}" Text="{Binding SelectedColorText,Mode=TwoWay}"  ValueMemberPath="ColorSelectionText" ItemTemplate="{StaticResource ColorTemplate}" ItemFilter="{Binding ColorFilter}" Grid.Row="1"/>
                     <Label Content="{Binding Source={StaticResource ResourceWrapper},Path=ApplicationString.colorSettings_codeAid}" Grid.Column="1"/>
                     <TextBox Text="{Binding ColorCodeAid}" CharacterCasing="Upper" Grid.Row="1" Grid.Column="1"/>
                     <Label Content="{Binding Source={StaticResource ResourceWrapper},Path=ApplicationString.colorSettings_amount}" Grid.Column="2"/>

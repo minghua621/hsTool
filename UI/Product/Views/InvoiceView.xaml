@@ -39,11 +39,11 @@
         <StackPanel Orientation="Vertical" Grid.Column="1" Margin="10,8">
             <StackPanel Orientation="Horizontal" Margin="5,0">
                 <Label Content="{Binding Source={StaticResource ResourceWrapper},Path=ApplicationString.header_customer_name}"/>
-                <ComboBox ItemsSource="{Binding Customers}" DisplayMemberPath="Name" SelectedValuePath="Code" Width="130" SelectedItem="{Binding SelectedCustomer}" Margin="3,0"/>
+                <ComboBox ItemsSource="{Binding Customers}" DisplayMemberPath="Name" SelectedValuePath="Code" Width="150" SelectedItem="{Binding SelectedCustomer}" Margin="3,0"/>
             </StackPanel>
             <StackPanel Orientation="Horizontal" Margin="5,0">
                 <Label Content="{Binding Source={StaticResource ResourceWrapper},Path=ApplicationString.header_invoice_month}"/>
-                <controls:MonthUpDown Value="{Binding SelectedMonth,Mode=TwoWay}" Margin="3,3,0,-3" VerticalAlignment="Bottom"/>
+                <controls:MonthUpDown Value="{Binding SelectedMonth,Mode=TwoWay}" Margin="3,3,0,-3" Width="150"/>
             </StackPanel>
             <GroupBox Header="{Binding Source={StaticResource ResourceWrapper},Path=ApplicationString.header_invoice_sample}" Foreground="Black" Margin="0,5">
                 <Grid>

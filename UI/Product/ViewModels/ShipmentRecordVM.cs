@@ -247,6 +247,7 @@ namespace UI.Product.ViewModels
                 ShipQty = this.InputQty,
                 ShipDate = this.InputDate,
                 ColorCode = SelectedColor == null ? string.Empty : SelectedColor.item.Code,
+                ColorName = SelectedColor == null ? string.Empty : SelectedColor.item.Name,
             };
             long id = ShipmentDao.Create(item);
             item.SerialNumber = id;
@@ -260,6 +261,7 @@ namespace UI.Product.ViewModels
             SelectedItem.ShipQty = this.InputQty;
             SelectedItem.ShipDate = this.InputDate;
             SelectedItem.ColorCode = SelectedColor == null ? string.Empty : SelectedColor.item.Code;
+            SelectedItem.ColorName = SelectedColor == null ? string.Empty : SelectedColor.item.Name;
             ShipmentDao.Update(SelectedItem);
             ClearInput();
         }
@@ -307,7 +309,7 @@ namespace UI.Product.ViewModels
                 SelectedInputText = SelectedItem.ProductName;
                 ShipQtyText = SelectedItem.ShipQty.ToString();                
                 InputDate = SelectedItem.ShipDate;
-                SelectedColorText = SelectedItem.ColorCode;
+                SelectedColorText = string.IsNullOrEmpty(SelectedItem.ColorCode) ? SelectedItem.ColorName : SelectedItem.ColorCode;
                 unitPrice = SelectedItem.UnitPrice;
             }
             else

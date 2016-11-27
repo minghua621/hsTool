@@ -7,6 +7,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using System.Windows.Data;
+using System.ComponentModel;
 using Common.Command;
 using Common.Models;
 
@@ -30,6 +32,7 @@ namespace Common.ViewModels
             {
                 this.Items.Add(item);
             }
+            ItemsView = CollectionViewSource.GetDefaultView(this.Items); 
         }
 
         private void _listModel_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
@@ -84,6 +87,8 @@ namespace Common.ViewModels
             set { _selectedItems = value; OnPropertyChanged("SelectedItems"); }
         }
         private IList _selectedItems;
+
+        public ICollectionView ItemsView { get; set; }
 
         #endregion
 

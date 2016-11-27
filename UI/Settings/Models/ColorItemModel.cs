@@ -22,5 +22,10 @@ namespace UI.Settings.Models
             set { _Name = value; OnPropertyChanged("Name"); }
         }
         private string _Name = string.Empty;
+
+        public string ColorSelectionText
+        {
+            get { return string.IsNullOrEmpty(Code.Trim()) ? Name : Code; }
+        }
     }
 }

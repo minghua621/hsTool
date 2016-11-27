@@ -31,6 +31,7 @@ namespace UI
             Log.Initialize(string.Format("{0}{1}.txt", AppSettings.LogDir, DateTime.Now.ToString("yyyyMMdd")));            
             Log.Info("Application Start");
 
+            /*
             if (!GoogleDrive.Settings.Initialize(AppSettings.GoogleDriveKey))
             {
                 Log.Error("Fail to update and backup");
@@ -43,7 +44,7 @@ namespace UI
                 //check program
 
                 //check settings
-            }
+            }*/
             this.MainWindow.Title = "hsTool";
             this.MainWindow.Icon = this.Resources["application_icon"] as System.Windows.Media.Imaging.BitmapImage;
             this.MainWindow.WindowState = WindowState.Maximized;

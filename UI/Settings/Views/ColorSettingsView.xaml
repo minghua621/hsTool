@@ -12,7 +12,7 @@
             <ColumnDefinition Width="500"/>
             <ColumnDefinition Width="380"/>
         </Grid.ColumnDefinitions>
-        <DataGrid x:Name="dataGrid" AutoGenerateColumns="False" IsReadOnly="True" ItemsSource="{Binding Items}" SelectedItem="{Binding SelectedItem}">
+        <DataGrid x:Name="dataGrid" AutoGenerateColumns="False" IsReadOnly="True" ItemsSource="{Binding ItemsView}" SelectedItem="{Binding SelectedItem}">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="{Binding Source={StaticResource ResourceWrapper},Path=ApplicationString.colorSettings_code}" Binding="{Binding Code}"/>
                 <DataGridTextColumn Header="{Binding Source={StaticResource ResourceWrapper},Path=ApplicationString.colorSettings_name}" Binding="{Binding Name}"/>
@@ -26,9 +26,9 @@
         </DataGrid>
         <StackPanel Grid.Column="1" Orientation="Vertical" Margin="10,0,0,0">
             <Label Content="{Binding Source={StaticResource ResourceWrapper},Path=ApplicationString.colorSettings_code}"/>
-            <TextBox Text="{Binding InputCode}" CharacterCasing="Upper"/>
+            <TextBox Text="{Binding InputCode,UpdateSourceTrigger=PropertyChanged}" CharacterCasing="Upper"/>
             <Label Content="{Binding Source={StaticResource ResourceWrapper},Path=ApplicationString.colorSettings_name}"/>
-            <TextBox Text="{Binding InputName}"/>            
+            <TextBox Text="{Binding InputName,UpdateSourceTrigger=PropertyChanged}"/>
             <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
                 <controls:Button Content="{Binding Source={StaticResource ResourceWrapper},Path=ApplicationString.buttonContent_Add}"
                                     IconSource="{StaticResource AddIcon_Black_18}" PressedIconSource="{StaticResource AddIcon_White_18}"

@@ -54,18 +54,16 @@ namespace UI.Product.Models
         public string ColorCode
         {
             get { return _ColorCode; }
-            set { _ColorCode = value; OnPropertyChanged("ColorCode"); OnPropertyChanged("ColorName"); }
+            set { _ColorCode = value; OnPropertyChanged("ColorCode"); }
         }
         private string _ColorCode = string.Empty;
 
         public string ColorName
         {
-            get
-            {
-                ColorItemModel item = ColorSettingsVM.ColorSettings.Items.FirstOrDefault(x => x.Code == ColorCode);
-                return item == null ? string.Empty : item.Name;
-            }
+            get { return _ColorName; }
+            set { _ColorName = value; OnPropertyChanged("ColorName"); }
         }
+        private string _ColorName = string.Empty;
 
         public DateTime ShipDate
         {

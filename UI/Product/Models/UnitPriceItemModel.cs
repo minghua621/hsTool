@@ -96,7 +96,8 @@ namespace UI.Product.Models
             {
                 if (!string.IsNullOrEmpty(color))
                 {
-                    rlt += color.Split("^".ToArray())[0] + ",";
+                    string[] val = color.Split("^".ToArray());
+                    rlt += (string.IsNullOrEmpty(val[0]) ? val[1] : val[0]) + ",";
                 }
             }
             return rlt;

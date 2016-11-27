@@ -62,7 +62,7 @@
         <Setter Property="Background" Value="{DynamicResource {x:Static SystemColors.WindowBrushKey}}"/>
         <Setter Property="BorderBrush" Value="{StaticResource NormalBorder}"/>
         <Setter Property="BorderThickness" Value="1"/>
-        <Setter Property="Padding" Value="1"/>
+        <Setter Property="Padding" Value="3,1"/>
         <Setter Property="AllowDrop" Value="true"/>
         <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
         <Setter Property="ScrollViewer.PanningMode" Value="VerticalFirst"/>
@@ -98,7 +98,6 @@
                             <ColumnDefinition/>
                             <ColumnDefinition Width="25"/>
                             <ColumnDefinition Width="25"/>
-                            <ColumnDefinition/>
                         </Grid.ColumnDefinitions>
                         <TextBox x:Name="valueTextBox" Margin="0,0,-2,0" IsReadOnly="True" Style="{StaticResource ValueTextBoxStyle}"/>
                         <RepeatButton Grid.Column="1" x:Name="downButton" Style="{StaticResource DownButtonStyle}" Content="&#8722;"/>

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -18,7 +19,7 @@ namespace UI.Settings.ViewModels
         public ColorSettingsVM(ColorListModel _listMoodel)
             : base(_listMoodel)
         {
-            this.ApplyFilter();
+            ItemsView.SortDescriptions.Add(new SortDescription("Code", ListSortDirection.Ascending));
         }
 
         #endregion
@@ -53,7 +54,7 @@ namespace UI.Settings.ViewModels
             get
             {
                 return new ActiveDelegateCommand<ColorSettingsVM>(this, (p) => { CreateItem(); },
-                    (p) => { return !string.IsNullOrEmpty(InputCode) && !string.IsNullOrEmpty(InputName) && this._listModel.FirstOrDefault(x => x.Code == InputCode) == null; });
+                    (p) => { return !string.IsNullOrEmpty(InputName) && this._listModel.FirstOrDefault(x => x.Code == InputCode.Trim() && x.Name == InputName) == null; });
             }
         }
 
@@ -100,7 +101,7 @@ namespace UI.Settings.ViewModels
         {
             ColorItemModel item = new ColorItemModel()
             {
-                Code = this.InputCode,
+                Code = this.InputCode.Trim(),
                 Name = this.InputName,
             };
             SettingsDao.CreateColor(item);

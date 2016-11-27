@@ -37,7 +37,8 @@ namespace UI.Product.Dao
                         string customer = sqlite_datareader["CustomerCode"].ToString();
                         int qty = Convert.ToInt32(sqlite_datareader["ShipQty"]);
                         DateTime dt = Convert.ToDateTime(sqlite_datareader["ShipDate"]);
-                        string color = sqlite_datareader["Color"].ToString();
+                        string colorCode = sqlite_datareader["ColorCode"].ToString();
+                        string colorName = sqlite_datareader["ColorName"].ToString();
 
                         UnitPriceListModel list = UnitPriceListModel.Units.FirstOrDefault(x => x._customerCode == customer);
                         UnitPriceItemModel unit = list.FirstOrDefault(x => x.Code == code);
@@ -50,7 +51,8 @@ namespace UI.Product.Dao
                             CustomerCode = customer,
                             ShipQty = qty,
                             ShipDate = dt,
-                            ColorCode = color,
+                            ColorCode = colorCode,
+                            ColorName = colorName
                         });
                     }
                 }
@@ -71,14 +73,15 @@ namespace UI.Product.Dao
                 using (SQLiteCommand cmd = conn.CreateCommand())
                 {
                     cmd.CommandType = CommandType.Text;
-                    cmd.CommandText = @"INSERT INTO ShipmentRecord (CustomerCode, ProductCode, Price, ShipQty, ShipDate, Color, UpdatedTime) VALUES (@p1,@p2,@p3,@p4,@p5,@p6,@p7)";
+                    cmd.CommandText = @"INSERT INTO ShipmentRecord (CustomerCode, ProductCode, Price, ShipQty, ShipDate, ColorCode, ColorName, UpdatedTime) VALUES (@p1,@p2,@p3,@p4,@p5,@p6,@p7,@p8)";
                     cmd.Parameters.Add(new SQLiteParameter("@p1", item.CustomerCode));
                     cmd.Parameters.Add(new SQLiteParameter("@p2", item.ProductCode));
                     cmd.Parameters.Add(new SQLiteParameter("@p3", item.UnitPrice));
                     cmd.Parameters.Add(new SQLiteParameter("@p4", item.ShipQty));
                     cmd.Parameters.AddWithValue("@p5", item.ShipDate);
                     cmd.Parameters.Add(new SQLiteParameter("@p6", item.ColorCode));
-                    cmd.Parameters.Add(new SQLiteParameter("@p7", DateTime.Now));
+                    cmd.Parameters.Add(new SQLiteParameter("@p7", item.ColorName));
+                    cmd.Parameters.Add(new SQLiteParameter("@p8", DateTime.Now));
                     cmd.ExecuteNonQuery();
                     number = conn.LastInsertRowId;
                 }
@@ -94,13 +97,14 @@ namespace UI.Product.Dao
                 using (SQLiteCommand cmd = conn.CreateCommand())
                 {
                     cmd.CommandType = CommandType.Text;
-                    cmd.CommandText = @"Update ShipmentRecord SET Price=@p1, ShipQty=@p2, ShipDate=@p3, Color=@p4, UpdatedTime=@p5 WHERE SerialNumber=@p6";
+                    cmd.CommandText = @"Update ShipmentRecord SET Price=@p1, ShipQty=@p2, ShipDate=@p3, ColorCode=@p4, ColorName=@p5, UpdatedTime=@p6 WHERE SerialNumber=@p7";
                     cmd.Parameters.AddWithValue("@p1", item.UnitPrice);
                     cmd.Parameters.AddWithValue("@p2", item.ShipQty);
                     cmd.Parameters.AddWithValue("@p3", item.ShipDate);
                     cmd.Parameters.AddWithValue("@p4", item.ColorCode);
-                    cmd.Parameters.AddWithValue("@p5", DateTime.Now);
-                    cmd.Parameters.AddWithValue("@p6", item.SerialNumber);
+                    cmd.Parameters.AddWithValue("@p5", item.ColorName);
+                    cmd.Parameters.AddWithValue("@p6", DateTime.Now);                    
+                    cmd.Parameters.AddWithValue("@p7", item.SerialNumber);
                     cmd.ExecuteNonQuery();
                 }
             }

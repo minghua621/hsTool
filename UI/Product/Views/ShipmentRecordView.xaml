@@ -71,7 +71,7 @@
             </StackPanel>
             <StackPanel>
                 <Label Content="{Binding Source={StaticResource ResourceWrapper},Path=ApplicationString.colorSettings_code}"/>
-                <toolkit:AutoCompleteBox Margin="3" Width="200" ItemsSource="{Binding ColorItems}" SelectedItem="{Binding SelectedColor,Mode=TwoWay}" Text="{Binding SelectedColorText,Mode=TwoWay}" ValueMemberPath="item.Code" ItemTemplate="{StaticResource ColorItemTemplate}" FilterMode="StartsWith"/>
+                <toolkit:AutoCompleteBox Margin="3" Width="200" ItemsSource="{Binding ColorItems}" SelectedItem="{Binding SelectedColor,Mode=TwoWay}" Text="{Binding SelectedColorText,Mode=TwoWay}" ValueMemberPath="item.ColorSelectionText" ItemTemplate="{StaticResource ColorItemTemplate}" FilterMode="StartsWith"/>
             </StackPanel>            
             <StackPanel>
                 <Label Content="{Binding Source={StaticResource ResourceWrapper},Path=ApplicationString.header_quantity}"/>

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -107,12 +108,27 @@ namespace UI.Product.ViewModels
         }
         private string _processing0Text = string.Empty;
 
-        public ObservableCollection<ColorItemModel> Colors
+        public ICollectionView Colors
         {
-            get { return ColorSettingsVM.ColorSettings.Items; }
+            get { return ColorSettingsVM.ColorSettings.ItemsView; }
         }
 
-        public ColorItemModel SelectedColor { get; set; }
+        public AutoCompleteFilterPredicate<object> ColorFilter
+        {
+            get
+            {
+                return (searchText, obj) =>
+                    (obj as ColorItemModel).Code.StartsWith(searchText)
+                    || (obj as ColorItemModel).Name.Contains(searchText);
+            }
+        }
+
+        public ColorItemModel SelectedColor 
+        {
+            get { return _SelectedColor; }
+            set { _SelectedColor = value; OnPropertyChanged("SelectedColor"); }
+        }
+        private ColorItemModel _SelectedColor = null;
 
         public string SelectedColorText 
         {
@@ -268,7 +284,7 @@ namespace UI.Product.ViewModels
 
             foreach (var color in items.OrderBy(x => x.item.Code))
             {
-                rlt += string.Format("{0}{1}{2}{3}{4},", color.item.Code, delimiter, color.codeAid, delimiter, color.amount);
+                rlt += string.Format("{0}{1}{2}{3}{4}{5}{6},", color.item.Code, delimiter, color.item.Name, delimiter, color.codeAid, delimiter, color.amount);
             }
             return rlt;
         }
@@ -283,11 +299,14 @@ namespace UI.Product.ViewModels
                 string[] colors = colorList.Split(",".ToCharArray());
                 foreach (string color in colors)
                 {
-                    string[] colorString = color.Split(delimiter.ToCharArray());
-                    ColorItemModel itemModel = Settings.ViewModels.ColorSettingsVM.ColorSettings.Items.FirstOrDefault(x => x.Code == colorString[0]);
-                    if (itemModel != null)
+                    if (!string.IsNullOrEmpty(color))
                     {
-                        rlt.Add(new ColorItem() { item = itemModel, codeAid = colorString[1], amount = colorString[2] });
+                        string[] colorString = color.Split(delimiter.ToCharArray());
+                        ColorItemModel itemModel = Settings.ViewModels.ColorSettingsVM.ColorSettings.Items.FirstOrDefault(x => x.Code == colorString[0] && x.Name == colorString[1]);
+                        if (itemModel != null)
+                        {
+                            rlt.Add(new ColorItem() { item = itemModel, codeAid = colorString[2], amount = colorString[3] });
+                        }
                     }
                 }
             }
