@@ -340,6 +340,24 @@ namespace UI.Localization.Messages {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to 包裝.
+        /// </summary>
+        public static string header_package {
+            get {
+                return ResourceManager.GetString("header_package", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 單重.
+        /// </summary>
+        public static string header_pieceWeight {
+            get {
+                return ResourceManager.GetString("header_pieceWeight", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to 特殊加工.
         /// </summary>
         public static string header_processing {

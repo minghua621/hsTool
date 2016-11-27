@@ -273,4 +273,10 @@
   <data name="customerSettings_invoice" xml:space="preserve">
     <value>請款單格式</value>
   </data>
+  <data name="header_package" xml:space="preserve">
+    <value>包裝</value>
+  </data>
+  <data name="header_pieceWeight" xml:space="preserve">
+    <value>單重</value>
+  </data>
 </root>

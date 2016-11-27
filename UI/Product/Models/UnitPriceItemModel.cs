@@ -63,7 +63,23 @@ namespace UI.Product.Models
             set { _Processing0 = value; OnPropertyChanged("Processing0"); }
         }
         private string _Processing0 = string.Empty;
+
+        public string PieceWeight
+        {
+            get { return _PieceWeight; }
+            set { _PieceWeight = value; OnPropertyChanged("PieceWeight"); }
+        }
+        private string _PieceWeight = string.Empty;
+
+        public string Package
+        {
+            get { return _Package; }
+            set { _Package = value; OnPropertyChanged("Package"); }
+        }
+        private string _Package = string.Empty;
+
         public bool IsCombined { get; set; }
+
         public string CombinedUnits
         {
             get { return _CombinedUnits; }

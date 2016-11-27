@@ -108,6 +108,20 @@ namespace UI.Product.ViewModels
         }
         private string _processing0Text = string.Empty;
 
+        public string PieceWeightText
+        {
+            get { return _pieceWeightText; }
+            set { _pieceWeightText = value; OnPropertyChanged("PieceWeightText"); }
+        }
+        private string _pieceWeightText = string.Empty;
+
+        public string PackageText
+        {
+            get { return _packageText; }
+            set { _packageText = value; OnPropertyChanged("PackageText"); }
+        }
+        private string _packageText = string.Empty;
+
         public ICollectionView Colors
         {
             get { return ColorSettingsVM.ColorSettings.ItemsView; }
@@ -324,6 +338,8 @@ namespace UI.Product.ViewModels
                 MaterialCode = (SelectedMaterial == null ? string.Empty : SelectedMaterial.Code),
                 Size = SizeText,
                 Processing0 = Processing0Text,
+                PieceWeight = PieceWeightText,
+                Package = PackageText,
                 IsCombined = false,
                 IsDeleted = false,
                 ColorTypes = ColorItemToString(ColorList.ToList()),
@@ -340,6 +356,8 @@ namespace UI.Product.ViewModels
             SelectedItem.MaterialCode = (SelectedMaterial == null ? string.Empty : SelectedMaterial.Code);
             SelectedItem.Size = SizeText;
             SelectedItem.Processing0 = Processing0Text;
+            SelectedItem.PieceWeight = PieceWeightText;
+            SelectedItem.Package = PackageText;
             SelectedItem.ColorTypes = ColorItemToString(ColorList.ToList());
             UnitPriceDao.Update(SelectedItem);
             ClearInput();
@@ -373,6 +391,8 @@ namespace UI.Product.ViewModels
             MaterialText = string.Empty;
             SizeText = string.Empty;
             Processing0Text = string.Empty;
+            PieceWeightText = string.Empty;
+            PackageText = string.Empty;
             SelectedColorText = string.Empty;
             ColorList.Clear();
             if (flag)
@@ -391,6 +411,8 @@ namespace UI.Product.ViewModels
                 MaterialText = this.SelectedItem.MaterialName;
                 SizeText = this.SelectedItem.Size;
                 Processing0Text = this.SelectedItem.Processing0;
+                PieceWeightText = this.SelectedItem.PieceWeight;
+                PackageText = this.SelectedItem.Package;
                 ColorList = new ObservableCollection<ColorItem>(StringToColorItem(this.SelectedItem.ColorTypes));
             }
             else

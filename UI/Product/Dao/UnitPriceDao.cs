@@ -38,6 +38,8 @@ namespace UI.Product.Dao
                         string material = sqlite_datareader["MaterialCode"].ToString();
                         string size = sqlite_datareader["SizeInfo"].ToString();
                         string processing0 = sqlite_datareader["Processing0"].ToString();
+                        string pieceWeight = sqlite_datareader["PieceWeight"].ToString();
+                        string package = sqlite_datareader["Package"].ToString();
                         bool isCombined = Convert.ToBoolean((decimal)sqlite_datareader["Combined"]);
                         string units = sqlite_datareader["CombinedUnits"].ToString();
                         bool isDeleted = Convert.ToBoolean((decimal)sqlite_datareader["Deleted"]);
@@ -52,6 +54,8 @@ namespace UI.Product.Dao
                             MaterialCode = material,
                             Size = size,
                             Processing0 = processing0,
+                            PieceWeight = pieceWeight,
+                            Package = package,
                             IsDeleted = isDeleted,
                             IsCombined = isCombined,
                             CombinedUnits = units,
@@ -75,7 +79,7 @@ namespace UI.Product.Dao
                 using (SQLiteCommand cmd = conn.CreateCommand())
                 {
                     cmd.CommandType = CommandType.Text;
-                    cmd.CommandText = @"INSERT INTO UnitPrice (CustomerCode, ProductCode, ProductName, Price, MaterialCode, SizeInfo, Combined, CombinedUnits, Processing0, Deleted, Color, UpdatedTime) VALUES (@p1,@p2,@p3,@p4,@p5,@p6,@p7,@p8,@p9,@p10,@p11,@p12)";
+                    cmd.CommandText = @"INSERT INTO UnitPrice (CustomerCode, ProductCode, ProductName, Price, MaterialCode, SizeInfo, Combined, CombinedUnits, Processing0, Deleted, Color, UpdatedTime, PieceWeight, Package) VALUES (@p1,@p2,@p3,@p4,@p5,@p6,@p7,@p8,@p9,@p10,@p11,@p12,@p13,@p14)";
                     cmd.Parameters.Add(new SQLiteParameter("@p1", item.CustomerCode));
                     cmd.Parameters.Add(new SQLiteParameter("@p2", item.Code));
                     cmd.Parameters.Add(new SQLiteParameter("@p3", item.Name));
@@ -88,6 +92,8 @@ namespace UI.Product.Dao
                     cmd.Parameters.Add(new SQLiteParameter("@p10", item.IsDeleted));
                     cmd.Parameters.Add(new SQLiteParameter("@p11", item.ColorTypes));
                     cmd.Parameters.Add(new SQLiteParameter("@p12", DateTime.Now));
+                    cmd.Parameters.Add(new SQLiteParameter("@p13", item.PieceWeight));
+                    cmd.Parameters.Add(new SQLiteParameter("@p14", item.Package));
                     cmd.ExecuteNonQuery();
                 }
             }
@@ -105,7 +111,7 @@ namespace UI.Product.Dao
                 using (SQLiteCommand cmd = conn.CreateCommand())
                 {
                     cmd.CommandType = CommandType.Text;
-                    cmd.CommandText = @"Update UnitPrice SET ProductName=@p0, Price=@p1, MaterialCode=@p2, SizeInfo=@p3, Processing0=@p4, UpdatedTime=@p5, CombinedUnits=@p6, Color=@p7 WHERE ProductCode=@p8";
+                    cmd.CommandText = @"Update UnitPrice SET ProductName=@p0, Price=@p1, MaterialCode=@p2, SizeInfo=@p3, Processing0=@p4, UpdatedTime=@p5, CombinedUnits=@p6, Color=@p7, PieceWeight=@p8, Package=@p9 WHERE ProductCode=@p10";
                     cmd.Parameters.AddWithValue("@p0", item.Name);
                     cmd.Parameters.AddWithValue("@p1", item.Price);
                     cmd.Parameters.AddWithValue("@p2", item.MaterialCode);
@@ -114,7 +120,9 @@ namespace UI.Product.Dao
                     cmd.Parameters.AddWithValue("@p5", DateTime.Now);
                     cmd.Parameters.AddWithValue("@p6", item.CombinedUnits);
                     cmd.Parameters.AddWithValue("@p7", item.ColorTypes);
-                    cmd.Parameters.AddWithValue("@p8", item.Code);
+                    cmd.Parameters.AddWithValue("@p8", item.PieceWeight);
+                    cmd.Parameters.AddWithValue("@p9", item.Package);
+                    cmd.Parameters.AddWithValue("@p10", item.Code);
                     cmd.ExecuteNonQuery();
                 }
             }
