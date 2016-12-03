@@ -13,15 +13,6 @@
         <Style TargetType="{x:Type TextBox}" BasedOn="{StaticResource TextBoxStyle}">
             <Setter Property="Width" Value="160"/>
         </Style>
-        
-        <DataTemplate x:Key="SampleTemplate">
-            <StackPanel Orientation="Horizontal">
-                <TextBlock Text="{Binding Name,StringFormat={}{0} :}" Width="170"/>
-                <TextBlock Text="{Binding Price}" Width="50"/>
-                <TextBlock Text="x" Margin="0,0,10,0"/>
-                <TextBlock Text="{Binding Qty}" Width="50"/>
-            </StackPanel>
-        </DataTemplate>
     </UserControl.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
@@ -36,7 +27,7 @@
                 <DataGridTextColumn Header="{Binding Source={StaticResource ResourceWrapper},Path=ApplicationString.header_ship_subtotal}" Binding="{Binding SubTotal}"/>
             </DataGrid.Columns>
         </DataGrid>
-        <StackPanel Orientation="Vertical" Grid.Column="1" Margin="10,8">
+        <StackPanel Orientation="Vertical" Grid.Column="1" Margin="20,8">
             <StackPanel Orientation="Horizontal" Margin="5,0">
                 <Label Content="{Binding Source={StaticResource ResourceWrapper},Path=ApplicationString.header_customer_name}"/>
                 <ComboBox ItemsSource="{Binding Customers}" DisplayMemberPath="Name" SelectedValuePath="Code" Width="150" SelectedItem="{Binding SelectedCustomer}" Margin="3,0"/>
@@ -45,37 +36,6 @@
                 <Label Content="{Binding Source={StaticResource ResourceWrapper},Path=ApplicationString.header_invoice_month}"/>
                 <controls:MonthUpDown Value="{Binding SelectedMonth,Mode=TwoWay}" Margin="3,3,0,-3" Width="150"/>
             </StackPanel>
-            <GroupBox Header="{Binding Source={StaticResource ResourceWrapper},Path=ApplicationString.header_invoice_sample}" Foreground="Black" Margin="0,5">
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition/>
-                        <ColumnDefinition/>
-                    </Grid.ColumnDefinitions>
-                    <StackPanel Orientation="Vertical">
-                        <StackPanel Orientation="Horizontal">
-                            <Label Content="{Binding Source={StaticResource ResourceWrapper},Path=ApplicationString.header_product_name}"/>
-                            <TextBox Text="{Binding SampleName}"/>
-                        </StackPanel>
-                        <StackPanel Orientation="Horizontal">
-                            <Label Content="{Binding Source={StaticResource ResourceWrapper},Path=ApplicationString.header_unit_price}"/>
-                            <TextBox Text="{Binding SamplePriceText,UpdateSourceTrigger=PropertyChanged}"/>
-                        </StackPanel>
-                        <StackPanel Orientation="Horizontal">
-                            <Label Content="{Binding Source={StaticResource ResourceWrapper},Path=ApplicationString.header_quantity}"/>
-                            <TextBox Text="{Binding SampleQtyText,UpdateSourceTrigger=PropertyChanged}"/>
-                        </StackPanel>
-                        <StackPanel Orientation="Horizontal" Margin="100,0,0,0">
-                            <controls:Button Content="{Binding Source={StaticResource ResourceWrapper},Path=ApplicationString.buttonContent_Add}"
-                                    IconSource="{StaticResource AddIcon_Black_18}" PressedIconSource="{StaticResource AddIcon_White_18}"
-                                    Command="{Binding IncreaseCommand}"/>
-                            <controls:Button Content="{Binding Source={StaticResource ResourceWrapper},Path=ApplicationString.buttonContent_Delete}"
-                                    IconSource="{StaticResource DeleteIcon_Black_18}" PressedIconSource="{StaticResource DeleteIcon_White_18}"
-                                    Command="{Binding DecreaseCommand}"/>
-                        </StackPanel>
-                    </StackPanel>
-                    <ListBox Grid.Column="1" Width="300" Margin="3" ItemsSource="{Binding SampleList}" SelectedItem="{Binding SelectedSample}" ItemTemplate="{StaticResource SampleTemplate}"/>
-                </Grid>
-            </GroupBox>
             <StackPanel Orientation="Horizontal" Margin="5,10">
                 <Label Content="{Binding Source={StaticResource ResourceWrapper},Path=ApplicationString.header_invoice_shipment_total}"/>
                 <TextBox IsReadOnly="True" Text="{Binding ShipmentTotal,Mode=OneWay}"/>

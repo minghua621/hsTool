@@ -55,41 +55,6 @@ namespace UI.Product.ViewModels
         }
         private DateTime _SelectedMonth = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1);
 
-        public string SampleName
-        {
-            get { return _SampleName; }
-            set { _SampleName = value; OnPropertyChanged("SampleName"); }
-        }
-        private string _SampleName = string.Empty;
-
-        public string SamplePriceText
-        {
-            get { return _SamplePriceText; }
-            set { _SamplePriceText = value; OnPropertyChanged("SamplePriceText"); }
-        }
-        private string _SamplePriceText = string.Empty;
-
-        public string SampleQtyText
-        {
-            get { return _SampleQtyText; }
-            set { _SampleQtyText = value; OnPropertyChanged("SampleQtyText"); }
-        }
-        private string _SampleQtyText = string.Empty;
-
-        public SampleItem SelectedSample 
-        {
-            get { return _SelectedSample; }
-            set { _SelectedSample = value; OnPropertyChanged("SelectedSample"); }
-        }
-        private SampleItem _SelectedSample = null;
-
-        public ObservableCollection<SampleItem> SampleList
-        {
-            get { return _SampleList; }
-            set { _SampleList = value; OnPropertyChanged("SampleList"); }
-        }
-        private ObservableCollection<SampleItem> _SampleList = new ObservableCollection<SampleItem>();
-
         public List<InvoiceItemModel> Items
         {
             get { return (_SelectedCustomer != null && SelectedMonth != null) ? Dao.InvoiceDao.GetInvoiceList(_SelectedCustomer.Code, SelectedMonth) : null; }
@@ -105,10 +70,6 @@ namespace UI.Product.ViewModels
                     foreach (InvoiceItemModel item in Items)
                     {
                         rlt += item.SubTotal;
-                    }
-                    foreach (SampleItem item in SampleList)
-                    {
-                        rlt += (item.Price * item.Qty);
                     }
                 }
                 return Convert.ToInt32(rlt);
@@ -155,34 +116,6 @@ namespace UI.Product.ViewModels
         #endregion
 
         #region commands
-        public ICommand IncreaseCommand
-        {
-            get
-            {
-                return new ActiveDelegateCommand<InvoiceVM>(this,
-                    (vm) => 
-                    { 
-                        SampleList.Add(new SampleItem() { Name = SampleName, Price = Convert.ToDouble(SamplePriceText), Qty = Convert.ToInt32(SampleQtyText) });
-                        OnPropertyChanged("ShipmentTotal");
-                        OnPropertyChanged("PersentTax");
-                        OnPropertyChanged("Total"); 
-                        SampleName = string.Empty;
-                        SamplePriceText = string.Empty;
-                        SampleQtyText = string.Empty;
-                    },
-                    (vm) => { return !string.IsNullOrEmpty(SampleName) && BasicUnitPriceVM.IsNumericText(SamplePriceText) && ShipmentRecordVM.IsIntText(SampleQtyText); });
-            }
-        }
-
-        public ICommand DecreaseCommand
-        {
-            get
-            {
-                return new ActiveDelegateCommand<InvoiceVM>(this,
-                    (p) => { SampleList.Remove(SelectedSample); OnPropertyChanged("ShipmentTotal"); OnPropertyChanged("PersentTax"); OnPropertyChanged("Total"); },
-                    (p) => { return SelectedSample != null; });
-            }
-        }
 
         public ICommand ExportCommand
         {
@@ -212,16 +145,6 @@ namespace UI.Product.ViewModels
                 ws.Cell(string.Format("B{0}", cell)).Value = item.Price;
                 ws.Cell(string.Format("C{0}", cell)).Value = item.Qty;
                 ws.Cell(string.Format("D{0}", cell)).Value = item.SubTotal;
-                cell++;
-            }
-
-            //sample
-            foreach (SampleItem item in SampleList)
-            {
-                ws.Cell(string.Format("A{0}", cell)).Value = item.Name;
-                ws.Cell(string.Format("B{0}", cell)).Value = item.Price;
-                ws.Cell(string.Format("C{0}", cell)).Value = item.Qty;
-                ws.Cell(string.Format("D{0}", cell)).Value = item.Price * item.Qty;
                 cell++;
             }
 

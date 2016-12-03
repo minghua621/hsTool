@@ -50,6 +50,7 @@
     <Compile Include="Command\ActiveDelegateCommand.cs" />
     <Compile Include="Command\CommandBase.cs" />
     <Compile Include="Command\RelayCommand.cs" />
+    <Compile Include="Converter\InverseBooleanConverter.cs" />
     <Compile Include="Converter\InverseVisibilityConverter.cs" />
     <Compile Include="Logger\DebugLogger.cs" />
     <Compile Include="Logger\FileLogger.cs" />

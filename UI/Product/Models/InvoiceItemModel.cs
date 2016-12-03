@@ -23,6 +23,11 @@ namespace UI.Product.Models
                     {
                         rlt = unit.Name;
                     }
+                    else
+                    {
+                        //樣品
+                        rlt = ProductCode;
+                    }
                 }
                 return rlt;
             }
@@ -33,12 +38,5 @@ namespace UI.Product.Models
         {
             get { return Math.Round(Price * Qty, MidpointRounding.AwayFromZero); }
         }
-    }
-
-    public class SampleItem
-    {
-        public string Name { get; set; }
-        public double Price { get; set; }
-        public int Qty { get; set; }
     }
 }

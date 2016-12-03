@@ -6,9 +6,11 @@
              xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
              xmlns:toolkit="clr-namespace:System.Windows.Controls;assembly=System.Windows.Controls.Input.Toolkit"
              xmlns:controls="clr-namespace:Theme.Controls;assembly=Theme"
+             xmlns:converter="clr-namespace:Common.Converter;assembly=Common" 
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
     <UserControl.Resources>
+        <converter:InverseBooleanConverter x:Key="InverseBooleanConverter"/>
         <DataTemplate x:Key="AutoCompleteBoxItemTemplate">
             <TextBlock Text="{Binding Name}"/>
         </DataTemplate>
@@ -30,7 +32,7 @@
         </Style>
         <Style TargetType="{x:Type StackPanel}">
             <Setter Property="Orientation" Value="Horizontal"/>
-            <Setter Property="Margin" Value="8"/>         
+            <Setter Property="Margin" Value="18,8,8,8"/>         
         </Style>
     </UserControl.Resources>
     <Grid>
@@ -66,13 +68,23 @@
                 <DatePicker Margin="3" Width="200" SelectedDate="{Binding InputDate}"/>
             </StackPanel>            
             <StackPanel>
-                <Label Content="{Binding Source={StaticResource ResourceWrapper},Path=ApplicationString.header_product_name}"/>
-                <toolkit:AutoCompleteBox Margin="3" Width="200" ItemsSource="{Binding ProductItems}" SelectedItem="{Binding SelectedInput,Mode=TwoWay}" Text="{Binding SelectedInputText,Mode=TwoWay}" ValueMemberPath="Name" ItemTemplate="{StaticResource AutoCompleteBoxItemTemplate}" FilterMode="Contains"/>
+                <RadioButton Margin="-18,0,0,0" VerticalAlignment="Center" IsChecked="{Binding IsSample,Converter={StaticResource InverseBooleanConverter}}"/>
+                <Label Content="{Binding Source={StaticResource ResourceWrapper},Path=ApplicationString.header_product_name}" IsEnabled="{Binding IsSample,Converter={StaticResource InverseBooleanConverter}}"/>
+                <toolkit:AutoCompleteBox Margin="3" Width="200" ItemsSource="{Binding ProductItems}" SelectedItem="{Binding SelectedInput,Mode=TwoWay}" Text="{Binding SelectedInputText,Mode=TwoWay}" ValueMemberPath="Name" ItemTemplate="{StaticResource AutoCompleteBoxItemTemplate}" FilterMode="Contains" IsEnabled="{Binding IsSample,Converter={StaticResource InverseBooleanConverter}}"/>
             </StackPanel>
-            <StackPanel>
+            <StackPanel IsEnabled="{Binding IsSample,Converter={StaticResource InverseBooleanConverter}}">
                 <Label Content="{Binding Source={StaticResource ResourceWrapper},Path=ApplicationString.colorSettings_code}"/>
                 <toolkit:AutoCompleteBox Margin="3" Width="200" ItemsSource="{Binding ColorItems}" SelectedItem="{Binding SelectedColor,Mode=TwoWay}" Text="{Binding SelectedColorText,Mode=TwoWay}" ValueMemberPath="item.ColorSelectionText" ItemTemplate="{StaticResource ColorItemTemplate}" FilterMode="StartsWith"/>
             </StackPanel>            
+            <StackPanel>
+                <RadioButton Margin="-18,0,0,0" VerticalAlignment="Center" IsChecked="{Binding IsSample}"/>
+                <Label Content="{Binding Source={StaticResource ResourceWrapper},Path=ApplicationString.header_sample}" IsEnabled="{Binding IsSample}"/>
+                <TextBox Text="{Binding SampleName,UpdateSourceTrigger=PropertyChanged}" IsEnabled="{Binding IsSample}"/>
+            </StackPanel>
+            <StackPanel IsEnabled="{Binding IsSample}">
+                <Label Content="{Binding Source={StaticResource ResourceWrapper},Path=ApplicationString.header_unit_price}"/>
+                <TextBox Text="{Binding SamplePriceText,UpdateSourceTrigger=PropertyChanged}"/>
+            </StackPanel>
             <StackPanel>
                 <Label Content="{Binding Source={StaticResource ResourceWrapper},Path=ApplicationString.header_quantity}"/>
                 <TextBox Text="{Binding ShipQtyText,UpdateSourceTrigger=PropertyChanged}"/>

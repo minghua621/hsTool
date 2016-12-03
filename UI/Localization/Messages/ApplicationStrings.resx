@@ -225,7 +225,7 @@
   <data name="header_invoice_month" xml:space="preserve">
     <value>請款月</value>
   </data>
-  <data name="header_invoice_sample" xml:space="preserve">
+  <data name="header_sample" xml:space="preserve">
     <value>樣品</value>
   </data>
   <data name="header_tax" xml:space="preserve">

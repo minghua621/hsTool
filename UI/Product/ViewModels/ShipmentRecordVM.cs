@@ -174,6 +174,42 @@ namespace UI.Product.ViewModels
         }
         private DateTime _InputDate = DateTime.Today;
 
+        public bool IsSample
+        {
+            get { return _isSample; }
+            set
+            {
+                _isSample = value;
+                OnPropertyChanged("IsSample");
+
+                if (IsSample)
+                {
+                    SelectedInputText = string.Empty;
+                    SelectedColorText = string.Empty;
+                }
+                else
+                {
+                    SampleName = string.Empty;
+                    SamplePriceText = string.Empty;
+                }
+            }
+        }
+        private bool _isSample = false;
+
+        public string SampleName
+        {
+            get { return _SampleName; }
+            set { _SampleName = value; OnPropertyChanged("SampleName"); }
+        }
+        private string _SampleName = string.Empty;
+
+        public string SamplePriceText
+        {
+            get { return _SamplePriceText; }
+            set { _SamplePriceText = value; OnPropertyChanged("SamplePriceText"); }
+        }
+        private string _SamplePriceText = string.Empty;
+
         #endregion
 
         #region commands
@@ -183,7 +219,7 @@ namespace UI.Product.ViewModels
             get
             {
                 return new ActiveDelegateCommand<ShipmentRecordVM>(this, (p) => { CreateItem(); },
-                    (p) => { return SelectedInput != null && IsIntText(ShipQtyText); });
+                    (p) => { return ((!IsSample && SelectedInput != null) || (IsSample && !string.IsNullOrEmpty(SampleName) && BasicUnitPriceVM.IsNumericText(SamplePriceText))) && IsIntText(ShipQtyText); });
             }
         }
 
@@ -193,7 +229,11 @@ namespace UI.Product.ViewModels
             {
                 return new SelectionDelegateCommand<ShipmentRecordVM>(this,
                     (vm) => { UpdateItem(); },
-                    (vm) => { return OnlyOneItemSelected() && SelectedInput != null && IsIntText(ShipQtyText); });
+                    (vm) =>
+                    {
+                        return OnlyOneItemSelected() && ((!SelectedItem.IsSample && SelectedInput != null)
+                            || (SelectedItem.IsSample && !string.IsNullOrEmpty(SampleName) && BasicUnitPriceVM.IsNumericText(SamplePriceText))) && IsIntText(ShipQtyText);
+                    });
             }
         }
 
@@ -242,12 +282,13 @@ namespace UI.Product.ViewModels
             ShipmentItemModel item = new ShipmentItemModel()
             {
                 CustomerCode = this._customerType,
-                ProductCode = SelectedInput.Code,
-                UnitPrice = SelectedInput.Price,
+                ProductCode = IsSample ? SampleName.Trim() : SelectedInput.Code,
+                UnitPrice = IsSample ? Convert.ToDouble(SamplePriceText) : SelectedInput.Price,
                 ShipQty = this.InputQty,
                 ShipDate = this.InputDate,
                 ColorCode = SelectedColor == null ? string.Empty : SelectedColor.item.Code,
                 ColorName = SelectedColor == null ? string.Empty : SelectedColor.item.Name,
+                IsSample = this.IsSample
             };
             long id = ShipmentDao.Create(item);
             item.SerialNumber = id;
@@ -257,7 +298,8 @@ namespace UI.Product.ViewModels
 
         private void UpdateItem()
         {
-            SelectedItem.UnitPrice = SelectedInput.Price;
+            SelectedItem.ProductCode = IsSample ? SampleName.Trim() : SelectedInput.Code;
+            SelectedItem.UnitPrice = SelectedItem.IsSample ? Convert.ToDouble(SamplePriceText) : SelectedInput.Price;
             SelectedItem.ShipQty = this.InputQty;
             SelectedItem.ShipDate = this.InputDate;
             SelectedItem.ColorCode = SelectedColor == null ? string.Empty : SelectedColor.item.Code;
@@ -284,9 +326,11 @@ namespace UI.Product.ViewModels
             SelectedInputText = string.Empty;
             ShipQtyText = string.Empty;
             SelectedColorText = string.Empty;
+            SampleName = string.Empty;
+            SamplePriceText = string.Empty;
             if(flag)
             {
-                SelectedItem = null;
+                SelectedItem = null;                
             }
         }
 
@@ -306,11 +350,21 @@ namespace UI.Product.ViewModels
         {
             if (OnlyOneItemSelected())
             {
-                SelectedInputText = SelectedItem.ProductName;
-                ShipQtyText = SelectedItem.ShipQty.ToString();                
+                if (SelectedItem.IsSample)
+                {
+                    IsSample = true;
+                    SampleName = SelectedItem.ProductName;
+                    SamplePriceText = SelectedItem.UnitPrice.ToString();
+                }
+                else
+                {
+                    IsSample = false;
+                    SelectedInputText = SelectedItem.ProductName;
+                    SelectedColorText = string.IsNullOrEmpty(SelectedItem.ColorCode) ? SelectedItem.ColorName : SelectedItem.ColorCode;
+                    unitPrice = SelectedItem.UnitPrice;
+                }
+                ShipQtyText = SelectedItem.ShipQty.ToString();
                 InputDate = SelectedItem.ShipDate;
-                SelectedColorText = string.IsNullOrEmpty(SelectedItem.ColorCode) ? SelectedItem.ColorName : SelectedItem.ColorCode;
-                unitPrice = SelectedItem.UnitPrice;
             }
             else
             {

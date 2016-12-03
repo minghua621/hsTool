@@ -295,15 +295,6 @@ namespace UI.Localization.Messages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 樣品.
-        /// </summary>
-        public static string header_invoice_sample {
-            get {
-                return ResourceManager.GetString("header_invoice_sample", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to 出貨金額.
         /// </summary>
         public static string header_invoice_shipment_total {
@@ -399,6 +390,15 @@ namespace UI.Localization.Messages {
         public static string header_quantity {
             get {
                 return ResourceManager.GetString("header_quantity", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 樣品.
+        /// </summary>
+        public static string header_sample {
+            get {
+                return ResourceManager.GetString("header_sample", resourceCulture);
             }
         }
         
