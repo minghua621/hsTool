@@ -58,7 +58,7 @@ namespace UI.Settings.Dao
             }
         }
 
-        public static void UpdateColor(ColorItemModel item)
+        public static void UpdateColor(string oldCode, string oldName, ColorItemModel item)
         {
             using (SQLiteConnection conn = new SQLiteConnection(AppSettings.ConnectString))
             {
@@ -66,16 +66,18 @@ namespace UI.Settings.Dao
                 using (SQLiteCommand cmd = conn.CreateCommand())
                 {
                     cmd.CommandType = CommandType.Text;
-                    cmd.CommandText = @"Update ColorSettings SET Name=@p0, UpdatedTime=@p1 WHERE Code=@p2";
-                    cmd.Parameters.Add(new SQLiteParameter("@p0", item.Name));
-                    cmd.Parameters.Add(new SQLiteParameter("@p1", DateTime.Now));
-                    cmd.Parameters.Add(new SQLiteParameter("@p2", item.Code));
+                    cmd.CommandText = @"Update ColorSettings SET Code=@p1, Name=@p2, UpdatedTime=@p3 WHERE Code=@p4 and Name=@p5";
+                    cmd.Parameters.Add(new SQLiteParameter("@p1", item.Code));
+                    cmd.Parameters.Add(new SQLiteParameter("@p2", item.Name));
+                    cmd.Parameters.Add(new SQLiteParameter("@p3", DateTime.Now));
+                    cmd.Parameters.Add(new SQLiteParameter("@p4", oldCode));
+                    cmd.Parameters.Add(new SQLiteParameter("@p5", oldName));
                     cmd.ExecuteNonQuery();
                 }
             }
         }
 
-        public static void DeleteColor(string code)
+        public static void DeleteColor(string code, string name)
         {
             using (SQLiteConnection conn = new SQLiteConnection(AppSettings.ConnectString))
             {
@@ -83,8 +85,9 @@ namespace UI.Settings.Dao
                 using (SQLiteCommand cmd = conn.CreateCommand())
                 {
                     cmd.CommandType = CommandType.Text;
-                    cmd.CommandText = @"Delete FROM ColorSettings WHERE Code=@p0";
+                    cmd.CommandText = @"Delete FROM ColorSettings WHERE Code=@p0 and Name=@p1";
                     cmd.Parameters.AddWithValue("@p0", code);
+                    cmd.Parameters.AddWithValue("@p1", name);
                     cmd.ExecuteNonQuery();
                 }
             }

@@ -251,7 +251,13 @@ namespace UI.Product.ViewModels
             get
             {
                 return new ActiveDelegateCommand<BasicUnitPriceVM>(this,
-                    (p) => { ColorList.Remove(SelectedColorItem); },
+                    (p) =>
+                    {
+                        SelectedColor = SelectedColorItem.item; 
+                        ColorCodeAid = SelectedColorItem.codeAid;
+                        ColorAmount = SelectedColorItem.amount;
+                        ColorList.Remove(SelectedColorItem);
+                    },
                     (p) => { return SelectedColorItem != null; });
             }
         }

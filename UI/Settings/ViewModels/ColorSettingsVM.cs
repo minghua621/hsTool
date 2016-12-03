@@ -54,7 +54,7 @@ namespace UI.Settings.ViewModels
             get
             {
                 return new ActiveDelegateCommand<ColorSettingsVM>(this, (p) => { CreateItem(); },
-                    (p) => { return !string.IsNullOrEmpty(InputName) && this._listModel.FirstOrDefault(x => x.Code == InputCode.Trim() && x.Name == InputName) == null; });
+                    (p) => { return !string.IsNullOrEmpty(InputName.Trim()) && this._listModel.FirstOrDefault(x => x.Code == InputCode.Trim() && x.Name == InputName) == null; });
             }
         }
 
@@ -64,7 +64,7 @@ namespace UI.Settings.ViewModels
             {
                 return new SelectionDelegateCommand<ColorSettingsVM>(this,
                     (vm) => { UpdateItem(); },
-                    (vm) => { return this._listModel.FirstOrDefault(x => x.Code == InputCode) != null && !string.IsNullOrEmpty(InputName); });
+                    (vm) => { return this._listModel.FirstOrDefault(x => x.Code == InputCode && x.Name == InputName) == null && !string.IsNullOrEmpty(InputName.Trim()); });
             }
         }
 
@@ -111,9 +111,11 @@ namespace UI.Settings.ViewModels
 
         private void UpdateItem()
         {
+            string oldCode = SelectedItem.Code;
+            string oldName = SelectedItem.Name;
             SelectedItem.Code = this.InputCode;
             SelectedItem.Name = this.InputName;
-            SettingsDao.UpdateColor(SelectedItem);
+            SettingsDao.UpdateColor(oldCode, oldName, SelectedItem);
             ClearInput();
         }
 
@@ -123,7 +125,7 @@ namespace UI.Settings.ViewModels
             {
                 for (int i = SelectedItems.Count - 1; i >= 0; i--)
                 {
-                    SettingsDao.DeleteColor(((ColorItemModel)SelectedItems[i]).Code);
+                    SettingsDao.DeleteColor(((ColorItemModel)SelectedItems[i]).Code, ((ColorItemModel)SelectedItems[i]).Name);
                     this._listModel.Remove((ColorItemModel)SelectedItems[i]);
                 }
             }
