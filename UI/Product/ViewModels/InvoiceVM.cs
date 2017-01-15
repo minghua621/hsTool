@@ -18,7 +18,7 @@ namespace UI.Product.ViewModels
 {
     public class InvoiceVM : NotificationBase
     {
-        #region fields
+        #region properties
 
         public ObservableCollection<CustomerItemModel> Customers
         {

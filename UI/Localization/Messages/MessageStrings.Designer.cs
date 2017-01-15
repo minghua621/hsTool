@@ -61,7 +61,7 @@ namespace UI.Localization.Messages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 已存在擁有相同組件的產品{0}，請確認.
+        ///   Looks up a localized string similar to 已存在擁有相同組合的產品{0}，請確認.
         /// </summary>
         public static string unitprice_same_units_warning {
             get {

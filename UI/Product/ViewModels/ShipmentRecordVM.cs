@@ -74,7 +74,6 @@ namespace UI.Product.ViewModels
                 string rlt = string.Empty;
                 if (SelectedInput != null)
                 {
-                    rlt += string.Format("{0}: {1}\n", ApplicationStrings.header_customer_name, SelectedInput.CustomerName);
                     rlt += string.Format("{0}: {1}\n", ApplicationStrings.header_product_code, SelectedInput.Code);
                     rlt += string.Format("{0}: {1}\n", ApplicationStrings.header_unit_price, unitPrice);
                     rlt += string.IsNullOrEmpty(SelectedInput.MaterialName) ? "" : string.Format("{0}: {1}\n", ApplicationStrings.header_material, SelectedInput.MaterialName);
@@ -210,6 +209,80 @@ namespace UI.Product.ViewModels
         }
         private string _SamplePriceText = string.Empty;
 
+        private bool _isShipMonth = true;
+        public bool IsShipMonth
+        {
+            get { return _isShipMonth; }
+            set 
+            { 
+                _isShipMonth = value; 
+                OnPropertyChanged("IsShipMonth"); 
+                if(IsShipMonth)
+                {
+                    periodStart = _shipMonth;
+                    periodEnd = _shipMonth.AddMonths(1);
+                }
+                else
+                {
+                    periodStart = _shiptDateStart;
+                    periodEnd = _shiptDateEnd.AddDays(1);
+                }
+                this.ApplyFilter(); 
+            }
+        }
+
+        private DateTime periodStart = DateTime.Now;
+        private DateTime periodEnd = DateTime.Now;
+
+        /// <summary>
+        /// 出貨月
+        /// </summary>
+        public DateTime ShipMonth
+        {
+            get { return _shipMonth; }
+            set
+            {
+                _shipMonth = value;
+                OnPropertyChanged("ShipMonth");
+                periodStart = _shipMonth;
+                periodEnd = _shipMonth.AddMonths(1);
+                this.ApplyFilter();
+            }
+        }
+        private DateTime _shipMonth = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1);
+
+        /// <summary>
+        /// 出貨起始日
+        /// </summary>
+        public DateTime ShiptDateStart
+        {
+            get { return _shiptDateStart; }
+            set
+            {
+                _shiptDateStart = value; 
+                OnPropertyChanged("ShiptDateStart");
+                periodStart = _shiptDateStart;
+                this.ApplyFilter();
+            }
+        }
+        private DateTime _shiptDateStart = new DateTime(DateTime.Now.Year, 1, 1);
+
+        /// <summary>
+        /// 出貨結束日
+        /// </summary>
+        public DateTime ShiptDateEnd
+        {
+            get { return _shiptDateEnd; }
+            set
+            {
+                _shiptDateEnd = value;
+                OnPropertyChanged("ShiptDateEnd");
+                periodEnd = _shiptDateEnd.AddDays(1);
+                this.ApplyFilter();
+            }
+        }
+        private DateTime _shiptDateEnd = new DateTime(DateTime.Now.Year, 12, 31);
+
         #endregion
 
         #region commands
@@ -258,7 +331,7 @@ namespace UI.Product.ViewModels
 
         protected override bool FilterItem(ShipmentItemModel item)
         {
-            return item.CustomerCode == this._customerType;
+            return item.CustomerCode == this._customerType && item.ShipDate >= this.periodStart && item.ShipDate < this.periodEnd;
         }
         
         private static List<ShipmentRecordVM> Initialize()

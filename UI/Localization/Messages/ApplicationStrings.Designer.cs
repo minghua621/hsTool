@@ -421,6 +421,24 @@ namespace UI.Localization.Messages {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to 出貨月.
+        /// </summary>
+        public static string header_shipMonth {
+            get {
+                return ResourceManager.GetString("header_shipMonth", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 出貨期間.
+        /// </summary>
+        public static string header_shipPeriod {
+            get {
+                return ResourceManager.GetString("header_shipPeriod", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to 尺寸.
         /// </summary>
         public static string header_size {

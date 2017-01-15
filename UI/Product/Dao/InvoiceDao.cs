@@ -22,7 +22,7 @@ namespace UI.Product.Dao
                 using (SQLiteCommand cmd = conn.CreateCommand())
                 {
                     cmd.CommandType = CommandType.Text;
-                    cmd.CommandText = @"SELECT ProductCode, Price, sum(ShipQty) as Qty FROM ShipmentRecord where CustomerCode=@p0 and ShipDate >= @p1 and ShipDate < @p2 GROUP BY ProductCode";
+                    cmd.CommandText = @"SELECT ProductCode, IsSample, Price, sum(ShipQty) as Qty FROM ShipmentRecord where CustomerCode=@p0 and ShipDate >= @p1 and ShipDate < @p2 GROUP BY ProductCode order by IsSample asc";
                     cmd.Parameters.Add(new SQLiteParameter("@p0", customerCode));
                     cmd.Parameters.AddWithValue("@p1", month);
                     cmd.Parameters.AddWithValue("@p2", month.AddMonths(1));

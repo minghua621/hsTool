@@ -279,4 +279,10 @@
   <data name="header_pieceWeight" xml:space="preserve">
     <value>單重</value>
   </data>
+  <data name="header_shipMonth" xml:space="preserve">
+    <value>出貨月</value>
+  </data>
+  <data name="header_shipPeriod" xml:space="preserve">
+    <value>出貨期間</value>
+  </data>
 </root>

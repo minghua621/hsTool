@@ -24,23 +24,22 @@
                 <TextBlock Text="{Binding item.Name}" Foreground="DarkGray" Grid.Column="1"/>
             </Grid>            
         </DataTemplate>
-        <Style TargetType="{x:Type Label}">
-            <Setter Property="Width" Value="85"/>
-        </Style>
         <Style TargetType="{x:Type TextBox}" BasedOn="{StaticResource TextBoxStyle}">
             <Setter Property="Width" Value="200"/>
+            <Setter Property="HorizontalAlignment" Value="Left"/>
         </Style>
-        <Style TargetType="{x:Type StackPanel}">
-            <Setter Property="Orientation" Value="Horizontal"/>
-            <Setter Property="Margin" Value="18,8,8,8"/>         
+        <Style TargetType="{x:Type toolkit:AutoCompleteBox}">
+            <Setter Property="Width" Value="200"/>
+            <Setter Property="Margin" Value="3"/>
+            <Setter Property="HorizontalAlignment" Value="Left"/>
         </Style>
     </UserControl.Resources>
-    <Grid>
+    <Grid Margin="0,8">
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
             <ColumnDefinition Width="Auto"/>
         </Grid.ColumnDefinitions>
-        <DataGrid x:Name="dataGrid" AutoGenerateColumns="False" IsReadOnly="True" ItemsSource="{Binding Items}" Margin="0,8"
+        <DataGrid x:Name="dataGrid" AutoGenerateColumns="False" IsReadOnly="True" ItemsSource="{Binding Items}"
                   SelectedItem="{Binding SelectedItem}">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="{Binding Source={StaticResource ResourceWrapper},Path=ApplicationString.header_shipdate}" Binding="{Binding ShipDate,StringFormat=\{0:yyyy/MM/dd\}}"/>
@@ -58,38 +57,55 @@
                 </i:EventTrigger>
             </i:Interaction.Triggers>            
         </DataGrid>
-        <StackPanel Grid.Column="1" Orientation="Vertical">
-            <StackPanel>
-                <Label Content="{Binding Source={StaticResource ResourceWrapper},Path=ApplicationString.header_product_info}"/>
-                <TextBox IsReadOnly="True" Text="{Binding ProductInfo,Mode=OneWay}" Height="180"/>
+        <Grid Grid.Column="1" Margin="15,5,10,0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="10"/>
+                <RowDefinition Height="Auto"/>                
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            
+            <RadioButton VerticalAlignment="Center" IsChecked="{Binding IsShipMonth}" GroupName="period"/>
+            <Label Content="{Binding Source={StaticResource ResourceWrapper},Path=ApplicationString.header_shipMonth}" Grid.Column="1"/>
+            <controls:MonthUpDown Grid.Column="2" HorizontalAlignment="Left" Value="{Binding ShipMonth,Mode=TwoWay}" IsEnabled="{Binding IsShipMonth}" Margin="3"/>
+            <RadioButton VerticalAlignment="Center" IsChecked="{Binding IsShipMonth,Converter={StaticResource InverseBooleanConverter}}" GroupName="period" Grid.Row="1"/>
+            <Label Content="{Binding Source={StaticResource ResourceWrapper},Path=ApplicationString.header_shipPeriod}" IsEnabled="{Binding IsShipMonth,Converter={StaticResource InverseBooleanConverter}}" Grid.Column="1" Grid.Row="1"/>
+            <StackPanel Grid.Column="2" Grid.Row="1" Orientation="Horizontal" Margin="3" IsEnabled="{Binding IsShipMonth,Converter={StaticResource InverseBooleanConverter}}">
+                <DatePicker MinWidth="140" SelectedDate="{Binding ShiptDateStart}"/>
+                <Label Content=" ~ "/>
+                <DatePicker MinWidth="140" SelectedDate="{Binding ShiptDateEnd}"/>
             </StackPanel>
-            <StackPanel>
-                <Label Content="{Binding Source={StaticResource ResourceWrapper},Path=ApplicationString.header_shipdate}"/>
-                <DatePicker Margin="3" Width="200" SelectedDate="{Binding InputDate}"/>
-            </StackPanel>            
-            <StackPanel>
-                <RadioButton Margin="-18,0,0,0" VerticalAlignment="Center" IsChecked="{Binding IsSample,Converter={StaticResource InverseBooleanConverter}}"/>
-                <Label Content="{Binding Source={StaticResource ResourceWrapper},Path=ApplicationString.header_product_name}" IsEnabled="{Binding IsSample,Converter={StaticResource InverseBooleanConverter}}"/>
-                <toolkit:AutoCompleteBox Margin="3" Width="200" ItemsSource="{Binding ProductItems}" SelectedItem="{Binding SelectedInput,Mode=TwoWay}" Text="{Binding SelectedInputText,Mode=TwoWay}" ValueMemberPath="Name" ItemTemplate="{StaticResource AutoCompleteBoxItemTemplate}" FilterMode="Contains" IsEnabled="{Binding IsSample,Converter={StaticResource InverseBooleanConverter}}"/>
-            </StackPanel>
-            <StackPanel IsEnabled="{Binding IsSample,Converter={StaticResource InverseBooleanConverter}}">
-                <Label Content="{Binding Source={StaticResource ResourceWrapper},Path=ApplicationString.colorSettings_code}"/>
-                <toolkit:AutoCompleteBox Margin="3" Width="200" ItemsSource="{Binding ColorItems}" SelectedItem="{Binding SelectedColor,Mode=TwoWay}" Text="{Binding SelectedColorText,Mode=TwoWay}" ValueMemberPath="item.ColorSelectionText" ItemTemplate="{StaticResource ColorItemTemplate}" FilterMode="StartsWith"/>
-            </StackPanel>            
-            <StackPanel>
-                <RadioButton Margin="-18,0,0,0" VerticalAlignment="Center" IsChecked="{Binding IsSample}"/>
-                <Label Content="{Binding Source={StaticResource ResourceWrapper},Path=ApplicationString.header_sample}" IsEnabled="{Binding IsSample}"/>
-                <TextBox Text="{Binding SampleName,UpdateSourceTrigger=PropertyChanged}" IsEnabled="{Binding IsSample}"/>
-            </StackPanel>
-            <StackPanel IsEnabled="{Binding IsSample}">
-                <Label Content="{Binding Source={StaticResource ResourceWrapper},Path=ApplicationString.header_unit_price}"/>
-                <TextBox Text="{Binding SamplePriceText,UpdateSourceTrigger=PropertyChanged}"/>
-            </StackPanel>
-            <StackPanel>
-                <Label Content="{Binding Source={StaticResource ResourceWrapper},Path=ApplicationString.header_quantity}"/>
-                <TextBox Text="{Binding ShipQtyText,UpdateSourceTrigger=PropertyChanged}"/>
-            </StackPanel>
-            <StackPanel>
+            <Border BorderThickness="1" BorderBrush="#FF688CAF" Grid.ColumnSpan="3" Grid.RowSpan="2" Margin="-5"/>
+            <Label Content="{Binding Source={StaticResource ResourceWrapper},Path=ApplicationString.header_product_info}" Grid.Column="1" Grid.Row="3"/>
+            <TextBox IsReadOnly="True" Text="{Binding ProductInfo,Mode=OneWay}" Height="150" Grid.Column="2" Grid.Row="3"/>
+            <Label Content="{Binding Source={StaticResource ResourceWrapper},Path=ApplicationString.header_shipdate}" Grid.Column="1" Grid.Row="4"/>
+            <DatePicker Width="200" Margin="3" HorizontalAlignment="Left" SelectedDate="{Binding InputDate}" Grid.Column="2" Grid.Row="4"/>
+            <RadioButton VerticalAlignment="Center" IsChecked="{Binding IsSample,Converter={StaticResource InverseBooleanConverter}}"  Grid.Row="5"/>
+            <Label Content="{Binding Source={StaticResource ResourceWrapper},Path=ApplicationString.header_product_name}" IsEnabled="{Binding IsSample,Converter={StaticResource InverseBooleanConverter}}" Grid.Column="1" Grid.Row="5"/>
+            <toolkit:AutoCompleteBox ItemsSource="{Binding ProductItems}" SelectedItem="{Binding SelectedInput,Mode=TwoWay}" Text="{Binding SelectedInputText,Mode=TwoWay}" ValueMemberPath="Name" ItemTemplate="{StaticResource AutoCompleteBoxItemTemplate}" FilterMode="Contains" IsEnabled="{Binding IsSample,Converter={StaticResource InverseBooleanConverter}}" Grid.Column="2" Grid.Row="5"/>
+            <Label Content="{Binding Source={StaticResource ResourceWrapper},Path=ApplicationString.colorSettings_code}" IsEnabled="{Binding IsSample,Converter={StaticResource InverseBooleanConverter}}" Grid.Column="1" Grid.Row="6"/>
+            <toolkit:AutoCompleteBox ItemsSource="{Binding ColorItems}" SelectedItem="{Binding SelectedColor,Mode=TwoWay}" Text="{Binding SelectedColorText,Mode=TwoWay}" ValueMemberPath="item.ColorSelectionText" ItemTemplate="{StaticResource ColorItemTemplate}" FilterMode="StartsWith" IsEnabled="{Binding IsSample,Converter={StaticResource InverseBooleanConverter}}" Grid.Column="2" Grid.Row="6"/>
+            <RadioButton VerticalAlignment="Center" IsChecked="{Binding IsSample}" Grid.Row="7"/>
+            <Label Content="{Binding Source={StaticResource ResourceWrapper},Path=ApplicationString.header_sample}" IsEnabled="{Binding IsSample}" Grid.Column="1" Grid.Row="7"/>
+            <TextBox Text="{Binding SampleName,UpdateSourceTrigger=PropertyChanged}" IsEnabled="{Binding IsSample}" Grid.Column="2" Grid.Row="7"/>
+            <Label Content="{Binding Source={StaticResource ResourceWrapper},Path=ApplicationString.header_unit_price}" IsEnabled="{Binding IsSample}" Grid.Column="1" Grid.Row="8"/>
+            <TextBox Text="{Binding SamplePriceText,UpdateSourceTrigger=PropertyChanged}" IsEnabled="{Binding IsSample}" Grid.Column="2" Grid.Row="8"/>
+            <Label Content="{Binding Source={StaticResource ResourceWrapper},Path=ApplicationString.header_quantity}" Grid.Column="1" Grid.Row="9"/>
+            <TextBox Text="{Binding ShipQtyText,UpdateSourceTrigger=PropertyChanged}" Grid.Column="2" Grid.Row="9"/>
+            <StackPanel Orientation="Horizontal" Grid.Column="1" Grid.Row="10" Grid.ColumnSpan="3">
                 <controls:Button Content="{Binding Source={StaticResource ResourceWrapper},Path=ApplicationString.buttonContent_Add}"
                                  IconSource="{StaticResource AddIcon_Black_18}" PressedIconSource="{StaticResource AddIcon_White_18}"
                                  Command="{Binding CreateItemCommand}"/>
@@ -102,7 +118,7 @@
                 <controls:Button Content="{Binding Source={StaticResource ResourceWrapper},Path=ApplicationString.buttonContent_Clear}"
                                  IconSource="{StaticResource ClearIcon_Black_18}" PressedIconSource="{StaticResource ClearIcon_White_18}"
                                  Command="{Binding ClearCommand}"/>
-            </StackPanel>
-        </StackPanel>        
+            </StackPanel>            
+        </Grid>       
     </Grid>
 </UserControl>
