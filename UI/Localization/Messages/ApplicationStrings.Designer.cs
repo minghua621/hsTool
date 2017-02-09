@@ -295,7 +295,7 @@ namespace UI.Localization.Messages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 出貨金額.
+        ///   Looks up a localized string similar to 銷貨金額.
         /// </summary>
         public static string header_invoice_shipment_total {
             get {

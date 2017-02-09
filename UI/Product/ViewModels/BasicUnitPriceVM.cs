@@ -269,7 +269,8 @@ namespace UI.Product.ViewModels
 
         protected override bool FilterItem(UnitPriceItemModel item)
         {
-            return !item.IsDeleted && !item.IsCombined && item.CustomerCode == this._customerType;
+            return !item.IsDeleted && !item.IsCombined && item.CustomerCode == this._customerType
+                && (string.IsNullOrEmpty(SearchText) ? true : item.Name.Contains(SearchText));
         }
 
         private static List<BasicUnitPriceVM> Initialize()

@@ -256,7 +256,7 @@
     <value>總計金額</value>
   </data>
   <data name="header_invoice_shipment_total" xml:space="preserve">
-    <value>出貨金額</value>
+    <value>銷貨金額</value>
   </data>
   <data name="invoice_date" xml:space="preserve">
     <value>{0}年{1}月{2}日 製表</value>

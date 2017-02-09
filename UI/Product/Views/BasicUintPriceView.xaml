@@ -39,27 +39,33 @@
             <ColumnDefinition/>
             <ColumnDefinition Width="Auto"/>
         </Grid.ColumnDefinitions>
-        <DataGrid x:Name="dataGrid" AutoGenerateColumns="False" IsReadOnly="True" ItemsSource="{Binding Items}" Margin="0,8"
-                  SelectedItem="{Binding SelectedItem}">
-            <DataGrid.Columns>
-                <DataGridTextColumn Header="{Binding Source={StaticResource ResourceWrapper},Path=ApplicationString.header_customer_name}" Binding="{Binding CustomerName}"/>
-                <DataGridTextColumn Header="{Binding Source={StaticResource ResourceWrapper},Path=ApplicationString.header_product_code}" Binding="{Binding Code}"/>
-                <DataGridTextColumn Header="{Binding Source={StaticResource ResourceWrapper},Path=ApplicationString.header_product_name}" Binding="{Binding Name}"/>
-                <DataGridTextColumn Header="{Binding Source={StaticResource ResourceWrapper},Path=ApplicationString.header_unit_price}" Binding="{Binding Price}"/>
-                <DataGridTextColumn Header="{Binding Source={StaticResource ResourceWrapper},Path=ApplicationString.header_material}" Binding="{Binding MaterialName}"/>
-                <DataGridTextColumn Header="{Binding Source={StaticResource ResourceWrapper},Path=ApplicationString.header_size}" Binding="{Binding Size}"/>
-                <DataGridTextColumn Header="{Binding Source={StaticResource ResourceWrapper},Path=ApplicationString.header_processing}" Binding="{Binding Processing0}"/>
-                <DataGridTextColumn Header="{Binding Source={StaticResource ResourceWrapper},Path=ApplicationString.header_pieceWeight}" Binding="{Binding PieceWeight}"/>
-                <DataGridTextColumn Header="{Binding Source={StaticResource ResourceWrapper},Path=ApplicationString.header_package}" Binding="{Binding Package}"/>
-                <DataGridTextColumn Header="{Binding Source={StaticResource ResourceWrapper},Path=ApplicationString.colorSettings_code}" Binding="{Binding Colors}"/>
-            </DataGrid.Columns>
-            <i:Interaction.Triggers>
-                <i:EventTrigger EventName="SelectionChanged">
-                    <i:InvokeCommandAction Command="{Binding SelectionChangedCommand}" CommandParameter="{Binding SelectedItems,ElementName=dataGrid}"/>
-                    <i:InvokeCommandAction Command="{Binding DetailChangedCommand}"/>
-                </i:EventTrigger>
-            </i:Interaction.Triggers>
-        </DataGrid>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>            
+            <DataGrid x:Name="dataGrid" AutoGenerateColumns="False" IsReadOnly="True" ItemsSource="{Binding Items}" Margin="0,0,0,8" Grid.Row="1"
+                      SelectedItem="{Binding SelectedItem}">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="{Binding Source={StaticResource ResourceWrapper},Path=ApplicationString.header_product_code}" Binding="{Binding Code}"/>
+                    <DataGridTextColumn Header="{Binding Source={StaticResource ResourceWrapper},Path=ApplicationString.header_product_name}" Binding="{Binding Name}"/>
+                    <DataGridTextColumn Header="{Binding Source={StaticResource ResourceWrapper},Path=ApplicationString.header_unit_price}" Binding="{Binding Price}"/>
+                    <DataGridTextColumn Header="{Binding Source={StaticResource ResourceWrapper},Path=ApplicationString.header_material}" Binding="{Binding MaterialName}"/>
+                    <DataGridTextColumn Header="{Binding Source={StaticResource ResourceWrapper},Path=ApplicationString.header_size}" Binding="{Binding Size}"/>
+                    <DataGridTextColumn Header="{Binding Source={StaticResource ResourceWrapper},Path=ApplicationString.header_processing}" Binding="{Binding Processing0}"/>
+                    <DataGridTextColumn Header="{Binding Source={StaticResource ResourceWrapper},Path=ApplicationString.header_pieceWeight}" Binding="{Binding PieceWeight}"/>
+                    <DataGridTextColumn Header="{Binding Source={StaticResource ResourceWrapper},Path=ApplicationString.header_package}" Binding="{Binding Package}"/>
+                    <DataGridTextColumn Header="{Binding Source={StaticResource ResourceWrapper},Path=ApplicationString.colorSettings_code}" Binding="{Binding Colors}"/>
+                </DataGrid.Columns>
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="SelectionChanged">
+                        <i:InvokeCommandAction Command="{Binding SelectionChangedCommand}" CommandParameter="{Binding SelectedItems,ElementName=dataGrid}"/>
+                        <i:InvokeCommandAction Command="{Binding DetailChangedCommand}"/>
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+            </DataGrid>
+            <TextBox Text="{Binding SearchText,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Width="200" HorizontalAlignment="Left" Margin="0,6"/>
+        </Grid>
         <Grid Grid.Column="1" Margin="10,5">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="200"/>
@@ -73,9 +79,8 @@
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
                 <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition/>
             </Grid.RowDefinitions>
             <Label Content="{Binding Source={StaticResource ResourceWrapper},Path=ApplicationString.header_product_code}"/>
             <TextBox IsReadOnly="True" Text="{Binding ProductCode,Mode=OneWay}" Grid.Row="1"/>
@@ -110,7 +115,7 @@
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
                     <Label Content="{Binding Source={StaticResource ResourceWrapper},Path=ApplicationString.colorSettings_code}"/>
                     <toolkit:AutoCompleteBox Margin="3" ItemsSource="{Binding Colors}" SelectedItem="{Binding SelectedColor,Mode=TwoWay}" Text="{Binding SelectedColorText,Mode=TwoWay}"  ValueMemberPath="ColorSelectionText" ItemTemplate="{StaticResource ColorTemplate}" ItemFilter="{Binding ColorFilter}" Grid.Row="1"/>
@@ -124,7 +129,7 @@
                         <controls:Button IconSource="{StaticResource UpArrowIcon_Black_18}" PressedIconSource="{StaticResource UpArrowIcon_White_18}"
                                      Padding="6,3,4,3"  Command="{Binding DecreaseColorCommand}"/>
                     </StackPanel>
-                    <ListBox ItemsSource="{Binding ColorList,Mode=TwoWay}" ItemTemplate="{StaticResource ColorItemTemplate}" SelectionMode="Single" SelectedItem="{Binding SelectedColorItem}" MinHeight="200" Margin="3" Grid.Row="3" Grid.ColumnSpan="3"/>
+                    <ListBox ItemsSource="{Binding ColorList,Mode=TwoWay}" ItemTemplate="{StaticResource ColorItemTemplate}" SelectionMode="Single" SelectedItem="{Binding SelectedColorItem}" Margin="3" Grid.Row="3" Grid.ColumnSpan="3" ScrollViewer.HorizontalScrollBarVisibility="Disabled"/>
                 </Grid>                                   
             </GroupBox>
             <Grid Grid.Row="7" Grid.ColumnSpan="3" Margin="0,5">
@@ -133,17 +138,18 @@
                     <ColumnDefinition Width="Auto"/>
                     <ColumnDefinition Width="Auto"/>
                     <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
                 </Grid.ColumnDefinitions>
-                <controls:Button Content="{Binding Source={StaticResource ResourceWrapper},Path=ApplicationString.buttonContent_Add}"
+                <controls:Button Grid.Column="1" Content="{Binding Source={StaticResource ResourceWrapper},Path=ApplicationString.buttonContent_Add}"
                                  IconSource="{StaticResource AddIcon_Black_18}" PressedIconSource="{StaticResource AddIcon_White_18}"
                                  Command="{Binding CreateItemCommand}"/>
-                <controls:Button Grid.Column="1" Content="{Binding Source={StaticResource ResourceWrapper},Path=ApplicationString.buttonContent_Update}"
+                <controls:Button Grid.Column="2" Content="{Binding Source={StaticResource ResourceWrapper},Path=ApplicationString.buttonContent_Update}"
                                  IconSource="{StaticResource DoneIcon_Black_18}" PressedIconSource="{StaticResource DoneIcon_White_18}"
                                  Command="{Binding UpdateCommand}"/>
-                <controls:Button Grid.Column="2" Content="{Binding Source={StaticResource ResourceWrapper},Path=ApplicationString.buttonContent_Delete}"
+                <controls:Button Grid.Column="3" Content="{Binding Source={StaticResource ResourceWrapper},Path=ApplicationString.buttonContent_Delete}"
                                  IconSource="{StaticResource DeleteIcon_Black_18}" PressedIconSource="{StaticResource DeleteIcon_White_18}"
                                  Command="{Binding DeleteCommand}"/>
-                <controls:Button Grid.Column="3" Content="{Binding Source={StaticResource ResourceWrapper},Path=ApplicationString.buttonContent_Clear}"
+                <controls:Button Grid.Column="4" Content="{Binding Source={StaticResource ResourceWrapper},Path=ApplicationString.buttonContent_Clear}"
                                  IconSource="{StaticResource ClearIcon_Black_18}" PressedIconSource="{StaticResource ClearIcon_White_18}"
                                  Command="{Binding ClearCommand}"/>
             </Grid>

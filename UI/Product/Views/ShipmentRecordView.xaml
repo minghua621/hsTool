@@ -79,7 +79,7 @@
             </Grid.RowDefinitions>
             
             <RadioButton VerticalAlignment="Center" IsChecked="{Binding IsShipMonth}" GroupName="period"/>
-            <Label Content="{Binding Source={StaticResource ResourceWrapper},Path=ApplicationString.header_shipMonth}" Grid.Column="1"/>
+            <Label Content="{Binding Source={StaticResource ResourceWrapper},Path=ApplicationString.header_shipMonth}" IsEnabled="{Binding IsShipMonth}" Grid.Column="1"/>
             <controls:MonthUpDown Grid.Column="2" HorizontalAlignment="Left" Value="{Binding ShipMonth,Mode=TwoWay}" IsEnabled="{Binding IsShipMonth}" Margin="3"/>
             <RadioButton VerticalAlignment="Center" IsChecked="{Binding IsShipMonth,Converter={StaticResource InverseBooleanConverter}}" GroupName="period" Grid.Row="1"/>
             <Label Content="{Binding Source={StaticResource ResourceWrapper},Path=ApplicationString.header_shipPeriod}" IsEnabled="{Binding IsShipMonth,Converter={StaticResource InverseBooleanConverter}}" Grid.Column="1" Grid.Row="1"/>

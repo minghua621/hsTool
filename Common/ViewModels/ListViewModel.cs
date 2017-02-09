@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using System.Windows.Data;
 using System.ComponentModel;
+using System.Windows.Threading;
 using Common.Command;
 using Common.Models;
 
@@ -62,6 +63,33 @@ namespace Common.ViewModels
             foreach (var item in rows)
             {                
                 this.Items.Add(item);
+            }
+        }
+
+        public string SearchText
+        {
+            get { return _searchText; }
+            set { _searchText = value; OnPropertyChanged("SearchText"); DelaySearch(_searchText); }
+        }
+        private string _searchText = string.Empty;
+        private DispatcherTimer _timer = null;
+
+        private void DelaySearch(string keyword)
+        {
+            if (_timer != null)
+            {
+                _timer.Stop();
+                _timer.Start();
+            }
+            else
+            {
+                _timer = new DispatcherTimer() { Interval = new TimeSpan(0, 0, 0, 0, 500) };
+                _timer.Tick += (s, e) =>
+                {
+                    _timer.Stop();
+                    this.ApplyFilter();
+                };
+                _timer.Start();
             }
         }
 
