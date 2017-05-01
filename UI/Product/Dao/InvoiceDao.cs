@@ -44,7 +44,7 @@ namespace UI.Product.Dao
                     }
                 }
             }
-            return rlt;
+            return rlt.OrderBy(x => x.ProductName).ToList();
         }
     }
 }

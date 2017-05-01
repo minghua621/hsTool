@@ -127,7 +127,7 @@
     <value>新增</value>
   </data>
   <data name="buttonContent_Clear" xml:space="preserve">
-    <value>清除</value>
+    <value>清空</value>
   </data>
   <data name="buttonContent_copy" xml:space="preserve">
     <value>複製</value>
@@ -284,5 +284,8 @@
   </data>
   <data name="header_shipPeriod" xml:space="preserve">
     <value>出貨期間</value>
+  </data>
+  <data name="header_searchName" xml:space="preserve">
+    <value>搜尋品名:</value>
   </data>
 </root>

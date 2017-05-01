@@ -97,7 +97,7 @@ namespace UI.Localization.Messages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 清除.
+        ///   Looks up a localized string similar to 清空.
         /// </summary>
         public static string buttonContent_Clear {
             get {
@@ -399,6 +399,15 @@ namespace UI.Localization.Messages {
         public static string header_sample {
             get {
                 return ResourceManager.GetString("header_sample", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 搜尋品名:.
+        /// </summary>
+        public static string header_searchName {
+            get {
+                return ResourceManager.GetString("header_searchName", resourceCulture);
             }
         }
         

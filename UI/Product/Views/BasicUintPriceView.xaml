@@ -10,9 +10,9 @@
              d:DesignHeight="300" d:DesignWidth="300">
     <UserControl.Resources>
         <DataTemplate x:Key="ColorTemplate">
-            <Grid Width="185">
+            <Grid Width="240">
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="2*"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
                 <TextBlock Text="{Binding Code}"/>
@@ -64,7 +64,10 @@
                     </i:EventTrigger>
                 </i:Interaction.Triggers>
             </DataGrid>
-            <TextBox Text="{Binding SearchText,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Width="200" HorizontalAlignment="Left" Margin="0,6"/>
+            <StackPanel Orientation="Horizontal" Margin="0,6" HorizontalAlignment="Left">
+                <Label Content="{Binding Source={StaticResource ResourceWrapper},Path=ApplicationString.header_searchName}"/>
+                <TextBox Text="{Binding SearchText,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Width="200"/>
+            </StackPanel>            
         </Grid>
         <Grid Grid.Column="1" Margin="10,5">
             <Grid.ColumnDefinitions>

@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Controls;
 using System.Windows.Input;
 using Common.Command;
 using Common.ViewModels;
@@ -24,7 +25,7 @@ namespace UI.Settings.ViewModels
 
         #endregion
 
-        #region fields
+        #region properties
 
         public static ColorSettingsVM ColorSettings
         {
@@ -86,6 +87,30 @@ namespace UI.Settings.ViewModels
         #endregion
 
         #region methods
+
+        /// <summary>
+        /// 排序: 關鍵字開頭的項目優先於包含關鍵字的項目
+        /// </summary>
+        /// <param name="colorText"></param>
+        /// <returns></returns>
+        public static List<ColorItemModel> GetColors(string colorText)
+        {
+            return ColorSettings.Items.OrderByDescending(x => x.Code.StartsWith(colorText)).ToList();
+        }
+
+        /// <summary>
+        /// 包含國際色號or包含顏色名
+        /// </summary>
+        public static AutoCompleteFilterPredicate<object> ColorFilter
+        {
+            get
+            {
+                return (searchText, obj) =>
+                    obj is ColorItemModel ?
+                    ((obj as ColorItemModel).Code.Contains(searchText)
+                    || (obj as ColorItemModel).Name.Contains(searchText)) : false;
+            }
+        }
 
         protected override bool FilterItem(ColorItemModel item)
         {

@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
+using System.Windows.Controls;
 using System.Windows.Input;
 using Common.Command;
 using Common.ViewModels;
@@ -30,7 +31,7 @@ namespace UI.Product.ViewModels
 
         #region fields
 
-        private string _customerType { get; set; }
+        public string _customerType { get; private set; }
 
         public static List<ShipmentRecordVM> Units
         {
@@ -86,10 +87,22 @@ namespace UI.Product.ViewModels
 
         private double unitPrice { get; set; }
 
-        public List<ColorItem> ColorItems
+        /// <summary>
+        /// 包含國際色號or包含顏色名
+        /// </summary>
+        public static AutoCompleteFilterPredicate<object> ColorFilter
+        {
+            get { return ColorSettingsVM.ColorFilter; }
+        }
+        
+        public List<ColorItemModel> ColorItems
         {
             get
             {
+                if (IsSample)
+                {
+                    return ColorSettingsVM.GetColors(SelectedColorText);
+                }
                 if (SelectedInput == null)
                 {
                     return null;
@@ -124,22 +137,22 @@ namespace UI.Product.ViewModels
                     {
                         colors = BasicUnitPriceVM.StringToColorItem(SelectedInput.ColorTypes);
                     }
-                    return colors;
+                    return colors.Select(x => x.item).Distinct().ToList();
                 }
             }
         }
 
-        public ColorItem SelectedColor
+        public ColorItemModel SelectedColor
         {
             get { return _SelectedColor; }
             set { _SelectedColor = value; OnPropertyChanged("SelectedColor"); }
         }
-        private ColorItem _SelectedColor = null;
+        private ColorItemModel _SelectedColor = null;
 
         public string SelectedColorText
         {
             get { return _SelectedColorText; }
-            set { _SelectedColorText = value; OnPropertyChanged("SelectedColorText"); }
+            set { _SelectedColorText = value; OnPropertyChanged("SelectedColorText"); OnPropertyChanged("ColorItems"); }
         }
         private string _SelectedColorText = string.Empty;
 
@@ -180,6 +193,7 @@ namespace UI.Product.ViewModels
             {
                 _isSample = value;
                 OnPropertyChanged("IsSample");
+                OnPropertyChanged("ColorItems");
 
                 if (IsSample)
                 {
@@ -265,7 +279,7 @@ namespace UI.Product.ViewModels
                 this.ApplyFilter();
             }
         }
-        private DateTime _shiptDateStart = new DateTime(DateTime.Now.Year, 1, 1);
+        private DateTime _shiptDateStart = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1);
 
         /// <summary>
         /// 出貨結束日
@@ -281,7 +295,7 @@ namespace UI.Product.ViewModels
                 this.ApplyFilter();
             }
         }
-        private DateTime _shiptDateEnd = new DateTime(DateTime.Now.Year, 12, 31);
+        private DateTime _shiptDateEnd = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1).AddMonths(1).AddDays(-1);
 
         #endregion
 
@@ -359,8 +373,8 @@ namespace UI.Product.ViewModels
                 UnitPrice = IsSample ? Convert.ToDouble(SamplePriceText) : SelectedInput.Price,
                 ShipQty = this.InputQty,
                 ShipDate = this.InputDate,
-                ColorCode = SelectedColor == null ? string.Empty : SelectedColor.item.Code,
-                ColorName = SelectedColor == null ? string.Empty : SelectedColor.item.Name,
+                ColorCode = SelectedColor == null ? string.Empty : SelectedColor.Code,
+                ColorName = SelectedColor == null ? string.Empty : SelectedColor.Name,
                 IsSample = this.IsSample
             };
             long id = ShipmentDao.Create(item);
@@ -375,8 +389,8 @@ namespace UI.Product.ViewModels
             SelectedItem.UnitPrice = SelectedItem.IsSample ? Convert.ToDouble(SamplePriceText) : SelectedInput.Price;
             SelectedItem.ShipQty = this.InputQty;
             SelectedItem.ShipDate = this.InputDate;
-            SelectedItem.ColorCode = SelectedColor == null ? string.Empty : SelectedColor.item.Code;
-            SelectedItem.ColorName = SelectedColor == null ? string.Empty : SelectedColor.item.Name;
+            SelectedItem.ColorCode = SelectedColor == null ? string.Empty : SelectedColor.Code;
+            SelectedItem.ColorName = SelectedColor == null ? string.Empty : SelectedColor.Name;
             ShipmentDao.Update(SelectedItem);
             ClearInput();
         }
@@ -432,10 +446,10 @@ namespace UI.Product.ViewModels
                 else
                 {
                     IsSample = false;
-                    SelectedInputText = SelectedItem.ProductName;
-                    SelectedColorText = string.IsNullOrEmpty(SelectedItem.ColorCode) ? SelectedItem.ColorName : SelectedItem.ColorCode;
+                    SelectedInputText = SelectedItem.ProductName;                    
                     unitPrice = SelectedItem.UnitPrice;
                 }
+                SelectedColorText = string.IsNullOrEmpty(SelectedItem.ColorCode) ? SelectedItem.ColorName : SelectedItem.ColorCode;
                 ShipQtyText = SelectedItem.ShipQty.ToString();
                 InputDate = SelectedItem.ShipDate;
             }
@@ -444,6 +458,11 @@ namespace UI.Product.ViewModels
                 ClearInput(false);
             }
             OnPropertyChanged("ProductInfo");
+        }
+
+        public void UpdateColorItems()
+        {
+            OnPropertyChanged("ColorItems");
         }
         #endregion
     }

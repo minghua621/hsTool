@@ -122,19 +122,20 @@ namespace UI.Product.ViewModels
         }
         private string _packageText = string.Empty;
 
-        public ICollectionView Colors
+        /// <summary>
+        /// 色號提示清單
+        /// </summary>
+        public List<ColorItemModel> Colors
         {
-            get { return ColorSettingsVM.ColorSettings.ItemsView; }
+            get { return ColorSettingsVM.GetColors(SelectedColorText); }
         }
 
-        public AutoCompleteFilterPredicate<object> ColorFilter
+        /// <summary>
+        /// 包含國際色號or包含顏色名
+        /// </summary>
+        public static AutoCompleteFilterPredicate<object> ColorFilter
         {
-            get
-            {
-                return (searchText, obj) =>
-                    (obj as ColorItemModel).Code.StartsWith(searchText)
-                    || (obj as ColorItemModel).Name.Contains(searchText);
-            }
+            get { return ColorSettingsVM.ColorFilter; }
         }
 
         public ColorItemModel SelectedColor 
@@ -144,10 +145,10 @@ namespace UI.Product.ViewModels
         }
         private ColorItemModel _SelectedColor = null;
 
-        public string SelectedColorText 
+        public string SelectedColorText
         {
             get { return _SelectedColorText; }
-            set { _SelectedColorText = value; OnPropertyChanged("SelectedColorText"); }
+            set { _SelectedColorText = value; OnPropertyChanged("SelectedColorText"); OnPropertyChanged("Colors"); }
         }
         private string _SelectedColorText = string.Empty;
 
@@ -366,8 +367,9 @@ namespace UI.Product.ViewModels
             SelectedItem.PieceWeight = PieceWeightText;
             SelectedItem.Package = PackageText;
             SelectedItem.ColorTypes = ColorItemToString(ColorList.ToList());
-            UnitPriceDao.Update(SelectedItem);
+            UnitPriceDao.Update(SelectedItem);            
             ClearInput();
+            ShipmentRecordVM.Units.FirstOrDefault(x => x._customerType == this._customerType).UpdateColorItems();
         }
 
         private bool OnlyOneItemSelected()
