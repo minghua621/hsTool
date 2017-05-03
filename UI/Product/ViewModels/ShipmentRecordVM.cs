@@ -241,7 +241,8 @@ namespace UI.Product.ViewModels
                     periodStart = _shiptDateStart;
                     periodEnd = _shiptDateEnd.AddDays(1);
                 }
-                this.ApplyFilter(); 
+                this.ApplyFilter();
+                UpdateSumText();
             }
         }
 
@@ -261,6 +262,7 @@ namespace UI.Product.ViewModels
                 periodStart = _shipMonth;
                 periodEnd = _shipMonth.AddMonths(1);
                 this.ApplyFilter();
+                UpdateSumText();
             }
         }
         private DateTime _shipMonth = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1);
@@ -277,6 +279,7 @@ namespace UI.Product.ViewModels
                 OnPropertyChanged("ShiptDateStart");
                 periodStart = _shiptDateStart;
                 this.ApplyFilter();
+                UpdateSumText();
             }
         }
         private DateTime _shiptDateStart = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1);
@@ -293,9 +296,26 @@ namespace UI.Product.ViewModels
                 OnPropertyChanged("ShiptDateEnd");
                 periodEnd = _shiptDateEnd.AddDays(1);
                 this.ApplyFilter();
+                UpdateSumText();
             }
         }
         private DateTime _shiptDateEnd = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1).AddMonths(1).AddDays(-1);
+
+        /// <summary>
+        /// 小計金額總和
+        /// </summary>
+        private double SubTotalSum
+        {
+            get { return _subTotalSum; }
+            set { _subTotalSum = value; OnPropertyChanged("SumText"); }
+
+        }
+        private double _subTotalSum = 0;
+
+        public string SumText
+        {
+            get { return string.Format("{0}: {1}", ApplicationStrings.header_ship_subtotal, SubTotalSum); }
+        }
 
         #endregion
 
@@ -463,6 +483,11 @@ namespace UI.Product.ViewModels
         public void UpdateColorItems()
         {
             OnPropertyChanged("ColorItems");
+        }
+
+        private void UpdateSumText()
+        {
+            SubTotalSum = Math.Round(this.Items.Sum(x => x.SubTotal), MidpointRounding.AwayFromZero);
         }
         #endregion
     }

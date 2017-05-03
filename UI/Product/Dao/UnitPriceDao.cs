@@ -26,7 +26,7 @@ namespace UI.Product.Dao
                 using (SQLiteCommand cmd = conn.CreateCommand())
                 {
                     cmd.CommandType = CommandType.Text;
-                    cmd.CommandText = "SELECT * FROM UnitPrice WHERE 1 = 1 order by ProductName asc";
+                    cmd.CommandText = "SELECT * FROM UnitPrice WHERE 1 = 1 order by Combined desc, ProductName asc";
                     SQLiteDataReader sqlite_datareader = cmd.ExecuteReader();
 
                     while (sqlite_datareader.Read()) //read every data
