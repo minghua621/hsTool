@@ -403,6 +403,8 @@ namespace UI.Product.ViewModels
             PieceWeightText = string.Empty;
             PackageText = string.Empty;
             SelectedColorText = string.Empty;
+            ColorCodeAid = string.Empty;
+            ColorAmount = string.Empty;
             ColorList.Clear();
             if (flag)
             {

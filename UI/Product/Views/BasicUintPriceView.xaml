@@ -20,12 +20,12 @@
             </Grid>
         </DataTemplate>
         <DataTemplate x:Key="ColorItemTemplate">
-            <Grid Width="575">
+            <Grid Width="{Binding ActualWidth,RelativeSource={RelativeSource AncestorType=ListBox}}">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="2*"/>
-                    <ColumnDefinition Width="2*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
                 <TextBlock Text="{Binding item.Code}"/>
                 <TextBlock Text="{Binding item.Name}" Grid.Column="1"/>
@@ -37,7 +37,7 @@
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
-            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition/>
         </Grid.ColumnDefinitions>
         <Grid>
             <Grid.RowDefinitions>
@@ -69,11 +69,12 @@
                 <TextBox Text="{Binding SearchText,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Width="200"/>
             </StackPanel>            
         </Grid>
+        <GridSplitter Grid.Column="1" Width="2" HorizontalAlignment="Left" VerticalAlignment="Stretch" Background="#1976D2"/>
         <Grid Grid.Column="1" Margin="10,5">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="200"/>
-                <ColumnDefinition Width="200"/>
-                <ColumnDefinition Width="200"/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
@@ -110,9 +111,9 @@
             <GroupBox Header="{Binding Source={StaticResource ResourceWrapper},Path=ApplicationString.colorSettings_name}" Grid.Row="6" Grid.ColumnSpan="3" Foreground="Black" Margin="0,5">
                 <Grid>
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="197"/>
-                        <ColumnDefinition Width="197"/>
-                        <ColumnDefinition Width="197"/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
                     </Grid.ColumnDefinitions>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto"/>
